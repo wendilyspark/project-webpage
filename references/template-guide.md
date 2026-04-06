@@ -57,11 +57,11 @@ Every page starts with this exact boilerplate. The Tailwind config defines the c
                         blue100:  '#d9edf5',   /* Blue-100 — highlight bg */
                         blue50:   '#f0f7fb',   /* Blue-50 — page background */
                         muted:    '#4a5a6a',   /* Body secondary text */
-                    }
-                }
-            }
-        }
+                    }}}}}
     </script>
+    <!-- ⚠️ The 5 closing braces above are: colors } extend } theme } config-obj } end.
+         DO NOT add extra braces — a JS syntax error silently breaks ALL custom color
+         classes (bg-primary, text-accent, from-secondary, etc.) with no console warning. -->
     <!-- CSS classes go here — see Section 2 -->
 </head>
 <body class="font-sans antialiased" style="background:#f0f7fb;color:#333;">
@@ -623,11 +623,14 @@ Place at the very bottom of `<body>`, before `</body>`.
 
 ```html
 <script>
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    /* threshold:0 + rootMargin:'0px' — ensures elements trigger even inside iframes.
+       The 1200ms setTimeout fallback forces all elements visible if observer misfires. */
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-    }, observerOptions);
-    document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    }, { threshold: 0, rootMargin: '0px' });
+    const revealEls = document.querySelectorAll('.scroll-reveal');
+    revealEls.forEach(el => observer.observe(el));
+    setTimeout(() => revealEls.forEach(el => el.classList.add('active')), 1200);
 </script>
 ```
 
