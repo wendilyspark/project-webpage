@@ -8,6 +8,7 @@ This file contains copy-pasteable code patterns for building consulting project 
 2. [CSS Custom Classes](#css-classes)
 3. [Hero Section](#hero)
 4. [Project Background](#project-background)
+4a. [ANALYSIS 00 — Strategic Positioning (equal-height two-column)](#analysis-00)
 5. [Insight Cards (Icon + Title + Content)](#insight-cards)
 6. [Card Grid with Hover Lift](#card-grid)
 7. [Layer Stack (L1/L2/L3)](#layer-stack)
@@ -23,6 +24,7 @@ This file contains copy-pasteable code patterns for building consulting project 
 17. [Footer](#footer)
 18. [Scroll Reveal Script](#scroll-reveal)
 19. [Section Label Pills](#section-labels)
+20. [Two-Column Layout Tricks — equal height, ratio, icon centering, compact timeline](#layout-tricks)
 
 ---
 
@@ -113,6 +115,9 @@ Place inside a `<style>` tag in `<head>`, after the Tailwind config script.
     /* Insight cards — white, subtle border */
     .insight-card { background: #ffffff; border: 1px solid rgba(15, 45, 62, 0.08); }
 
+    /* Icon circle — small round badge for insight/positioning cards */
+    .icon-circle { background: linear-gradient(135deg, #0f2d3e, #1a4a63); }
+
     /* Section label pill */
     .section-pill {
         display: inline-flex; align-items: center;
@@ -196,21 +201,55 @@ The hero uses a **light Blue→Cream gradient** with an amber plus grid pattern 
 <a id="project-background"></a>
 ## 4. Project Background
 
-Plain text on white background — no box wrapper. A thin divider line separates it from the next section.
+Plain text on white background — **one paragraph only**. Strategic context (market evolution, role shifts, industry architecture) belongs in a separate ANALYSIS 00 section, not here. A thin divider line separates it from the next section.
 
 ```html
 <section class="pt-16 pb-0" style="background:#ffffff;">
-    <div class="max-w-7xl mx-auto px-6 scroll-reveal">
+    <div class="max-w-7xl mx-auto px-6">
+    <div class="scroll-reveal mb-10">
         <h2 class="font-serif text-3xl font-bold mb-6" style="color:#0f2d3e;">Project Background</h2>
-        <p class="leading-relaxed text-sm mb-16" style="color:#4a5a6a;">
+        <p class="text-lg leading-relaxed max-w-4xl" style="color:#4a5a6a;">
             Context paragraph about the client, engagement scope, and objectives...
         </p>
+    </div>
     </div>
     <hr style="border:none; border-top: 1px solid rgba(0,0,0,0.18); margin: 0;">
 </section>
 ```
 
-> **Note:** The old `highlight-box` wrapped in `rounded-xl p-6` is retired. Use plain `<p>` text directly. The full-width `<hr>` sits outside the `max-w-7xl` container so it bleeds edge-to-edge.
+> **Rule:** Project Background = one paragraph, scope/objective only. If overflow content exists (market evolution, industry architecture, role transformation), overflow goes into **ANALYSIS 00** — see §4a. Don't force-fit extra context here.
+
+> **Note:** The full-width `<hr>` sits outside the `max-w-7xl` container so it bleeds edge-to-edge.
+
+---
+
+<a id="analysis-00"></a>
+## 4a. ANALYSIS 00 — Strategic Positioning *(optional — use only when needed)*
+
+**When to use:** Only when Project Background has excess context that doesn't fit one paragraph — e.g. market evolution, industry architecture, role transformation. Do not add this section by default.
+
+Uses light gray background (`#f8f9fa`) immediately after Project Background. For layout and card techniques, see the general **§20 Two-Column Layout Tricks** which apply here and in any other section.
+
+```html
+<section class="py-16" style="background:#f8f9fa;">
+    <div class="max-w-7xl mx-auto px-6">
+    <div class="scroll-reveal mb-10">
+        <span class="section-pill mb-4" style="display:inline-block;">ANALYSIS 00</span>
+        <h2 class="font-serif text-3xl font-bold mt-3 mb-2" style="color:#0f2d3e;">Strategic Positioning</h2>
+    </div>
+    <!-- For equal-height columns with icon cards + panel, apply §20 techniques -->
+    <div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-stretch">
+        <div class="scroll-reveal flex flex-col">
+            <!-- Optional: compact inline timeline (§9) -->
+            <!-- Icon cards using flex-1 to fill height (§20) -->
+        </div>
+        <div class="scroll-reveal">
+            <!-- Numbered panel (§8) -->
+        </div>
+    </div>
+    </div>
+</section>
+```
 
 ---
 
@@ -673,11 +712,98 @@ Alternate section backgrounds for visual rhythm. The page background is Blue-50 
 |---|---|---|
 | Hero | Blue→Cream gradient | Always first |
 | Project Background | White `#ffffff` + bottom `<hr>` | Always second |
+| ANALYSIS 00 (Strategic Positioning) | Light gray `#f8f9fa` | Optional, immediately after Project Bg |
 | Analysis/Content sections | White `bg-white` or page bg (Blue-50) | Alternate |
 | Skills & Domains | Blue-900 `#0f2d3e` | Always second-to-last |
 | Footer | `#0a1e2a` | Always last |
 
-**Pattern:** Hero → White (Project Bg) → White → Blue-50 → White → Blue-50 → … → Blue-900 (Skills) → `#0a1e2a` (Footer)
+**Pattern:** Hero → White (Project Bg) → `#f8f9fa` (ANALYSIS 00, if used) → White → Blue-50 → White → Blue-50 → … → Blue-900 (Skills) → `#0a1e2a` (Footer)
 
 Within Blue-50 sections, wrap content: `<div class="max-w-7xl mx-auto px-6">`
 Within White sections, use: `<section class="bg-white py-16"><div class="max-w-7xl mx-auto px-6">…</div></section>`
+
+---
+
+<a id="layout-tricks"></a>
+## 20. Two-Column Layout Tricks
+
+These techniques apply to **any** two-column section, not just ANALYSIS 00.
+
+### Equal-height columns
+When left and right columns have different amounts of content, use `items-stretch` on the grid and `flex flex-col` + `flex-1` on the shorter column's cards so they stretch to fill.
+
+```html
+<!-- Grid: items-stretch instead of items-start -->
+<div class="grid lg:grid-cols-2 gap-12 items-stretch">
+
+    <!-- Lighter column: flex-col so children can stretch -->
+    <div class="scroll-reveal flex flex-col">
+        <!-- Fixed-height element at top (e.g. timeline, intro block) -->
+        <div class="mb-4 ...">...</div>
+        <!-- Cards: flex-1 makes each card grow equally to fill remaining height -->
+        <div class="flex flex-col gap-4 flex-1">
+            <div class="... flex-1">Card A</div>
+            <div class="... flex-1">Card B</div>
+        </div>
+    </div>
+
+    <!-- Heavier column: no special treatment needed -->
+    <div class="scroll-reveal">...</div>
+</div>
+```
+
+### Asymmetric column ratio
+When one column has denser content than the other, use a custom fraction instead of `grid-cols-2`:
+
+```html
+<!-- Right column slightly wider -->
+<div class="grid lg:grid-cols-[1fr_1.1fr] gap-12 items-stretch">
+<!-- Left column wider -->
+<div class="grid lg:grid-cols-[1.2fr_1fr] gap-12 items-stretch">
+```
+
+### Icon cards — vertical centering
+Icon + text cards inside a column use `items-center` (not `items-start`) when the text is short:
+
+```html
+<!-- items-center: icon and text vertically centered -->
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex-1">
+    <div class="icon-circle w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0">
+        <i class="fas fa-chart-line text-sm"></i>
+    </div>
+    <div>
+        <h4 class="font-semibold" style="color:#0f2d3e;">Card Title</h4>
+        <p class="text-sm mt-1" style="color:#4a5a6a;">Short description</p>
+    </div>
+</div>
+```
+
+Use `items-start` instead when the description is multi-line (3+ lines) and top-alignment looks better.
+
+### Compact inline progression timeline
+Use inside a column when the evolution/phase story is supporting context (not the main focus). The last stage is highlighted in amber.
+
+```html
+<div class="p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
+    <p class="text-xs font-semibold uppercase tracking-wider mb-4" style="color:#9ca3af;">Evolution Path</p>
+    <div class="flex items-stretch gap-1">
+        <div class="flex-1 text-center p-3 bg-slate-50 rounded-l-lg border border-slate-200">
+            <div class="text-base font-bold" style="color:#9ca3af;">1.0</div>
+            <div class="text-xs mt-1 leading-snug" style="color:#9ca3af;">Stage One<br/>Label</div>
+        </div>
+        <div class="flex items-center px-1 text-sm" style="color:#d1d5db;">›</div>
+        <div class="flex-1 text-center p-3 bg-slate-50 border border-slate-200">
+            <div class="text-base font-bold" style="color:#9ca3af;">2.0</div>
+            <div class="text-xs mt-1 leading-snug" style="color:#9ca3af;">Stage Two<br/>Label</div>
+        </div>
+        <div class="flex items-center px-1 text-sm" style="color:#d4a055;">›</div>
+        <!-- Current/highlighted stage: amber -->
+        <div class="flex-1 text-center p-3 rounded-r-lg" style="background:rgba(212,160,85,0.07);border:1px solid rgba(212,160,85,0.3);">
+            <div class="text-base font-bold" style="color:#d4a055;">3.0</div>
+            <div class="text-xs mt-1 leading-snug" style="color:#7a4a10;">Current<br/>Stage</div>
+        </div>
+    </div>
+</div>
+```
+
+> For the full-width card-based evolution visual (main section focus), use §9 instead.
