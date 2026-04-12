@@ -59,11 +59,15 @@ Every page starts with this exact boilerplate. The Tailwind config defines the c
                         blue100:  '#d9edf5',   /* Blue-100 — highlight bg */
                         blue50:   '#f0f7fb',   /* Blue-50 — page background */
                         muted:    '#4a5a6a',   /* Body secondary text */
-                    }}}}}
+                    }
+                    }
+                }
+            }
     </script>
-    <!-- ⚠️ The 5 closing braces above are: colors } extend } theme } config-obj } end.
+    <!-- ⚠️ The 4 closing braces above close: colors } extend } theme } config-obj }.
          DO NOT add extra braces — a JS syntax error silently breaks ALL custom color
-         classes (bg-primary, text-accent, from-secondary, etc.) with no console warning. -->
+         classes (bg-primary, text-accent, from-secondary, etc.) with no console warning.
+         Verify brace balance: Opens={5} Closes={5} — if unequal, tailwind.config will be undefined. -->
     <!-- CSS classes go here — see Section 2 -->
 </head>
 <body class="font-sans antialiased" style="background:#f0f7fb;color:#333;">
