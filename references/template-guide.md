@@ -64,10 +64,14 @@ Every page starts with this exact boilerplate. The Tailwind config defines the c
                 }
             }
     </script>
-    <!-- ⚠️ The 4 closing braces above close: colors } extend } theme } config-obj }.
-         DO NOT add extra braces — a JS syntax error silently breaks ALL custom color
-         classes (bg-primary, text-accent, from-secondary, etc.) with no console warning.
-         Verify brace balance: Opens={5} Closes={5} — if unequal, tailwind.config will be undefined. -->
+    <!-- ⚠️ Brace count: the config block has 5 opens (config, theme, extend, fontFamily, colors).
+         fontFamily closes inline with },  so only 4 explicit braces appear at the end:
+           } closes colors
+           } closes extend
+           } closes theme
+           } closes config object
+         Total must balance: Opens=5, Closes=5. If unequal, tailwind.config is undefined and
+         ALL custom color classes (bg-primary, text-accent, etc.) silently break with no error. -->
     <!-- CSS classes go here — see Section 2 -->
 </head>
 <body class="font-sans antialiased" style="background:#f0f7fb;color:#333;">
