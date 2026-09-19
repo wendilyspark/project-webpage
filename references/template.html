@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+
+<!-- ============================================================
+     PROJECT WEBPAGE — CANONICAL TEMPLATE
+     Self-contained. No build step. No Tailwind. No icon CDN.
+     Only external dependency: Google Fonts (degrades gracefully).
+
+     HOW TO USE: copy this file, replace the content, delete the
+     component blocks you don't need. Do NOT rewrite the <style>
+     block — the design system lives there and is already correct.
+     ============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Plus+Jakarta+Sans:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENS
+   All design values live here as custom properties. Nothing
+   downstream hardcodes a colour. Change the theme by editing
+   only this block.
+   ============================================================ */
+:root{
+  /* Ink & paper */
+  --ink:        #0c2331;   /* headings, dark bands */
+  --ink-2:      #1d4a63;   /* secondary dark */
+  --slate:      #4f6070;   /* body copy */
+  --slate-2:    #8794a1;   /* captions, muted meta */
+  --paper:      #fcfbf8;   /* page background (warm) */
+  --white:      #ffffff;
+  --panel:      #f1f6f9;   /* cool tinted panel */
+  --panel-warm: #f7f3ec;   /* warm tinted panel */
+
+  /* Accent */
+  --amber:      #c2883c;   /* accent for text & marks */
+  --amber-deep: #7d5216;   /* accent text on light tint */
+  --amber-tint: rgba(194,136,60,.10);
+  --amber-line: rgba(194,136,60,.34);
+
+  /* Rules */
+  --line:       rgba(12,35,49,.11);
+  --line-2:     rgba(12,35,49,.20);
+  --line-dark:  rgba(255,255,255,.16);
+
+  /* Type */
+  --serif: 'Newsreader', 'Playfair Display', Georgia, serif;
+  --sans:  'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:  'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Layout */
+  --gutter: 28px;
+  --maxw: 1180px;
+  --rail: 168px;   /* width of the sticky left rail */
+  --gap:  72px;    /* rail → content gap */
+}
+
+/* ============================================================
+   2. BASE
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--slate);
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+h1,h2,h3,h4{ margin:0; color:var(--ink); font-weight:600; letter-spacing:-.015em; }
+p{ margin:0; }
+ul{ margin:0; padding:0; list-style:none; }
+strong{ color:var(--ink); font-weight:600; }
+em{ font-style:italic; }
+a{ color:inherit; }
+
+/* Figures must always be tabular so columns of numbers align */
+.num{ font-variant-numeric:tabular-nums lining-nums; font-feature-settings:"tnum" 1,"lnum" 1; }
+
+/* ============================================================
+   3. TYPE SCALE
+   A real range: 11px caption → 76px display. The old template
+   topped out around 36px, which is why everything read flat.
+   ============================================================ */
+.display{ font-family:var(--serif); font-weight:400; font-size:clamp(2.6rem,6.2vw,4.7rem); line-height:1.02; letter-spacing:-.025em; color:var(--ink); }
+.h2{      font-family:var(--serif); font-weight:400; font-size:clamp(1.9rem,3.4vw,2.9rem); line-height:1.12; letter-spacing:-.02em; }
+.h3{      font-family:var(--serif); font-weight:500; font-size:1.35rem;  line-height:1.25; }
+.h4{      font-family:var(--sans);  font-weight:600; font-size:.95rem;   line-height:1.4; letter-spacing:-.005em; }
+
+/* Standfirst — the one large paragraph under a section heading */
+.lede{ font-family:var(--serif); font-weight:300; font-size:clamp(1.12rem,1.9vw,1.42rem); line-height:1.55; color:var(--ink-2); max-width:62ch; }
+.body{ font-size:1rem; line-height:1.72; max-width:70ch; }
+.small{ font-size:.875rem; line-height:1.6; }
+.caption{ font-size:.8rem; line-height:1.5; color:var(--slate-2); }
+
+/* Mono label — the "analyst document" signal. Used for section
+   numbers, kickers, table headers, axis labels. */
+.label{
+  font-family:var(--mono); font-size:.68rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--slate-2);
+}
+.label-ink{ color:var(--ink); }
+.label-amber{ color:var(--amber-deep); }
+
+/* ============================================================
+   4. LAYOUT
+   ============================================================ */
+.wrap{ max-width:var(--maxw); margin:0 auto; padding:0 var(--gutter); }
+.section{ padding:104px 0; position:relative; }
+.section--tight{ padding:72px 0; }
+.section--paper{ background:var(--paper); }
+.section--white{ background:var(--white); }
+.section--panel{ background:var(--panel); }
+.section--warm{  background:var(--panel-warm); }
+.section--ink{   background:var(--ink); }
+
+/* The signature layout: a sticky rail carrying the section number
+   and kicker, with the content stream to its right. This single
+   move is what makes the page read as a designed document rather
+   than a stack of centred blocks. */
+.split{ display:grid; grid-template-columns:var(--rail) 1fr; gap:var(--gap); align-items:start; }
+.rail{ position:sticky; top:84px; }
+.rail-num{ font-family:var(--mono); font-size:2.1rem; font-weight:400; color:var(--amber); line-height:1; letter-spacing:-.02em; }
+.rail-kicker{ margin-top:10px; padding-top:10px; border-top:1px solid var(--line-2); }
+
+/* Generic grids */
+.grid{ display:grid; gap:24px; }
+.g2{ grid-template-columns:repeat(2,1fr); }
+.g3{ grid-template-columns:repeat(3,1fr); }
+.g4{ grid-template-columns:repeat(4,1fr); }
+.g-2-3{ grid-template-columns:2fr 3fr; }
+.g-3-2{ grid-template-columns:3fr 2fr; }
+
+.stack{ display:flex; flex-direction:column; }
+.gap8{gap:8px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.gap32{gap:32px}.gap48{gap:48px}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}.mt48{margin-top:48px}.mt64{margin-top:64px}
+
+hr.rule{ border:0; border-top:1px solid var(--line); margin:0; }
+hr.rule-strong{ border:0; border-top:1px solid var(--line-2); margin:0; }
+
+/* ============================================================
+   5. PILLS & MARKS
+   ============================================================ */
+.pill{
+  display:inline-flex; align-items:center; gap:7px;
+  padding:5px 12px; border-radius:2px;
+  font-family:var(--mono); font-size:.66rem; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase;
+  border:1px solid var(--line-2); color:var(--ink); background:transparent;
+}
+.pill--amber{ border-color:var(--amber-line); color:var(--amber-deep); background:var(--amber-tint); }
+.pill--ghost{ border-color:var(--line); color:var(--slate-2); }
+
+/* A short amber rule used above headings instead of a filled badge */
+.tick{ width:32px; height:2px; background:var(--amber); display:block; }
+
+/* ============================================================
+   6. HERO
+   Editorial, not a gradient panel. A hairline meta row sits on a
+   baseline beneath the title, the way a report masthead would.
+   ============================================================ */
+.hero{ position:relative; background:var(--paper); overflow:hidden; border-bottom:1px solid var(--line); }
+/* Faint ruled-paper texture — barely visible, adds print quality */
+.hero::before{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background-image:linear-gradient(var(--line) 1px, transparent 1px);
+  background-size:100% 88px; opacity:.55;
+  -webkit-mask-image:linear-gradient(to bottom, #000 0%, transparent 78%);
+          mask-image:linear-gradient(to bottom, #000 0%, transparent 78%);
+}
+/* padding-top only — a shorthand here would override .wrap's side gutters */
+.hero-inner{ position:relative; padding-top:76px; }
+.hero-client{ font-family:var(--serif); font-size:clamp(1.05rem,2vw,1.35rem); font-weight:400; font-style:italic; color:var(--amber-deep); letter-spacing:.01em; }
+
+/* Meta strip: hairline-separated cells, mono values */
+.metastrip{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line-2); margin-top:56px; }
+.metastrip > div{ padding:20px 24px 26px; border-right:1px solid var(--line); }
+.metastrip > div:first-child{ padding-left:0; }
+.metastrip > div:last-child{ border-right:0; }
+.metastrip .v{ font-family:var(--serif); font-size:1.5rem; color:var(--ink); line-height:1.15; margin-top:6px; }
+
+/* ============================================================
+   7. STAT BAND — oversized tabular numerals on hairlines
+   ============================================================ */
+.statband{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line-2); border-bottom:1px solid var(--line-2); }
+.statband > div{ padding:34px 28px; border-right:1px solid var(--line); }
+.statband > div:last-child{ border-right:0; }
+.statband .fig{ font-family:var(--serif); font-weight:300; font-size:clamp(2.6rem,5vw,3.8rem); line-height:1; color:var(--ink); letter-spacing:-.03em; }
+.statband .fig sup{ font-size:.4em; vertical-align:super; color:var(--amber); }
+
+/* ============================================================
+   8. RULE ROWS — the workhorse. Replaces most card grids.
+   Hairline rows with a mono index in the margin. Dense, scannable,
+   and it looks like a document instead of a dashboard.
+   ============================================================ */
+.rows{ border-top:1px solid var(--line-2); }
+.row{ display:grid; grid-template-columns:52px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); align-items:start; }
+.row-i{ font-family:var(--mono); font-size:.8rem; color:var(--amber); padding-top:3px; }
+.row-title{ font-family:var(--sans); font-weight:600; font-size:1rem; color:var(--ink); }
+.row-body{ margin-top:6px; font-size:.92rem; line-height:1.68; color:var(--slate); max-width:78ch; }
+/* Two-column variant: title left, body right */
+.row--split{ grid-template-columns:52px minmax(180px,1.1fr) 2fr; }
+@media (max-width:860px){ .row--split{ grid-template-columns:40px 1fr; } .row--split > *:last-child{ grid-column:2; } }
+
+/* ============================================================
+   9. CARDS — restrained. Hairline border, no shadow, no icon tile.
+   Reserved for genuinely parallel items so they stay meaningful.
+   ============================================================ */
+.card{ background:var(--white); border:1px solid var(--line); border-radius:3px; padding:28px; transition:border-color .25s, transform .25s; }
+.card:hover{ border-color:var(--line-2); transform:translateY(-2px); }
+.card-k{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber-deep); }
+.card-t{ margin-top:14px; font-family:var(--serif); font-size:1.28rem; font-weight:500; color:var(--ink); line-height:1.25; }
+.card-b{ margin-top:10px; font-size:.9rem; line-height:1.68; color:var(--slate); }
+.card--flat{ background:transparent; border-color:var(--line); }
+.card--fill{ background:var(--panel); border-color:transparent; }
+
+/* Small tags inside a card */
+.tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:16px; }
+.tag{ font-family:var(--mono); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; padding:3px 8px; border:1px solid var(--line); color:var(--slate-2); border-radius:2px; }
+
+/* ============================================================
+   10. PULL QUOTE / KEY INSIGHT
+   ============================================================ */
+.quote{ border-top:2px solid var(--ink); padding-top:28px; max-width:34ch; }
+.quote-t{ font-family:var(--serif); font-weight:300; font-size:clamp(1.5rem,2.8vw,2.1rem); line-height:1.3; color:var(--ink); letter-spacing:-.015em; }
+.quote-a{ margin-top:18px; }
+
+/* ============================================================
+   11. DARK INTERLUDE — a full-bleed chapter break carrying one
+   thesis or figure. Breaks the white monotony mid-page.
+   ============================================================ */
+.section--ink{ color:rgba(255,255,255,.72); }
+.section--ink h1,.section--ink h2,.section--ink h3,.section--ink h4,.section--ink .h2,.section--ink .h3{ color:#fff; }
+.section--ink .label{ color:rgba(255,255,255,.5); }
+.section--ink hr.rule{ border-top-color:var(--line-dark); }
+.section--ink .amber{ color:var(--amber); }
+.interlude-fig{ font-family:var(--serif); font-weight:300; font-size:clamp(3.4rem,9vw,6.5rem); line-height:.95; color:#fff; letter-spacing:-.04em; }
+
+/* ============================================================
+   12. FRAMEWORK — 2×2 MATRIX
+   ============================================================ */
+.matrix-wrap{ display:grid; grid-template-columns:34px 1fr; gap:14px; }
+.matrix-y{ writing-mode:vertical-rl; transform:rotate(180deg); text-align:center; align-self:center; }
+.matrix{ display:grid; grid-template-columns:1fr 1fr; grid-template-rows:1fr 1fr; border:1px solid var(--line-2); }
+.matrix > div{ padding:26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); min-height:168px; }
+.matrix > div:nth-child(2n){ border-right:0; }
+.matrix > div:nth-child(n+3){ border-bottom:0; }
+.matrix .q-hi{ background:var(--amber-tint); }
+.matrix-x{ grid-column:2; text-align:center; margin-top:12px; }
+
+/* ============================================================
+   13. FRAMEWORK — LAYER STACK with connector rail
+   ============================================================ */
+.layers{ position:relative; padding-left:34px; }
+.layers::before{ content:''; position:absolute; left:7px; top:12px; bottom:12px; width:1px; background:var(--line-2); }
+.layer{ position:relative; padding:22px 0 22px 0; border-bottom:1px solid var(--line); }
+.layer:last-child{ border-bottom:0; }
+.layer::before{ content:''; position:absolute; left:-31px; top:30px; width:15px; height:15px; border-radius:50%; background:var(--paper); border:1px solid var(--line-2); }
+.layer--active::before{ background:var(--amber); border-color:var(--amber); }
+.layer-k{ font-family:var(--mono); font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--slate-2); }
+
+/* ============================================================
+   14. FRAMEWORK — HORIZONTAL PROGRESSION / JOURNEY
+   ============================================================ */
+.journey{ display:grid; grid-auto-flow:column; grid-auto-columns:1fr; border-top:1px solid var(--line-2); position:relative; }
+.journey > div{ padding:28px 22px 0 0; position:relative; }
+.journey > div::before{ content:''; position:absolute; top:-4px; left:0; width:7px; height:7px; background:var(--line-2); border-radius:50%; }
+.journey > div:last-child::before{ background:var(--amber); }
+.journey .st{ font-family:var(--mono); font-size:.72rem; color:var(--amber); letter-spacing:.1em; }
+.journey .sn{ margin-top:10px; font-family:var(--serif); font-size:1.15rem; color:var(--ink); line-height:1.25; }
+
+/* ============================================================
+   15. RANK / BAR METER — for hierarchies and scored comparisons
+   ============================================================ */
+.meters{ border-top:1px solid var(--line-2); }
+.meter{ display:grid; grid-template-columns:38px minmax(140px,1fr) 2.2fr 58px; gap:20px; align-items:center; padding:18px 0; border-bottom:1px solid var(--line); }
+.meter-r{ font-family:var(--mono); font-size:.78rem; color:var(--slate-2); }
+.meter-n{ font-weight:600; color:var(--ink); font-size:.95rem; }
+.meter-track{ height:5px; background:var(--line); border-radius:0; overflow:hidden; }
+.meter-fill{ height:100%; background:var(--ink-2); }
+.meter:first-child .meter-fill{ background:var(--amber); }
+.meter-v{ font-family:var(--mono); font-size:.8rem; color:var(--slate); text-align:right; }
+
+/* ============================================================
+   16. DATA TABLE — financial-report styling
+   ============================================================ */
+table.data{ width:100%; border-collapse:collapse; }
+table.data th{
+  font-family:var(--mono); font-size:.64rem; font-weight:500; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--slate-2); text-align:left;
+  padding:0 16px 12px 0; border-bottom:1px solid var(--line-2);
+}
+table.data td{ padding:16px 16px 16px 0; border-bottom:1px solid var(--line); font-size:.92rem; vertical-align:top; }
+table.data td:first-child{ color:var(--ink); font-weight:600; }
+table.data .n{ text-align:right; font-family:var(--mono); font-size:.86rem; color:var(--ink); padding-right:0; }
+table.data th.n{ text-align:right; padding-right:0; }
+/* Rating dots for benchmark comparisons */
+.dots{ display:inline-flex; gap:4px; }
+.dot{ width:7px; height:7px; border-radius:50%; background:var(--line-2); }
+.dot.on{ background:var(--amber); }
+
+/* ============================================================
+   17. TAG CLOUD (dark section)
+   ============================================================ */
+.chips{ display:flex; flex-wrap:wrap; gap:8px; }
+.chip{
+  font-family:var(--mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+  padding:8px 14px; border:1px solid var(--line-dark); color:rgba(255,255,255,.82); border-radius:2px;
+}
+.chip--amber{ border-color:var(--amber-line); color:var(--amber); }
+
+/* ============================================================
+   18. STICKY PROGRESS + SECTION NAV
+   ============================================================ */
+.progress{ position:fixed; top:0; left:0; height:2px; width:0; background:var(--amber); z-index:60; transition:width .1s linear; }
+.tocbar{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  background:rgba(252,251,248,.88); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+  transform:translateY(-100%); transition:transform .3s ease;
+}
+.tocbar.show{ transform:translateY(0); }
+.tocbar-in{ max-width:var(--maxw); margin:0 auto; padding:11px var(--gutter); display:flex; align-items:center; gap:22px; }
+.tocbar .t{ font-family:var(--serif); font-size:.95rem; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.toclinks{ display:flex; gap:18px; margin-left:auto; }
+.toclinks a{
+  font-family:var(--mono); font-size:.64rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--slate-2); text-decoration:none; padding-bottom:2px; border-bottom:1px solid transparent; transition:color .2s,border-color .2s;
+}
+.toclinks a:hover,.toclinks a.active{ color:var(--ink); border-bottom-color:var(--amber); }
+
+/* ============================================================
+   19. FOOTER
+   ============================================================ */
+.foot{ background:#081821; padding:40px 0; }
+.foot-in{ display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+
+/* ============================================================
+   20. REVEAL
+   Failure-proof by construction. Nothing is hidden in CSS alone —
+   an element only goes transparent once JS has measured it and
+   confirmed it starts BELOW the fold. So:
+     · JS blocked or errors  → everything visible
+     · deep link to #anchor  → that section is on screen, never hidden
+     · iframe sized to content (no inner scroll) → nothing below the
+       fold, so nothing is hidden
+     · observer misfires     → the timeout clears every hidden flag
+   The previous template hid everything up front and relied on a
+   timeout to undo it, which left blank sections in all four cases.
+   ============================================================ */
+.reveal[data-hidden]{ opacity:0; transform:translateY(14px); }
+.reveal[data-shown]{ opacity:1; transform:none; transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
+@media (prefers-reduced-motion:reduce){
+  .reveal[data-hidden]{ opacity:1; transform:none; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ============================================================
+   21. RESPONSIVE
+   ============================================================ */
+@media (max-width:1020px){
+  :root{ --rail:120px; --gap:40px; }
+  .g4{ grid-template-columns:repeat(2,1fr); }
+  .metastrip,.statband{ grid-template-columns:repeat(2,1fr); }
+  .metastrip > div,.statband > div{ border-bottom:1px solid var(--line); }
+  .metastrip > div:nth-child(2n),.statband > div:nth-child(2n){ border-right:0; }
+  .metastrip > div:nth-child(3){ padding-left:0; }
+}
+@media (max-width:760px){
+  :root{ --gutter:20px; }
+  .section{ padding:64px 0; }
+  .split{ grid-template-columns:1fr; gap:26px; }
+  .rail{ position:static; display:flex; align-items:baseline; gap:14px; }
+  .rail-kicker{ margin-top:0; padding-top:0; border-top:0; }
+  .g2,.g3,.g4,.g-2-3,.g-3-2{ grid-template-columns:1fr; }
+  .journey{ grid-auto-flow:row; }
+  .journey > div{ padding:20px 0 20px 20px; border-left:1px solid var(--line); }
+  .journey > div::before{ top:22px; left:-4px; }
+  .matrix{ grid-template-columns:1fr; }
+  .matrix > div{ border-right:0 !important; border-bottom:1px solid var(--line) !important; min-height:0; }
+  .meter{ grid-template-columns:30px 1fr; }
+  .meter-track,.meter-v{ grid-column:2; }
+  .toclinks{ display:none; }
+  .hero-inner{ padding-top:52px; }
+}
+
+/* ============================================================
+   22. PRINT — pages get shared as PDF often enough to matter
+   ============================================================ */
+@media print{
+  .progress,.tocbar{ display:none; }
+  html.js .reveal{ opacity:1 !important; transform:none !important; }
+  .section{ padding:28px 0; break-inside:avoid; }
+  .section--ink{ background:#fff !important; color:#000 !important; }
+  .section--ink h2,.section--ink h3,.section--ink .h2,.interlude-fig{ color:#000 !important; }
+  .chip{ border-color:#999; color:#000; }
+  body{ background:#fff; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<!-- ============ STICKY NAV ============ -->
+<nav class="tocbar" id="tocbar">
+  <div class="tocbar-in">
+    <span class="t">Ultra-Luxury Residential Insights</span>
+    <span class="toclinks">
+      <a href="#context">Context</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#segments">Segments</a>
+      <a href="#framework">Framework</a>
+      <a href="#outcome">Outcome</a>
+    </span>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <span class="pill">Sep — Nov 2021</span>
+      <span class="pill pill--amber">Consumer Research</span>
+      <span class="pill pill--ghost">Product Strategy</span>
+      <span class="pill pill--ghost">Brand</span>
+    </div>
+
+    <p class="hero-client" style="margin-top:34px;">For a leading state-owned developer</p>
+
+    <h1 class="display" style="margin-top:10px;max-width:16ch;">
+      Ultra-Luxury<br>Residential Insights
+    </h1>
+
+    <p class="lede" style="margin-top:28px;">
+      Deep consumer ethnography and product strategy for a prime inner-city project —
+      navigating policy constraints, irregular floorplans and UHNW buyer psychology.
+    </p>
+
+    <div class="metastrip">
+      <div>
+        <div class="label">Location</div>
+        <div class="v">Prime inner-city</div>
+      </div>
+      <div>
+        <div class="label">Buyer segments</div>
+        <div class="v num">4</div>
+      </div>
+      <div>
+        <div class="label">Value dimensions</div>
+        <div class="v num">8</div>
+      </div>
+      <div>
+        <div class="label">Benchmark projects</div>
+        <div class="v num">8</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CONTEXT ============ -->
+<section class="section section--white" id="context">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-num num">00</div>
+        <div class="rail-kicker label">Context</div>
+      </div>
+      <div class="reveal">
+        <h2 class="h2" style="max-width:20ch;">A flagship asset with no obvious comparable</h2>
+        <p class="lede mt24">
+          Located in a rare prime inner-city plot with school-district advantages and elite
+          community resources, the project faced multiple simultaneous challenges: policy
+          restrictions on height limits, density caps, demolition bands resulting in irregular
+          lot shapes, and unconventional unit layouts.
+        </p>
+        <p class="body mt24">
+          Site-level factors affecting ultra-luxury value perception and investment return
+          pressures meant the client could not price from precedent. We were commissioned to
+          conduct deep ultra-luxury market research and consumer insights — clarifying target
+          buyer profiles, product optimisation directions, and innovative commercial model
+          exploration.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAT BAND ============ -->
+<section class="section--tight section--paper">
+  <div class="wrap reveal">
+    <div class="statband">
+      <div>
+        <div class="label">Depth interviews</div>
+        <div class="fig num mt16">32</div>
+      </div>
+      <div>
+        <div class="label">Benchmark projects</div>
+        <div class="fig num mt16">8</div>
+      </div>
+      <div>
+        <div class="label">Value dimensions</div>
+        <div class="fig num mt16">8</div>
+      </div>
+      <div>
+        <div class="label">Optimisation moves</div>
+        <div class="fig num mt16">40<sup>+</sup></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ANALYSIS 01 — BENCHMARK ============ -->
+<section class="section section--white" id="benchmark">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-num num">01</div>
+        <div class="rail-kicker label">Benchmark analysis</div>
+      </div>
+
+      <div>
+        <div class="reveal">
+          <h2 class="h2" style="max-width:22ch;">How comparable assets manufacture scarcity</h2>
+          <p class="lede mt24">
+            Eight ultra-luxury projects, decomposed by the source of their premium rather than
+            by their marketing claim.
+          </p>
+        </div>
+
+        <!-- RULE ROWS: dense, scannable, document-like -->
+        <div class="rows mt48 reveal">
+          <div class="row row--split">
+            <div class="row-i num">A</div>
+            <div>
+              <div class="row-title">Art &amp; scarcity positioning</div>
+              <div class="caption mt8">Collector-oriented</div>
+            </div>
+            <div class="row-body">
+              Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers
+              under 1,000 UHNW families, invitation-only release cycles.
+            </div>
+          </div>
+          <div class="row row--split">
+            <div class="row-i num">B</div>
+            <div>
+              <div class="row-title">Chinese courtyard heritage</div>
+              <div class="caption mt8">Cultural-form</div>
+            </div>
+            <div class="row-body">
+              Courtyard compound design benchmark. Chinese garden plus private courtyard plus
+              multi-space differentiation; buyers are local landowning legacy families.
+            </div>
+          </div>
+          <div class="row row--split">
+            <div class="row-i num">C</div>
+            <div>
+              <div class="row-title">Absolute location scarcity</div>
+              <div class="caption mt8">Positional</div>
+            </div>
+            <div class="row-body">
+              Prime location address, pricing and liquidity accepted as the purest embodiment
+              of "location = value". Resale velocity materially above segment average.
+            </div>
+          </div>
+          <div class="row row--split">
+            <div class="row-i num">D</div>
+            <div>
+              <div class="row-title">Heritage &amp; cultural narrative</div>
+              <div class="caption mt8">Narrative</div>
+            </div>
+            <div class="row-body">
+              Inside a historic conservation district. Historical depth plus cultural-circle
+              premium validates cultural storytelling support for ultra-luxury pricing.
+            </div>
+          </div>
+        </div>
+
+        <!-- RANK METERS: the core insight, shown rather than stated -->
+        <div class="mt64 reveal">
+          <div style="display:flex;align-items:baseline;gap:14px;">
+            <span class="tick" style="margin-bottom:4px;"></span>
+            <h3 class="h3">Premium source hierarchy</h3>
+          </div>
+          <p class="body small mt8" style="color:var(--slate-2);">
+            Share of realised price premium attributable to each driver, across the eight benchmarks.
+          </p>
+
+          <div class="meters mt24">
+            <div class="meter">
+              <div class="meter-r num">1st</div>
+              <div class="meter-n">Location scarcity</div>
+              <div class="meter-track"><div class="meter-fill" style="width:100%"></div></div>
+              <div class="meter-v num">Decisive</div>
+            </div>
+            <div class="meter">
+              <div class="meter-r num">2nd</div>
+              <div class="meter-n">Architecture &amp; design</div>
+              <div class="meter-track"><div class="meter-fill" style="width:72%"></div></div>
+              <div class="meter-v num">Strong</div>
+            </div>
+            <div class="meter">
+              <div class="meter-r num">3rd</div>
+              <div class="meter-n">Service amenities</div>
+              <div class="meter-track"><div class="meter-fill" style="width:46%"></div></div>
+              <div class="meter-v num">Moderate</div>
+            </div>
+            <div class="meter">
+              <div class="meter-r num">4th</div>
+              <div class="meter-n">Brand premium</div>
+              <div class="meter-track"><div class="meter-fill" style="width:24%"></div></div>
+              <div class="meter-v num">Weak</div>
+            </div>
+          </div>
+          <p class="caption mt16">
+            Value perception varies significantly by buyer type. Legacy families are location-driven;
+            wealth accumulators weight design and display; professional elites weight comfort and
+            design; new money weights brand recognition.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DARK INTERLUDE ============ -->
+<section class="section section--ink">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-kicker label" style="border-top-color:var(--line-dark);">Core finding</div>
+      </div>
+      <div class="reveal" style="display:grid;grid-template-columns:1fr auto;gap:56px;align-items:end;">
+        <div>
+          <p class="h2" style="font-weight:300;max-width:22ch;">
+            Brand contributes least to realised premium — and receives the largest share of
+            ultra-luxury marketing spend.
+          </p>
+          <p class="body mt24" style="color:rgba(255,255,255,.62);">
+            Reallocating that spend toward location narrative and architectural differentiation
+            is the highest-leverage move available before launch.
+          </p>
+        </div>
+        <div style="text-align:right;">
+          <div class="interlude-fig num">4<span class="amber">th</span></div>
+          <div class="label mt8">of four drivers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERABLE 01 — SEGMENTS ============ -->
+<section class="section section--paper" id="segments">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-num num">02</div>
+        <div class="rail-kicker label">Deliverable</div>
+      </div>
+
+      <div>
+        <div class="reveal">
+          <h2 class="h2" style="max-width:20ch;">Four UHNW buyer segments</h2>
+          <p class="lede mt24">
+            A three-dimensional assessment model — investment, residential and social-circle
+            attributes — resolving a single "luxury buyer" into four addressable groups.
+          </p>
+        </div>
+
+        <div class="grid g2 mt48 reveal">
+          <div class="card">
+            <div class="card-k">Segment 01 · Legacy families</div>
+            <div class="card-t">Old wealth, location first</div>
+            <p class="card-b">
+              Multi-generational holders. Buy the address, not the building. Indifferent to
+              brand; highly sensitive to neighbours, school access and long-run land scarcity.
+            </p>
+            <div class="tags">
+              <span class="tag">Scarcity</span><span class="tag">Privacy</span><span class="tag">Value preservation</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-k">Segment 02 · Wealth accumulators</div>
+            <div class="card-t">Asset logic, display second</div>
+            <p class="card-b">
+              Treat the unit as a portfolio position. Liquidity and resale velocity dominate;
+              design quality matters as an exit argument rather than a lifestyle preference.
+            </p>
+            <div class="tags">
+              <span class="tag">Liquidity</span><span class="tag">Prestige</span><span class="tag">Design</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-k">Segment 03 · Professional elite</div>
+            <div class="card-t">Comfort, privacy, circle</div>
+            <p class="card-b">
+              C-suite and senior professionals. Prioritise comfort, privacy and circle
+              integration. Extremely high bar on product detail: ceiling height, orientation,
+              flow. Rational decision-making, value-conscious.
+            </p>
+            <div class="tags">
+              <span class="tag">Comfort</span><span class="tag">Privacy</span><span class="tag">Design quality</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-k">Segment 04 · New money</div>
+            <div class="card-t">Belonging and signal</div>
+            <p class="card-b">
+              Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment:
+              most influenced by marketing, most active word-of-mouth amplifiers. Strongest
+              need for circle admission.
+            </p>
+            <div class="tags">
+              <span class="tag">Belonging</span><span class="tag">Prestige</span><span class="tag">Brand</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2×2 MATRIX -->
+        <div class="mt64 reveal">
+          <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:24px;">
+            <span class="tick" style="margin-bottom:4px;"></span>
+            <h3 class="h3">Segment map — motive against price elasticity</h3>
+          </div>
+          <div class="matrix-wrap">
+            <div class="matrix-y label">Price elasticity →</div>
+            <div>
+              <div class="matrix">
+                <div>
+                  <div class="label">Low elasticity · Use motive</div>
+                  <div class="h4 mt16">Professional elite</div>
+                  <p class="caption mt8">Will pay for resolved product detail. Walks away from compromise.</p>
+                </div>
+                <div class="q-hi">
+                  <div class="label label-amber">Low elasticity · Asset motive</div>
+                  <div class="h4 mt16">Legacy families</div>
+                  <p class="caption mt8">Primary target. Price-insensitive where scarcity is genuine.</p>
+                </div>
+                <div>
+                  <div class="label">High elasticity · Use motive</div>
+                  <div class="h4 mt16">New money</div>
+                  <p class="caption mt8">Responsive to narrative and brand. Needs the circle to be legible.</p>
+                </div>
+                <div>
+                  <div class="label">High elasticity · Asset motive</div>
+                  <div class="h4 mt16">Wealth accumulators</div>
+                  <p class="caption mt8">Buys on exit maths. Will trade design for liquidity.</p>
+                </div>
+              </div>
+              <div class="matrix-x label">Purchase motive: use ← → asset</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DELIVERABLE 02 — FRAMEWORK ============ -->
+<section class="section section--white" id="framework">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-num num">03</div>
+        <div class="rail-kicker label">Deliverable</div>
+      </div>
+
+      <div>
+        <div class="reveal">
+          <h2 class="h2" style="max-width:22ch;">Eight value dimensions</h2>
+          <p class="lede mt24">
+            A product-optimisation framework translating segment psychology into decisions the
+            design and sales teams could act on.
+          </p>
+        </div>
+
+        <table class="data mt48 reveal">
+          <thead>
+            <tr>
+              <th style="width:20%">Dimension</th>
+              <th style="width:44%">What it governs</th>
+              <th style="width:22%">Primary segment</th>
+              <th class="n" style="width:14%">Weight</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Scarcity</td>
+              <td>Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</td>
+              <td>Legacy families</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i></span></td>
+            </tr>
+            <tr>
+              <td>Value preservation</td>
+              <td>Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</td>
+              <td>Legacy families</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Liquidity</td>
+              <td>Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</td>
+              <td>Wealth accumulators</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Comfort</td>
+              <td>Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</td>
+              <td>Professional elite</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Privacy</td>
+              <td>Security systems, community density, resident-circle homogeneity.</td>
+              <td>Professional elite</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Prestige</td>
+              <td>Entry immediacy, exclusive service details, visible service standards.</td>
+              <td>New money</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Belonging</td>
+              <td>Circle community resources, resident events, admission mechanics.</td>
+              <td>New money</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i></span></td>
+            </tr>
+            <tr>
+              <td>Purity</td>
+              <td>Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</td>
+              <td>Cross-segment</td>
+              <td class="n"><span class="dots"><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot on"></i><i class="dot"></i></span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- PULL QUOTE + LAYERS, asymmetric -->
+        <div class="grid g-2-3 mt64 gap48 reveal" style="align-items:start;">
+          <div class="quote">
+            <p class="quote-t">Purity ranked above prestige in every segment — and no benchmark project was designing for it.</p>
+            <div class="quote-a label">Finding · Depth interviews</div>
+          </div>
+
+          <div class="layers">
+            <div class="layer layer--active">
+              <div class="layer-k">Layer 01 · Product</div>
+              <div class="h4 mt8" style="font-size:1.05rem;">Layout remediation programme</div>
+              <p class="card-b">
+                Forty-plus specific moves converting policy-forced irregularity into
+                differentiated unit typologies rather than compromised ones.
+              </p>
+            </div>
+            <div class="layer">
+              <div class="layer-k">Layer 02 · Service</div>
+              <div class="h4 mt8" style="font-size:1.05rem;">Circle admission design</div>
+              <p class="card-b">
+                Resident-community mechanics that make belonging legible to new-money buyers
+                without diluting the homogeneity legacy families are paying for.
+              </p>
+            </div>
+            <div class="layer">
+              <div class="layer-k">Layer 03 · Narrative</div>
+              <div class="h4 mt8" style="font-size:1.05rem;">Scarcity story architecture</div>
+              <p class="card-b">
+                A sales narrative sequenced by segment, leading with location scarcity and
+                treating brand as supporting evidence rather than the headline.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OUTCOME / JOURNEY ============ -->
+<section class="section section--panel" id="outcome">
+  <div class="wrap">
+    <div class="split">
+      <div class="rail reveal">
+        <div class="rail-num num">04</div>
+        <div class="rail-kicker label">Engagement arc</div>
+      </div>
+      <div>
+        <div class="reveal">
+          <h2 class="h2" style="max-width:20ch;">From ethnography to launch strategy</h2>
+        </div>
+        <div class="journey mt48 reveal">
+          <div>
+            <div class="st num">01</div>
+            <div class="sn">Ethnographic fieldwork</div>
+            <p class="card-b">Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p>
+          </div>
+          <div>
+            <div class="st num">02</div>
+            <div class="sn">Benchmark decomposition</div>
+            <p class="card-b">Premium sources separated from marketing claims to establish the real driver hierarchy.</p>
+          </div>
+          <div>
+            <div class="st num">03</div>
+            <div class="sn">Segment &amp; value model</div>
+            <p class="card-b">Four segments mapped against eight value dimensions into a single prioritisation grid.</p>
+          </div>
+          <div>
+            <div class="st num">04</div>
+            <div class="sn">Product &amp; launch strategy</div>
+            <p class="card-b">Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS & DOMAINS ============ -->
+<section class="section section--ink">
+  <div class="wrap">
+    <div class="grid g2 gap48 reveal">
+      <div>
+        <div class="label">Core competencies</div>
+        <hr class="rule mt16">
+        <div class="chips mt24">
+          <span class="chip">Consumer Research</span>
+          <span class="chip">Product Strategy</span>
+          <span class="chip">Market Analysis</span>
+          <span class="chip">Brand Strategy</span>
+          <span class="chip">Segmentation</span>
+        </div>
+      </div>
+      <div>
+        <div class="label">Industry domains</div>
+        <hr class="rule mt16">
+        <div class="chips mt24">
+          <span class="chip chip--amber">Real Estate</span>
+          <span class="chip chip--amber">Consumer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="wrap foot-in">
+    <span class="label" style="color:rgba(255,255,255,.4);">2021 Consulting Engagement · Deliverables Showcase</span>
+    <span class="label" style="color:rgba(255,255,255,.4);">Client identity anonymised</span>
+  </div>
+</footer>
+
+<script>
+/* Reveal on scroll — additive only. See §20 of the stylesheet for
+   why nothing is hidden until JS has measured it.
+   Measurement waits for `load` so that any #anchor jump has already
+   been applied; otherwise a deep-linked section measures as
+   below-the-fold, gets hidden, and never comes back. */
+(function(){
+  var els = [].slice.call(document.querySelectorAll('.reveal'));
+  if(!els.length || !('IntersectionObserver' in window)) return;
+
+  function show(el){ el.removeAttribute('data-hidden'); el.setAttribute('data-shown',''); }
+
+  function start(){
+    requestAnimationFrame(function(){
+      var fold = window.innerHeight * 0.92;
+      var pending = els.filter(function(el){
+        return el.getBoundingClientRect().top > fold;
+      });
+      if(!pending.length) return;
+
+      pending.forEach(function(el){ el.setAttribute('data-hidden',''); });
+
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ show(e.target); io.unobserve(e.target); }
+        });
+      }, { threshold:0, rootMargin:'0px 0px -8% 0px' });
+      pending.forEach(function(el){ io.observe(el); });
+
+      /* Last-resort net: nothing stays hidden for more than 3s. */
+      setTimeout(function(){ pending.forEach(show); }, 3000);
+    });
+  }
+
+  if(document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
+
+  /* Scroll progress + sticky nav */
+  var bar = document.getElementById('progress');
+  var toc = document.getElementById('tocbar');
+  var links = [].slice.call(document.querySelectorAll('.toclinks a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+
+  function onScroll(){
+    var doc = document.documentElement;
+    var max = (doc.scrollHeight - doc.clientHeight) || 1;
+    var y = window.scrollY || doc.scrollTop;
+    bar.style.width = Math.min(100, (y / max) * 100) + '%';
+    toc.classList.toggle('show', y > 520);
+
+    var active = -1;
+    targets.forEach(function(t, i){
+      if(t && t.getBoundingClientRect().top <= 140) active = i;
+    });
+    links.forEach(function(a, i){ a.classList.toggle('active', i === active); });
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
