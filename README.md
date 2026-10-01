@@ -47,58 +47,33 @@ Sector: Mining / Private Equity
 
 ### Output
 
-A single `.html` file (~200–400 KB) that opens in any browser. No server, no internet connection required after the initial Tailwind CDN load.
+A single self-contained `.html` file that opens in any browser, in any of thirteen styles. Every thumbnail shows the same sample project summary — click one to open that template.
 
-**Page structure:**
-```
-Hero section
-  └── Project title, client descriptor, duration, engagement type, key stats
-
-Project Background
-  └── Context paragraph in a highlight box
-
-Analysis Sections (ANALYSIS 01, 02, 03…)
-  └── Each area gets a serif heading + bullet cards or list
-
-Deliverables (DELIVERABLE 01, 02…)
-  └── Card grids, layer stacks, or stat callouts depending on content type
-
-Skills & Domains
-  └── Gold tag cloud on dark background
-
-Footer
-```
-
-**Sample output structure (from a real engagement, client name sanitized):**
-
-```html
-<!-- Hero -->
-<h1>
-  Canadian Gold Mine Operator<br>
-  <span>Post-Acquisition Integration & Compliance Planning</span>
-</h1>
-<div class="stats-grid">
-  <div>3 Months</div>
-  <div>15 Workstreams</div>
-  <div>3 Functional Areas</div>
-</div>
-
-<!-- Analysis section -->
-<div class="section-label">ANALYSIS 01</div>
-<h2>Integration Scope & Workstream Mapping</h2>
-<ul>
-  <li>Finance: IFRS currency transition, revenue recognition redesign,
-      Purchase Price Accounting with Big Four auditors</li>
-  <li>Technology: systems migration timeline and data governance protocol</li>
-  <li>Legal: regulatory filings, contract assignments, compliance calendar</li>
-</ul>
-```
-
-**Sample page (screenshot):**
-
-![Project Webpage Sample](references/sample-preview.jpg)
-
-*(Navy/gold palette, serif headings, card-based deliverable layouts with scroll-reveal animations)*
+<table>
+<tr>
+<td align="center" valign="top" width="33%"><a href="references/themes/harbour.html"><img src="references/thumbnails/harbour.jpg" alt="Harbour style" width="260"></a><br><b>Harbour</b><br><sub>The original and default — navy, sky blue, gold</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/template.html"><img src="references/thumbnails/editorial.jpg" alt="Editorial style" width="260"></a><br><b>Editorial</b><br><sub>Canonical editorial design system</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/accented.html"><img src="references/thumbnails/accented.jpg" alt="Accented style" width="260"></a><br><b>Accented</b><br><sub>Navy section bands on cool blue-grey</sub></td>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%"><a href="references/themes/mat.html"><img src="references/thumbnails/mat.jpg" alt="Mat style" width="260"></a><br><b>Mat</b><br><sub>Forest green and cream environments</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/signal.html"><img src="references/thumbnails/signal.jpg" alt="Signal style" width="260"></a><br><b>Signal</b><br><sub>Sticky rail, navy bands on cream</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/monochrome.html"><img src="references/thumbnails/monochrome.jpg" alt="Monochrome style" width="260"></a><br><b>Monochrome</b><br><sub>Accounting ledger, black on white</sub></td>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%"><a href="references/themes/cartesian.html"><img src="references/thumbnails/cartesian.jpg" alt="Cartesian style" width="260"></a><br><b>Cartesian</b><br><sub>Museum monograph with framed plates</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/cobalt-grid.html"><img src="references/thumbnails/cobalt-grid.jpg" alt="Cobalt Grid style" width="260"></a><br><b>Cobalt Grid</b><br><sub>Engineering drawing sheet</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/emerald-editorial.html"><img src="references/thumbnails/emerald-editorial.jpg" alt="Emerald Editorial style" width="260"></a><br><b>Emerald Editorial</b><br><sub>Magazine feature with masthead</sub></td>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%"><a href="references/themes/blue-professional.html"><img src="references/thumbnails/blue-professional.jpg" alt="Blue Professional style" width="260"></a><br><b>Blue Professional</b><br><sub>Product docs with sidebar contents</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/editorial-tri-tone.html"><img src="references/thumbnails/editorial-tri-tone.jpg" alt="Editorial Tri-Tone style" width="260"></a><br><b>Editorial Tri-Tone</b><br><sub>Poster report in blush and crimson</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/biennale-yellow.html"><img src="references/thumbnails/biennale-yellow.jpg" alt="Biennale Yellow style" width="260"></a><br><b>Biennale Yellow</b><br><sub>Exhibition catalogue, alternating rooms</sub></td>
+</tr>
+<tr>
+<td align="center" valign="top" width="33%"><a href="references/themes/raw-grid.html"><img src="references/thumbnails/raw-grid.jpg" alt="Raw Grid style" width="260"></a><br><b>Raw Grid</b><br><sub>Neobrutalist block grid</sub></td>
+</tr>
+</table>
 
 ## Installation
 
@@ -132,12 +107,6 @@ You can also invoke it directly with `/project-webpage` in any Claude Code sessi
 3. Propose a sanitized client descriptor for your review
 4. Generate the HTML file and save it to the location you specify
 5. Offer to iterate on layout, color balance, or content depth
-
-## Companion Skills
-
-Works well with [**summarize-deliverables**](https://github.com/wendilyspark/summarize-deliverables) — scan a project folder (decks, spreadsheets, reports) first to generate a structured project summary, then feed that directly into this skill.
-
-Also pairs with [**project-value**](https://github.com/wendilyspark/project-value) — use project-value to generate portfolio card copy for your homepage, and project-webpage to generate the full detail page it links to.
 
 ## License
 
