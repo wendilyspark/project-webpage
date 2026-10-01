@@ -1,0 +1,926 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* palette */
+  --page: #E9EAF2;
+  --deep: #D8DBEA;
+  --indigo: #1B2566;
+  --sun: #F1EE2E;
+  --ember: #C25233;  /* marks only — 3.9:1 on page, 3.4:1 on deep panel (clears 3:1 graphic minimum) */
+  --paper: #F4F5F9;
+  --ink: #1B2566;
+  --ink-2: #3F4780;
+  --rule: #B3B8D3;
+  --rule-strong: #1B2566;
+  --dot-empty: #FFFFFF;
+  --on-dark: #E9EAF2;
+  --on-dark-2: #BEC3E2;
+  --sun-glow: rgba(241, 238, 46, 0.55);
+  --sun-glow-mid: rgba(241, 238, 46, 0.22);
+  --sun-fade: rgba(241, 238, 46, 0);
+  --print-ink: #000000;
+  --print-bg: #FFFFFF;
+  --print-rule: #999999;
+
+  /* type */
+  --f-display: "Instrument Serif", "Times New Roman", serif;
+  --f-body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* rhythm */
+  --gutter: clamp(16px, 4vw, 56px);
+  --room-gap: clamp(32px, 6vw, 112px);
+  --max: 1360px;
+  --radius: 2px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  font-variant-numeric: tabular-nums;
+}
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+svg { display: block; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.wrap { max-width: var(--max); margin: 0 auto; padding-left: var(--gutter); padding-right: var(--gutter); }
+.mono { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ---------- solar highlight ---------- */
+.hl {
+  position: relative;
+  z-index: 0;
+  white-space: nowrap;
+  color: var(--indigo);
+}
+.hl::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: -0.12em; right: -0.12em;
+  top: 0.18em; bottom: 0.04em;
+  background: var(--sun);
+  transform: skewX(-8deg) rotate(-1.2deg);
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  border-bottom: 1px solid var(--rule-strong);
+  position: relative;
+  z-index: 2;
+}
+.masthead .wrap {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px;
+  padding-top: 14px; padding-bottom: 14px;
+}
+.masthead span { color: var(--ink); }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: clip; padding: clamp(56px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); }
+.sun {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: clamp(520px, 72vw, 1080px); aspect-ratio: 1;
+  right: clamp(-420px, -22vw, -160px); top: clamp(-360px, -18vw, -120px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, var(--sun-glow) 0%, var(--sun-glow-mid) 42%, var(--sun-fade) 70%);
+}
+.hero .wrap { position: relative; z-index: 1; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 64fr) minmax(0, 36fr);
+  gap: var(--room-gap);
+  align-items: end;
+}
+.disciplines { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 28px; }
+.disciplines li { display: inline-flex; align-items: center; gap: 8px; }
+.disciplines li::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ember); }
+h1 {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: clamp(3.1rem, 8.4vw, 8rem);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+}
+h1 em { font-style: italic; }
+.hero-stand {
+  margin-top: 32px;
+  font-family: var(--f-display);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+  line-height: 1.35;
+  max-width: 38ch;
+}
+.hero-meta {
+  border-top: 2px solid var(--rule-strong);
+  padding-top: 18px;
+}
+.hero-meta .label-title { margin-bottom: 16px; color: var(--ink-2); }
+.hero-meta dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 18px 24px; }
+.hero-meta dt { font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.hero-meta dd { font-family: var(--f-display); font-size: 2rem; line-height: 1.1; margin-top: 4px; }
+.hero-meta dd.txt { font-size: 1.45rem; }
+
+/* ---------- rooms (asymmetric alternation) ---------- */
+.room { padding: clamp(56px, 7vw, 104px) 0; border-top: 1px solid var(--rule); }
+.room-grid { display: grid; gap: var(--room-gap); align-items: start; }
+.room--left .room-grid { grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); }
+.room--right .room-grid { grid-template-columns: minmax(0, 52fr) minmax(0, 48fr); }
+.room--left .room-body { grid-column: 1; grid-row: 1; }
+.room--left .wall { grid-column: 2; grid-row: 1; justify-self: start; }
+.room--right .room-body { grid-column: 2; grid-row: 1; }
+.room--right .wall { grid-column: 1; grid-row: 1; justify-self: end; text-align: right; }
+
+.wall {
+  position: sticky; top: 28px;
+  font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--ink-2);
+  line-height: 1.7;
+  padding-top: 6px;
+  min-width: 150px;
+}
+.wall .tick { display: block; width: 28px; height: 2px; background: var(--ember); margin-bottom: 12px; }
+.room--right .wall .tick { margin-left: auto; }
+.wall .no { color: var(--ink); font-weight: 600; }
+
+/* heading plate */
+.plate {
+  background: var(--indigo);
+  color: var(--on-dark);
+  padding: clamp(22px, 3vw, 34px) clamp(20px, 3vw, 36px) clamp(24px, 3vw, 32px);
+  border-radius: var(--radius);
+}
+.plate .kicker { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-dark-2); margin-bottom: 14px; }
+.plate h2 {
+  font-family: var(--f-body);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2.7vw, 2.35rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--on-dark);
+}
+.plate h2::after { content: ""; display: block; width: 64px; height: 3px; background: var(--sun); margin-top: 18px; }
+.standfirst {
+  margin-top: 26px;
+  font-family: var(--f-display); font-style: italic;
+  font-size: clamp(1.3rem, 1.9vw, 1.6rem); line-height: 1.35;
+}
+.prose p { margin-top: 18px; color: var(--ink); max-width: 62ch; }
+
+/* exhibits */
+.exhibit { margin-top: clamp(40px, 5vw, 64px); }
+.cat-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-bottom: 12px; border-bottom: 1px solid var(--rule-strong); margin-bottom: 22px; }
+.cat-no { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; color: var(--ink); display: inline-flex; align-items: center; gap: 10px; }
+.cat-no::before { content: ""; width: 18px; height: 2px; background: var(--ember); }
+.cat-cap { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: 1.45rem; line-height: 1.2; }
+.cat-note { margin-top: 18px; font-family: var(--f-display); font-style: italic; font-size: 1.15rem; line-height: 1.4; color: var(--ink-2); max-width: 58ch; }
+
+/* CAT 01 — constraint tiles (keyline square icons) */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+.tile { background: var(--paper); padding: 22px 20px 24px; }
+.ico-key { width: 48px; height: 48px; border: 1.5px solid var(--indigo); display: grid; place-items: center; color: var(--indigo); margin-bottom: 16px; }
+.ico-key svg { width: 26px; height: 26px; }
+.tile h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.02rem; line-height: 1.3; }
+.tile p { margin-top: 6px; font-size: 0.93rem; line-height: 1.55; }
+
+/* CAT 02 — figures (bare marks) */
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0; }
+.figure { padding: 26px 0 28px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; align-items: start; }
+.figure svg { width: 34px; height: 34px; color: var(--indigo); margin-top: 14px; }
+.figure .num { font-family: var(--f-display); font-size: clamp(3.4rem, 5.2vw, 4.6rem); line-height: 1; }
+.figure .lbl { grid-column: 2; font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+
+/* CAT 03 — benchmark entries (filled disc icons) */
+.entries { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+.entry { background: var(--paper); border: 1px solid var(--rule); padding: 22px 22px 24px; }
+.entry-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+.disc { width: 44px; height: 44px; border-radius: 50%; background: var(--indigo); color: var(--on-dark); display: grid; place-items: center; flex: none; }
+.disc svg { width: 22px; height: 22px; }
+.entry-letter { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; }
+.entry h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.05rem; line-height: 1.3; }
+.entry .cap { font-family: var(--f-display); font-style: italic; font-size: 1.3rem; line-height: 1.25; margin-top: 2px; }
+.entry p.body { margin-top: 12px; font-size: 0.93rem; line-height: 1.55; }
+
+/* CAT 04 — ranked bars */
+.ranked { display: grid; gap: 18px; }
+.rank-row { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 14px; align-items: center; }
+.rank-pos { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.06em; grid-row: 1 / span 2; align-self: start; padding-top: 2px; }
+.rank-line { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline; }
+.rank-driver { font-weight: 600; font-size: 0.98rem; }
+.rank-meta { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.rank-meta b { color: var(--ink); font-weight: 600; }
+.bar { height: 14px; background: var(--deep); position: relative; }
+.bar span { position: absolute; inset: 0 auto 0 0; background: var(--indigo); }
+.footnote { margin-top: 22px; padding-left: 16px; border-left: 2px solid var(--ember); font-size: 0.92rem; line-height: 1.6; color: var(--ink); max-width: 62ch; }
+.footnote em { font-style: italic; }
+
+/* CAT 05 — donuts */
+.donuts { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+.donut { display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; background: var(--paper); border: 1px solid var(--rule); padding: 18px; }
+.donut-svg { position: relative; width: 112px; height: 112px; }
+.donut-svg svg { width: 112px; height: 112px; transform: rotate(-90deg); }
+.donut-svg .trk { stroke: var(--deep); }
+.donut-svg .val { stroke: var(--indigo); }
+.donut-svg .pct { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--f-display); font-size: 2rem; line-height: 1; }
+.donut p { font-size: 0.95rem; line-height: 1.45; }
+
+/* ---------- core finding band ---------- */
+.finding-band { background: var(--indigo); color: var(--on-dark); padding: clamp(64px, 9vw, 128px) 0; }
+.finding-grid { display: grid; grid-template-columns: minmax(0, 70fr) minmax(0, 30fr); gap: var(--room-gap); align-items: end; }
+.finding-band h2 { font-family: var(--f-body); font-weight: 700; font-size: clamp(1.4rem, 2.2vw, 1.8rem); color: var(--on-dark); display: inline-block; }
+.finding-band h2::after { content: ""; display: block; width: 64px; height: 3px; background: var(--sun); margin-top: 14px; }
+.finding-statement {
+  margin-top: 32px;
+  font-family: var(--f-display);
+  font-size: clamp(2.1rem, 4.6vw, 4.1rem);
+  line-height: 1.08;
+  color: var(--on-dark);
+  max-width: 22ch;
+}
+.finding-sub { margin-top: 26px; font-family: var(--f-display); font-style: italic; font-size: clamp(1.2rem, 1.8vw, 1.5rem); line-height: 1.4; color: var(--on-dark-2); max-width: 46ch; }
+.rank-stamp { border: 1.5px solid var(--on-dark-2); padding: 22px 22px 20px; }
+.rank-stamp .big { font-family: var(--f-display); font-size: clamp(4rem, 7vw, 6rem); line-height: 0.9; color: var(--on-dark); }
+.rank-stamp .big sup { font-size: 0.4em; vertical-align: top; position: relative; top: 0.25em; margin-left: 2px; }
+.rank-stamp p { margin-top: 12px; font-size: 0.98rem; color: var(--on-dark); }
+.stamp-dots { display: flex; gap: 8px; margin-top: 16px; }
+.stamp-dots i { width: 14px; height: 14px; border-radius: 50%; border: 1.5px solid var(--on-dark-2); }
+.stamp-dots i.on { background: var(--sun); border-color: var(--sun); }
+
+/* ---------- CAT 06 — segments with attribute bars ---------- */
+.segments { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+.seg { background: var(--paper); border: 1px solid var(--rule); border-top: 3px solid var(--indigo); padding: 20px 22px 24px; }
+.seg .seg-no { font-family: var(--f-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+.seg h3 { font-family: var(--f-display); font-weight: 400; font-size: 1.85rem; line-height: 1.1; margin-top: 8px; }
+.seg p { margin-top: 10px; font-size: 0.92rem; line-height: 1.55; }
+.attrs { margin-top: 18px; display: grid; gap: 10px; }
+.attr-line { display: flex; justify-content: space-between; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.attr .bar { height: 8px; margin-top: 4px; }
+
+/* CAT 07 — 2x2 */
+.matrix { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 10px; }
+.y-axis { display: flex; flex-direction: column; justify-content: space-between; align-items: center; font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.y-axis .y-name { writing-mode: vertical-rl; transform: rotate(180deg); font-family: var(--f-display); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 1.05rem; color: var(--ink); }
+.quads { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--indigo); border: 1px solid var(--indigo); }
+.quad { background: var(--paper); padding: 18px 16px 20px; }
+.quad .q-pos { font-family: var(--f-mono); font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.quad h4 { font-family: var(--f-display); font-weight: 400; font-size: 1.45rem; line-height: 1.15; margin-top: 6px; }
+.quad p { margin-top: 6px; font-size: 0.88rem; line-height: 1.5; }
+.quad--target { background: var(--sun); }
+.quad--target .q-pos, .quad--target p, .quad--target h4 { color: var(--indigo); }
+.x-axis { grid-column: 2; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-family: var(--f-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.x-axis .x-name { font-family: var(--f-display); font-style: italic; text-transform: none; letter-spacing: 0; font-size: 1.05rem; color: var(--ink); }
+
+/* ---------- CAT 08 — weighted dots table ---------- */
+.vtable { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.vtable th { text-align: left; font-family: var(--f-mono); font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0 10px 10px 0; border-bottom: 2px solid var(--rule-strong); vertical-align: bottom; }
+.vtable td { padding: 14px 10px 14px 0; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.5; }
+.vtable td.dim { font-family: var(--f-display); font-size: 1.3rem; line-height: 1.15; white-space: nowrap; }
+.vtable td.seg-col { font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; padding-top: 17px; }
+.vtable td.wt { white-space: nowrap; padding-top: 17px; padding-right: 0; }
+.dots { display: inline-flex; gap: 4px; vertical-align: middle; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--indigo); background: var(--dot-empty); }
+.dots i.on { background: var(--indigo); }
+.wt-n { font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; margin-left: 8px; vertical-align: middle; }
+
+/* pull quote */
+.pull { margin-top: clamp(40px, 5vw, 64px); padding: 30px 0 0; border-top: 2px solid var(--rule-strong); }
+.pull blockquote { margin: 0; font-family: var(--f-display); font-size: clamp(1.75rem, 3vw, 2.5rem); line-height: 1.2; }
+.pull figcaption { margin-top: 16px; font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+.pull figcaption em { font-style: normal; }
+
+/* CAT 09 — layers (numbered badges) */
+.layers { display: grid; gap: 0; }
+.layer { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; padding: 0 0 22px; margin-bottom: 22px; border-bottom: 1px solid var(--rule); }
+.badge { width: 56px; height: 56px; border: 1.5px solid var(--indigo); display: grid; place-items: center; font-family: var(--f-display); font-size: 1.8rem; line-height: 1; color: var(--indigo); background: var(--paper); }
+.layer .l-tag { font-family: var(--f-mono); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.layer h4 { font-family: var(--f-body); font-weight: 700; font-size: 1.05rem; line-height: 1.3; margin-top: 4px; }
+.layer p { margin-top: 6px; font-size: 0.93rem; line-height: 1.55; }
+
+/* CAT 10 — engagement flow */
+.flow { display: grid; gap: 0; counter-reset: step; }
+.step { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 18px; position: relative; padding-bottom: 30px; }
+.step:last-child { padding-bottom: 0; }
+.step::before { content: ""; position: absolute; left: 25px; top: 52px; bottom: 0; width: 2px; background: var(--indigo); }
+.step:last-child::before { display: none; }
+.step-n { width: 52px; height: 52px; border-radius: 50%; background: var(--indigo); color: var(--on-dark); display: grid; place-items: center; font-family: var(--f-mono); font-weight: 600; font-size: 0.95rem; position: relative; z-index: 1; }
+.step-body { padding-top: 4px; }
+.step h3 { font-family: var(--f-body); font-weight: 700; font-size: 1.08rem; line-height: 1.3; }
+.step p { margin-top: 6px; font-size: 0.94rem; line-height: 1.55; }
+.step .arrow { display: block; color: var(--ember); margin-top: 10px; }
+.step .arrow svg { width: 18px; height: 18px; }
+
+/* closing */
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.tags li { font-family: var(--f-mono); font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; border: 1.5px solid var(--indigo); padding: 7px 12px; background: var(--paper); }
+.closing-sub { margin-top: 34px; font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: 1.45rem; }
+
+/* footer */
+.foot { background: var(--indigo); color: var(--on-dark); }
+.foot .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 26px; padding-bottom: 26px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .hero-grid, .finding-grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .room--left .room-grid, .room--right .room-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .room--left .wall, .room--right .wall { grid-column: 1; grid-row: 1; position: static; justify-self: stretch; text-align: left; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px; padding-top: 0; }
+  .room--left .room-body, .room--right .room-body { grid-column: 1; grid-row: 2; }
+  .wall .tick, .room--right .wall .tick { margin: 0; }
+  .wall br { display: none; }
+}
+@media (max-width: 600px) {
+  .vtable thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .vtable, .vtable tbody, .vtable tr, .vtable td { display: block; width: 100%; }
+  .vtable tr { padding: 16px 0; border-bottom: 1px solid var(--rule); }
+  .vtable td, .vtable td.seg-col, .vtable td.wt { border: 0; padding: 4px 0; white-space: normal; }
+  .vtable td::before { content: attr(data-label); display: block; font-family: var(--f-mono); font-size: 0.64rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-bottom: 2px; }
+  .vtable td.dim::before { display: none; }
+  .matrix { grid-template-columns: 22px minmax(0, 1fr); gap: 6px; }
+  .y-axis { font-size: 0.58rem; }
+  .x-axis { font-size: 0.58rem; }
+  .y-axis .y-name, .x-axis .x-name { font-size: 0.95rem; }
+  .quad { padding: 12px 10px 14px; }
+  .quad .q-pos { font-size: 0.56rem; letter-spacing: 0.03em; }
+  .quad h4 { font-size: 1.15rem; }
+  .quad p { font-size: 0.8rem; line-height: 1.45; }
+  .donut { grid-template-columns: 96px 1fr; }
+  .donut-svg, .donut-svg svg { width: 96px; height: 96px; }
+  .figure .num { font-size: 3.4rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- print ---------- */
+@media print {
+  body { background: var(--print-bg); color: var(--print-ink); }
+  .sun { display: none; }
+  .wall { position: static; }
+  .plate, .finding-band, .foot, .disc, .step-n { background: var(--print-bg) !important; color: var(--print-ink) !important; border: 1px solid var(--print-ink); }
+  .plate h2, .plate .kicker, .finding-band h2, .finding-statement, .finding-sub, .rank-stamp p, .rank-stamp .big, .foot span { color: var(--print-ink) !important; }
+  .room, .exhibit, .entry, .seg, .quad, .layer, .step, .tile, tr { break-inside: avoid; page-break-inside: avoid; }
+  .bar span, .dots i.on { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .hl::before, .quad--target { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .tile, .entry, .seg, .donut, .quad, .badge, .tags li { background: var(--print-bg); border-color: var(--print-rule); }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="wrap mono">
+    <span>For a leading state-owned developer</span>
+    <span>Sep — Nov 2021</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="sun" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <ul class="disciplines mono" aria-label="Disciplines">
+          <li>Consumer Research</li>
+          <li>Product Strategy</li>
+          <li>Brand</li>
+        </ul>
+        <h1>Ultra-Luxury Residential Insights</h1>
+        <p class="hero-stand">Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and <span class="hl">UHNW buyer psychology</span>.</p>
+      </div>
+      <div class="hero-meta">
+        <dl>
+          <div><dt>Location</dt><dd class="txt">Prime inner-city</dd></div>
+          <div><dt>Buyer segments</dt><dd>4</dd></div>
+          <div><dt>Value dimensions</dt><dd>8</dd></div>
+          <div><dt>Benchmark projects</dt><dd>8</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 00 Context — LEFT -->
+<section class="room room--left" id="context" aria-labelledby="h-context">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <p class="kicker">00 — Context</p>
+        <h2 id="h-context">A flagship asset with no obvious comparable</h2>
+      </header>
+      <p class="standfirst">Four simultaneous constraints meant the client could not price from precedent.</p>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 01</span></div>
+        <ul class="tiles">
+          <li class="tile">
+            <span class="ico-key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h18" stroke-dasharray="2 2"/><path d="M7 21V9h10v12"/><path d="M3 21h18"/><path d="M10 12h1M13 12h1M10 15h1M13 15h1M10 18h1M13 18h1"/><path d="M12 6.5V4.5M10.8 5.6 12 4.4l1.2 1.2"/></svg></span>
+            <h3>Height limits</h3>
+            <p>Policy restrictions cap buildable height, compressing the achievable unit mix.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="12"/><path d="M4 14h16M9.3 8v12M14.6 8v12"/><path d="M2.5 4.5h19"/></svg></span>
+            <h3>Density caps</h3>
+            <p>Plot ratio ceilings limit saleable area against a very high land basis.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h9l3 4 4 1v9H8l-4-3z"/><path d="M11 5 7 19" stroke-dasharray="2 2"/><path d="M16 9 13 19" stroke-dasharray="2 2"/></svg></span>
+            <h3>Demolition bands</h3>
+            <p>Phased clearance leaves irregular lot boundaries that resist orthogonal planning.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-key" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h11v5h7v11H9v-6H3z"/><path d="M9 14h5v6M14 9v5"/></svg></span>
+            <h3>Unconventional layouts</h3>
+            <p>Irregular footprints force non-standard floorplans that UHNW buyers scrutinise.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="prose">
+        <p>Located in a rare prime inner-city plot with school-district advantages and elite community resources, the project faced multiple simultaneous challenges: policy restrictions on height limits, density caps, demolition bands resulting in irregular lot shapes, and unconventional unit layouts.</p>
+        <p>Site-level factors affecting ultra-luxury value perception and investment return pressures meant the client could not price from precedent. We were commissioned to conduct deep ultra-luxury market research and consumer insights — clarifying target buyer profiles, product optimisation directions, and innovative commercial model exploration.</p>
+      </div>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">00</span><br>
+      <span>Context</span><br>
+      <span>CAT. 01</span>
+    </aside>
+  </div>
+</section>
+
+<!-- Figures — RIGHT -->
+<section class="room room--right" aria-label="Figures">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <div class="cat-head"><span class="cat-no">CAT. 02</span></div>
+      <ul class="figures">
+        <li class="figure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H10l-4 4v-4H4z"/><path d="M8 9h8M8 12h5"/></svg>
+          <span class="num"><span class="hl">32</span></span>
+          <span class="lbl">Depth interviews</span>
+        </li>
+        <li class="figure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10h4v11M10 21V5h4v16M15 21v-8h4v8"/></svg>
+          <span class="num"><span class="hl">8</span></span>
+          <span class="lbl">Benchmark projects</span>
+        </li>
+        <li class="figure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.3 3h7.4L21 8.3v7.4L15.7 21H8.3L3 15.7V8.3z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span class="num"><span class="hl">8</span></span>
+          <span class="lbl">Value dimensions</span>
+        </li>
+        <li class="figure">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18 10 12l3 3 7-7"/><path d="M15 8h5v5"/></svg>
+          <span class="num"><span class="hl">40+</span></span>
+          <span class="lbl">Optimisation moves</span>
+        </li>
+      </ul>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">Figures</span><br>
+      <span>CAT. 02</span>
+    </aside>
+  </div>
+</section>
+
+<!-- 01 Benchmark — LEFT -->
+<section class="room room--left" id="benchmark" aria-labelledby="h-bench">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <p class="kicker">01 — Benchmark analysis</p>
+        <h2 id="h-bench">How comparable assets manufacture scarcity</h2>
+      </header>
+      <p class="standfirst">Eight ultra-luxury projects, decomposed by the source of their premium rather than by their marketing claim.</p>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 03</span></div>
+        <ul class="entries">
+          <li class="entry">
+            <div class="entry-top">
+              <span class="disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16"/><rect x="7.5" y="7.5" width="9" height="9"/><path d="m8 16 3-4 2 2 3-3"/></svg></span>
+              <span class="entry-letter">A</span>
+            </div>
+            <h3>Collector-oriented</h3>
+            <p class="cap">Art &amp; scarcity positioning</p>
+            <p class="body">Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers under 1,000 UHNW families, invitation-only release cycles.</p>
+          </li>
+          <li class="entry">
+            <div class="entry-top">
+              <span class="disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8 12 3l9 5"/><rect x="5" y="8" width="14" height="12"/><rect x="9" y="12" width="6" height="5"/></svg></span>
+              <span class="entry-letter">B</span>
+            </div>
+            <h3>Cultural-form</h3>
+            <p class="cap">Chinese courtyard heritage</p>
+            <p class="body">Courtyard compound design benchmark. Chinese garden plus private courtyard plus multi-space differentiation; buyers are local landowning legacy families.</p>
+          </li>
+          <li class="entry">
+            <div class="entry-top">
+              <span class="disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.7-6-11a6 6 0 0 1 12 0c0 5.3-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span>
+              <span class="entry-letter">C</span>
+            </div>
+            <h3>Positional</h3>
+            <p class="cap">Absolute location scarcity</p>
+            <p class="body">Prime location address, pricing and liquidity accepted as the purest embodiment of "location = value". Resale velocity materially above segment average.</p>
+          </li>
+          <li class="entry">
+            <div class="entry-top">
+              <span class="disc" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16M5 8h14M12 3 4 8M12 3l8 5"/><path d="M7 8v12M12 8v12M17 8v12"/></svg></span>
+              <span class="entry-letter">D</span>
+            </div>
+            <h3>Narrative</h3>
+            <p class="cap">Heritage &amp; cultural narrative</p>
+            <p class="body">Inside a historic conservation district. Historical depth plus cultural-circle premium validates cultural storytelling support for ultra-luxury pricing.</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 04</span><h3 class="cat-cap">Premium source hierarchy</h3></div>
+        <ol class="ranked" aria-label="Premium source hierarchy, ranked">
+          <li class="rank-row">
+            <span class="rank-pos">1st</span>
+            <div class="rank-line"><span class="rank-driver">Location scarcity</span><span class="rank-meta"><b>100%</b> · Decisive</span></div>
+            <div class="bar" aria-hidden="true"><span style="width:100%"></span></div>
+          </li>
+          <li class="rank-row">
+            <span class="rank-pos">2nd</span>
+            <div class="rank-line"><span class="rank-driver">Architecture &amp; design</span><span class="rank-meta"><b>72%</b> · Strong</span></div>
+            <div class="bar" aria-hidden="true"><span style="width:72%"></span></div>
+          </li>
+          <li class="rank-row">
+            <span class="rank-pos">3rd</span>
+            <div class="rank-line"><span class="rank-driver">Service amenities</span><span class="rank-meta"><b>46%</b> · Moderate</span></div>
+            <div class="bar" aria-hidden="true"><span style="width:46%"></span></div>
+          </li>
+          <li class="rank-row">
+            <span class="rank-pos">4th</span>
+            <div class="rank-line"><span class="rank-driver">Brand premium</span><span class="rank-meta"><b>24%</b> · Weak</span></div>
+            <div class="bar" aria-hidden="true"><span style="width:24%"></span></div>
+          </li>
+        </ol>
+        <p class="cat-note">Share of realised price premium attributable to each driver, across the eight benchmarks.</p>
+        <p class="footnote"><em>Value perception varies significantly by buyer type. Legacy families are location-driven; wealth accumulators weight design and display; professional elites weight comfort and design; new money weights brand recognition.</em></p>
+      </div>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 05</span><h3 class="cat-cap">The contradiction</h3></div>
+        <div class="donuts">
+          <div class="donut">
+            <div class="donut-svg">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="50" fill="none" stroke-width="14"/><circle class="val" cx="60" cy="60" r="50" fill="none" stroke-width="14" pathLength="100" stroke-dasharray="24 100"/></svg>
+              <span class="pct">24%</span>
+            </div>
+            <p>of realised premium from brand</p>
+          </div>
+          <div class="donut">
+            <div class="donut-svg">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="trk" cx="60" cy="60" r="50" fill="none" stroke-width="14"/><circle class="val" cx="60" cy="60" r="50" fill="none" stroke-width="14" pathLength="100" stroke-dasharray="61 100"/></svg>
+              <span class="pct">61%</span>
+            </div>
+            <p>of marketing spend on brand</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">01</span><br>
+      <span>Benchmark analysis</span><br>
+      <span>CAT. 03 — 05</span>
+    </aside>
+  </div>
+</section>
+
+<!-- Core finding — full band -->
+<section class="finding-band" aria-labelledby="h-finding">
+  <div class="wrap finding-grid">
+    <div>
+      <h2 id="h-finding">Core finding</h2>
+      <p class="finding-statement">Brand <span class="hl">contributes least</span> to realised premium — and receives <span class="hl">the largest share</span> of ultra-luxury marketing spend.</p>
+      <p class="finding-sub">Reallocating that spend toward location narrative and architectural differentiation is the highest-leverage move available before launch.</p>
+    </div>
+    <div class="rank-stamp">
+      <div class="big" aria-hidden="true">4<sup>th</sup></div>
+      <p>Brand ranks <strong>4th</strong> of four drivers.</p>
+      <div class="stamp-dots" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Segments — RIGHT -->
+<section class="room room--right" id="segments" aria-labelledby="h-seg">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <p class="kicker">02 — Deliverable</p>
+        <h2 id="h-seg">Four UHNW buyer segments</h2>
+      </header>
+      <p class="standfirst">A three-dimensional assessment model — investment, residential and social-circle attributes — resolving a single "luxury buyer" into four addressable groups.</p>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 06</span></div>
+        <ul class="segments">
+          <li class="seg">
+            <span class="seg-no">Segment 01</span>
+            <h3>Legacy families</h3>
+            <p>Multi-generational holders. Buy the address, not the building. Indifferent to brand; highly sensitive to neighbours, school access and long-run land scarcity.</p>
+            <div class="attrs">
+              <div class="attr"><div class="attr-line"><span>Scarcity</span><span>96</span></div><div class="bar" aria-hidden="true"><span style="width:96%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Privacy</span><span>78</span></div><div class="bar" aria-hidden="true"><span style="width:78%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Brand</span><span>12</span></div><div class="bar" aria-hidden="true"><span style="width:12%"></span></div></div>
+            </div>
+          </li>
+          <li class="seg">
+            <span class="seg-no">Segment 02</span>
+            <h3>Wealth accumulators</h3>
+            <p>Treat the unit as a portfolio position. Liquidity and resale velocity dominate; design quality matters as an exit argument rather than a lifestyle preference.</p>
+            <div class="attrs">
+              <div class="attr"><div class="attr-line"><span>Liquidity</span><span>92</span></div><div class="bar" aria-hidden="true"><span style="width:92%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Prestige</span><span>60</span></div><div class="bar" aria-hidden="true"><span style="width:60%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Comfort</span><span>34</span></div><div class="bar" aria-hidden="true"><span style="width:34%"></span></div></div>
+            </div>
+          </li>
+          <li class="seg">
+            <span class="seg-no">Segment 03</span>
+            <h3>Professional elite</h3>
+            <p>C-suite and senior professionals. Prioritise comfort, privacy and circle integration. Extremely high bar on product detail: ceiling height, orientation, flow. Rational decision-making, value-conscious.</p>
+            <div class="attrs">
+              <div class="attr"><div class="attr-line"><span>Comfort</span><span>94</span></div><div class="bar" aria-hidden="true"><span style="width:94%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Privacy</span><span>88</span></div><div class="bar" aria-hidden="true"><span style="width:88%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Brand</span><span>26</span></div><div class="bar" aria-hidden="true"><span style="width:26%"></span></div></div>
+            </div>
+          </li>
+          <li class="seg">
+            <span class="seg-no">Segment 04</span>
+            <h3>New money</h3>
+            <p>Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment: most influenced by marketing, most active word-of-mouth amplifiers. Strongest need for circle admission.</p>
+            <div class="attrs">
+              <div class="attr"><div class="attr-line"><span>Belonging</span><span>90</span></div><div class="bar" aria-hidden="true"><span style="width:90%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Brand</span><span>84</span></div><div class="bar" aria-hidden="true"><span style="width:84%"></span></div></div>
+              <div class="attr"><div class="attr-line"><span>Scarcity</span><span>40</span></div><div class="bar" aria-hidden="true"><span style="width:40%"></span></div></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 07</span><h3 class="cat-cap">Segment map — motive against price elasticity</h3></div>
+        <div class="matrix">
+          <div class="y-axis" aria-hidden="true"><span>High</span><span class="y-name">Price elasticity</span><span>Low</span></div>
+          <div class="quads">
+            <div class="quad">
+              <span class="q-pos">High elasticity · Use</span>
+              <h4>New money</h4>
+              <p>Responsive to narrative and brand. Needs the circle to be legible.</p>
+            </div>
+            <div class="quad">
+              <span class="q-pos">High elasticity · Asset</span>
+              <h4>Wealth accumulators</h4>
+              <p>Buys on exit maths. Will trade design for liquidity.</p>
+            </div>
+            <div class="quad">
+              <span class="q-pos">Low elasticity · Use</span>
+              <h4>Professional elite</h4>
+              <p>Will pay for resolved product detail. Walks away from compromise.</p>
+            </div>
+            <div class="quad quad--target">
+              <span class="q-pos">Low elasticity · Asset</span>
+              <h4>Legacy families</h4>
+              <p>Primary target. Price-insensitive where scarcity is genuine.</p>
+            </div>
+          </div>
+          <div class="x-axis" aria-hidden="true"><span>Use</span><span class="x-name">Purchase motive: use → asset</span><span>Asset</span></div>
+        </div>
+      </div>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">02</span><br>
+      <span>Deliverable</span><br>
+      <span>CAT. 06 — 07</span>
+    </aside>
+  </div>
+</section>
+
+<!-- 03 Value dimensions — LEFT -->
+<section class="room room--left" id="dimensions" aria-labelledby="h-dim">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <p class="kicker">03 — Deliverable</p>
+        <h2 id="h-dim">Eight value dimensions</h2>
+      </header>
+      <p class="standfirst">A product-optimisation framework translating segment psychology into decisions the design and sales teams could act on.</p>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 08</span></div>
+        <table class="vtable">
+          <thead>
+            <tr><th scope="col">Dimension</th><th scope="col">What it governs</th><th scope="col">Primary segment</th><th scope="col">Weight</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dim" data-label="Dimension">Scarcity</td>
+              <td data-label="What it governs">Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</td>
+              <td class="seg-col" data-label="Primary segment">Legacy families</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="wt-n">5</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Value preservation</td>
+              <td data-label="What it governs">Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</td>
+              <td class="seg-col" data-label="Primary segment">Legacy families</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt-n">4</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Liquidity</td>
+              <td data-label="What it governs">Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</td>
+              <td class="seg-col" data-label="Primary segment">Wealth accumulators</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt-n">4</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Comfort</td>
+              <td data-label="What it governs">Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</td>
+              <td class="seg-col" data-label="Primary segment">Professional elite</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt-n">3</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Privacy</td>
+              <td data-label="What it governs">Security systems, community density, resident-circle homogeneity.</td>
+              <td class="seg-col" data-label="Primary segment">Professional elite</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt-n">3</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Prestige</td>
+              <td data-label="What it governs">Entry immediacy, exclusive service details, visible service standards.</td>
+              <td class="seg-col" data-label="Primary segment">New money</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt-n">3</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Belonging</td>
+              <td data-label="What it governs">Circle community resources, resident events, admission mechanics.</td>
+              <td class="seg-col" data-label="Primary segment">New money</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="wt-n">2</span></td>
+            </tr>
+            <tr>
+              <td class="dim" data-label="Dimension">Purity</td>
+              <td data-label="What it governs">Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</td>
+              <td class="seg-col" data-label="Primary segment">Cross-segment</td>
+              <td class="wt" data-label="Weight"><span class="dots" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt-n">4</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <figure class="pull">
+        <blockquote>"<span class="hl">Purity ranked above prestige</span> in every segment — and no benchmark project was designing for it."</blockquote>
+        <figcaption>— <em>Finding · Depth interviews</em></figcaption>
+      </figure>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 09</span><h3 class="cat-cap">Three response layers</h3></div>
+        <ol class="layers">
+          <li class="layer">
+            <span class="badge" aria-hidden="true">01</span>
+            <div>
+              <span class="l-tag">Layer 01 · Product</span>
+              <h4>Layout remediation programme</h4>
+              <p>Forty-plus specific moves converting policy-forced irregularity into differentiated unit typologies rather than compromised ones.</p>
+            </div>
+          </li>
+          <li class="layer">
+            <span class="badge" aria-hidden="true">02</span>
+            <div>
+              <span class="l-tag">Layer 02 · Service</span>
+              <h4>Circle admission design</h4>
+              <p>Resident-community mechanics that make belonging legible to new-money buyers without diluting the homogeneity legacy families are paying for.</p>
+            </div>
+          </li>
+          <li class="layer">
+            <span class="badge" aria-hidden="true">03</span>
+            <div>
+              <span class="l-tag">Layer 03 · Narrative</span>
+              <h4>Scarcity story architecture</h4>
+              <p>A sales narrative sequenced by segment, leading with location scarcity and treating brand as supporting evidence rather than the headline.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">03</span><br>
+      <span>Deliverable</span><br>
+      <span>CAT. 08 — 09</span>
+    </aside>
+  </div>
+</section>
+
+<!-- 04 Engagement arc — RIGHT -->
+<section class="room room--right" id="arc" aria-labelledby="h-arc">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <p class="kicker">04 — Engagement arc</p>
+        <h2 id="h-arc">From ethnography to launch strategy</h2>
+      </header>
+
+      <div class="exhibit">
+        <div class="cat-head"><span class="cat-no">CAT. 10</span></div>
+        <ol class="flow">
+          <li class="step">
+            <span class="step-n" aria-hidden="true">01</span>
+            <div class="step-body">
+              <h3>Ethnographic fieldwork</h3>
+              <p>Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">02</span>
+            <div class="step-body">
+              <h3>Benchmark decomposition</h3>
+              <p>Premium sources separated from marketing claims to establish the real driver hierarchy.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">03</span>
+            <div class="step-body">
+              <h3>Segment &amp; value model</h3>
+              <p>Four segments mapped against eight value dimensions into a single prioritisation grid.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">04</span>
+            <div class="step-body">
+              <h3>Product &amp; launch strategy</h3>
+              <p>Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">04</span><br>
+      <span>Engagement arc</span><br>
+      <span>CAT. 10</span>
+    </aside>
+  </div>
+</section>
+
+<!-- Closing — LEFT -->
+<section class="room room--left" id="closing" aria-labelledby="h-close">
+  <div class="wrap room-grid">
+    <div class="room-body">
+      <header class="plate">
+        <h2 id="h-close">Core competencies</h2>
+      </header>
+      <ul class="tags">
+        <li>Consumer Research</li>
+        <li>Product Strategy</li>
+        <li>Market Analysis</li>
+        <li>Brand Strategy</li>
+        <li>Segmentation</li>
+      </ul>
+      <h3 class="closing-sub">Industry domains</h3>
+      <ul class="tags">
+        <li>Real Estate</li>
+        <li>Consumer</li>
+      </ul>
+    </div>
+    <aside class="wall" aria-hidden="true">
+      <span class="tick"></span>
+      <span class="no">Closing</span>
+    </aside>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap mono">
+    <span>2021 Consulting Engagement · Deliverables Showcase</span>
+    <span>Client identity anonymised</span>
+  </div>
+</footer>
+
+</body>
+</html>
