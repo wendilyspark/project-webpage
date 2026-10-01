@@ -15,7 +15,7 @@ Project Webpage reads your consulting project materials and generates a self-con
 **What you get:**
 
 - **A complete single-file HTML page** — no build step, no dependencies, opens in any browser
-- **Thirteen professional styles to choose from** — browse them all on one page before you pick; navy-and-gold Harbour is the default
+- **Twelve professional styles to choose from** — browse them all on one page before you pick; navy-and-gold Harbour is the default
 - **Full content fidelity** — every analysis section, deliverable, and metric from your source material, reorganized for visual impact
 - **Built-in client anonymization** — real client names are replaced with neutral descriptors ("Leading State-Owned Developer", "Multilateral Development Bank") — safe to publish publicly
 - **Component-rich layouts** — card grids, layer stacks, stat callouts, benchmark tables, and tag clouds map your content to the right visual pattern automatically
@@ -47,7 +47,7 @@ Sector: Retail / Consumer
 
 ### Output
 
-A single self-contained `.html` file that opens in any browser, in any of thirteen styles. Every thumbnail shows the same sample project summary — click one to open that template.
+A single self-contained `.html` file that opens in any browser, in any of twelve styles. Every thumbnail shows the same sample project summary — click one to open that template.
 
 <table>
 <tr>
@@ -69,9 +69,6 @@ A single self-contained `.html` file that opens in any browser, in any of thirte
 <td align="center" valign="top" width="33%"><a href="references/themes/blue-professional.html"><img src="references/thumbnails/blue-professional.jpg" alt="Blue Professional style" width="260"></a><br><b>Blue Professional</b><br><sub>Product docs with sidebar contents</sub></td>
 <td align="center" valign="top" width="33%"><a href="references/themes/editorial-tri-tone.html"><img src="references/thumbnails/editorial-tri-tone.jpg" alt="Editorial Tri-Tone style" width="260"></a><br><b>Editorial Tri-Tone</b><br><sub>Poster report in blush and crimson</sub></td>
 <td align="center" valign="top" width="33%"><a href="references/themes/biennale-yellow.html"><img src="references/thumbnails/biennale-yellow.jpg" alt="Biennale Yellow style" width="260"></a><br><b>Biennale Yellow</b><br><sub>Exhibition catalogue, alternating rooms</sub></td>
-</tr>
-<tr>
-<td align="center" valign="top" width="33%"><a href="references/themes/signal.html"><img src="references/thumbnails/signal.jpg" alt="Signal style" width="260"></a><br><b>Signal</b><br><sub>Sticky rail, navy bands on cream</sub></td>
 </tr>
 </table>
 
@@ -103,7 +100,7 @@ You can also invoke it directly with `/project-webpage` in any Claude Code sessi
 
 **The skill will:**
 1. Ask for your source material, and ask for more if it is too thin to make a full page
-2. Ask which style you want — and if you're not sure, open a single style-browser page where you can flip through all thirteen
+2. Ask which style you want — and if you're not sure, open a single style-browser page where you can flip through all twelve
 3. Extract all content — every bullet, every metric, every deliverable
 4. Propose a sanitized client descriptor for your review
 5. Generate the HTML file in your chosen style and save it to the location you specify

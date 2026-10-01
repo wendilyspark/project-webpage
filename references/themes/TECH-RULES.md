@@ -26,7 +26,7 @@ These come from repeated review feedback. They are not suggestions.
 6. **Icons** are inline SVG using `currentColor`. Several treatments across the
    page (bare oversized mark, filled disc, keyline square, inline mark, numbered
    badge, ghost watermark) — but one treatment per peer set.
-7. **One cream.** Only `signal` may use a warm cream/beige ground. Every other
+7. **One cream at most.** No more than one template may use a warm cream/beige ground. Every other
    template needs a genuinely different surface, and the set must include dark
    options. Do not replace one monotony with a set of identical pale neutrals.
 8. **Difference means style/brand character** — typographic voice, proportion,

@@ -39,7 +39,7 @@ If anything in the table is missing, or the material is too thin to fill a page,
 
 ### Step 2: Choose a Style
 
-Ask the user which style they want. There are thirteen, all built from the same sample case study:
+Ask the user which style they want. There are twelve, all built from the same sample case study:
 
 | Style | Reference file | Character |
 |---|---|---|
@@ -55,7 +55,6 @@ Ask the user which style they want. There are thirteen, all built from the same 
 | Blue Professional | `references/themes/blue-professional.html` | Product docs with a sidebar table of contents |
 | Editorial Tri-Tone | `references/themes/editorial-tri-tone.html` | Poster report in blush, butter and crimson |
 | Biennale Yellow | `references/themes/biennale-yellow.html` | Exhibition catalogue with alternating rooms |
-| Signal | `references/themes/signal.html` | Sticky side rail, navy bands on cream |
 
 **If the user names a style**, confirm the match and continue.
 
