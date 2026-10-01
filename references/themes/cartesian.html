@@ -1,0 +1,923 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* surfaces */
+  --page: #EAECEA;
+  --tint: #DCE0DC;
+  --sheet: #F4F5F3;
+  --plate-dark: #1F2321;
+  /* type */
+  --ink: #1A1A1A;
+  --ink-2: #5A5A5A;
+  --on-dark: #F1F2F0;
+  --on-dark-2: #B9BDBA;
+  /* accent */
+  --taupe: #8A8178;
+  --taupe-text: #665E55;
+  --taupe-light: #C9BEB0;
+  --line: #B8B0A4;
+  --line-soft: #CDC7BE;
+  --deco: #1A1A1A;
+  /* fonts */
+  --serif: "Playfair Display", "Didot", "Bodoni 72", Georgia, serif;
+  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  /* rhythm */
+  --measure: 58ch;
+  --plate-w: 1080px;
+  --gutter: clamp(16px, 5vw, 64px);
+  --space-section: clamp(88px, 12vw, 168px);
+  --hair: 1px;
+  --track: 0.18em;
+  --deco-opacity: 0.08;
+  /* print */
+  --print-paper: #FFFFFF;
+  --print-ink: #000000;
+  --print-bar: #555555;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, figure, blockquote, dl, dd, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+svg { display: block; }
+
+.label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--taupe-text);
+  line-height: 1.5;
+}
+
+.wrap { padding-left: var(--gutter); padding-right: var(--gutter); }
+.measure { max-width: var(--measure); margin-left: auto; margin-right: auto; }
+.prose p + p { margin-top: 1.2em; }
+.prose p { color: var(--ink); }
+
+/* ---------- Hero / title page ---------- */
+.hero { padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(56px, 8vw, 104px); }
+.hero__sheet {
+  position: relative;
+  max-width: var(--plate-w);
+  margin: 0 auto;
+  border: var(--hair) solid var(--line);
+  padding: clamp(28px, 6vw, 88px) clamp(20px, 6vw, 88px);
+  overflow: hidden;
+  text-align: center;
+}
+.hero__sheet .corner { position: absolute; width: 14px; height: 14px; border-color: var(--taupe); border-style: solid; border-width: 0; }
+.hero__sheet .corner--tl { top: 8px; left: 8px; border-top-width: 1px; border-left-width: 1px; }
+.hero__sheet .corner--tr { top: 8px; right: 8px; border-top-width: 1px; border-right-width: 1px; }
+.hero__sheet .corner--bl { bottom: 8px; left: 8px; border-bottom-width: 1px; border-left-width: 1px; }
+.hero__sheet .corner--br { bottom: 8px; right: 8px; border-bottom-width: 1px; border-right-width: 1px; }
+.hero__deco {
+  position: absolute; inset: 0; margin: auto;
+  width: min(820px, 140%); height: auto;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  color: var(--deco); opacity: var(--deco-opacity); pointer-events: none;
+}
+.hero__inner { position: relative; }
+.hero__top {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 28px;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+.hero__disc { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0; }
+.hero__disc span { white-space: nowrap; }
+.hero__disc span:not(:last-child)::after { content: "·"; padding: 0 0.7em; color: var(--taupe-text); }
+h1 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(40px, 7.4vw, 92px);
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  max-width: 14ch;
+  margin: 0 auto;
+  overflow-wrap: break-word;
+}
+.hero__rule { width: 56px; height: 1px; background: var(--taupe); margin: clamp(28px, 4vw, 40px) auto; border: 0; }
+.hero__standfirst {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: clamp(19px, 2.1vw, 24px); line-height: 1.5;
+  color: var(--ink-2); max-width: 36em; margin: 0 auto;
+}
+.hero__meta {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  margin-top: clamp(48px, 6vw, 80px);
+  border-top: var(--hair) solid var(--line);
+}
+.hero__meta div { padding: 20px 12px 0; }
+.hero__meta dt { margin-bottom: 6px; }
+.hero__meta dd { font-family: var(--serif); font-size: 24px; line-height: 1.25; }
+
+/* ---------- Section title card (dark plate) ---------- */
+.section { padding-top: var(--space-section); }
+.title-card {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--plate-dark);
+  color: var(--on-dark);
+  text-align: center;
+  padding: clamp(40px, 6vw, 64px) clamp(24px, 5vw, 64px);
+}
+.title-card::before {
+  content: ""; position: absolute; inset: 8px;
+  border: var(--hair) solid var(--taupe-light); opacity: 0.45; pointer-events: none;
+}
+.title-card__num {
+  font-family: var(--serif); font-size: 30px; font-weight: 400; line-height: 1;
+  color: var(--taupe-light);
+}
+.title-card__kicker { margin-top: 14px; color: var(--taupe-light); }
+.title-card__rule { width: 40px; height: 1px; background: var(--taupe-light); margin: 22px auto; border: 0; }
+.title-card h2 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(28px, 4.2vw, 46px); line-height: 1.14;
+  color: var(--on-dark); max-width: 20ch; margin: 0 auto;
+}
+.standfirst {
+  font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2vw, 22px);
+  line-height: 1.55; color: var(--ink-2);
+  text-align: center; margin-top: clamp(32px, 4vw, 48px);
+}
+.block { margin-top: clamp(56px, 7vw, 88px); }
+.subhead {
+  text-align: center;
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(22px, 2.6vw, 28px); line-height: 1.25;
+}
+.subhead-label { text-align: center; margin-bottom: 10px; }
+
+/* ---------- Plates ---------- */
+.plate-zone { position: relative; overflow: hidden; padding: 24px 0; }
+.plate-zone__deco {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: max(120%, 900px); max-width: none; height: auto;
+  color: var(--deco); opacity: var(--deco-opacity); pointer-events: none;
+}
+.plate { position: relative; max-width: var(--plate-w); margin: 0 auto; }
+.plate--mid { max-width: 880px; }
+.plate--narrow { max-width: 720px; }
+.plate__label { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+.plate__label::after { content: ""; flex: 1; height: 1px; background: var(--line); transform: translateY(-3px); }
+.plate__frame {
+  border: var(--hair) solid var(--taupe);
+  background: var(--sheet);
+  padding: clamp(20px, 4vw, 48px);
+}
+.plate__caption {
+  font-family: var(--serif); font-style: italic; font-size: 16px; line-height: 1.55;
+  color: var(--ink-2); margin-top: 14px; max-width: 64ch;
+}
+.note {
+  font-size: 15px; line-height: 1.7; color: var(--ink-2);
+  margin-top: 28px; padding-top: 18px; border-top: var(--hair) solid var(--line);
+}
+
+/* icon treatments */
+.ico { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.ico-keyline { /* keyline square — constraints */
+  width: 64px; height: 64px; border: var(--hair) solid var(--taupe);
+  display: grid; place-items: center; color: var(--ink);
+}
+.ico-keyline .ico { width: 30px; height: 30px; }
+.ico-bare { color: var(--taupe-text); } /* bare oversized — figures */
+.ico-bare .ico { width: 40px; height: 40px; stroke-width: 1; }
+.ico-disc { /* filled disc — segments */
+  width: 44px; height: 44px; border-radius: 50%; background: var(--plate-dark); color: var(--on-dark);
+  display: grid; place-items: center; flex: none;
+}
+.ico-disc .ico { width: 22px; height: 22px; }
+.ico-inline { color: var(--taupe-text); flex: none; } /* inline mark — benchmarks */
+.ico-inline .ico { width: 22px; height: 22px; }
+
+/* constraints */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; }
+.tile { padding: 8px clamp(16px, 2.4vw, 28px) 8px; border-left: var(--hair) solid var(--line-soft); }
+.tile:first-child { border-left-color: transparent; }
+.tile h3 { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.25; margin: 22px 0 10px; }
+.tile p:not(.label) { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+
+/* figures */
+.figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); text-align: center; }
+.figure { padding: 8px 16px; border-left: var(--hair) solid var(--line-soft); display: flex; flex-direction: column; align-items: center; }
+.figure:first-child { border-left-color: transparent; }
+.figure__num { font-family: var(--serif); font-weight: 400; font-size: clamp(52px, 6vw, 72px); line-height: 1; margin-top: 20px; }
+.figure__lab { margin-top: 14px; }
+
+/* benchmark cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(16px, 2vw, 24px); }
+.bcard { border: var(--hair) solid var(--line); padding: 24px 22px 26px; background: var(--sheet); }
+.bcard__head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: var(--hair) solid var(--line-soft); }
+.bcard__letter {
+  width: 40px; height: 40px; border: var(--hair) solid var(--taupe); border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--serif); font-size: 20px; line-height: 1;
+}
+.bcard__kicker { margin-top: 18px; }
+.bcard h3 { font-family: var(--serif); font-weight: 600; font-size: 21px; line-height: 1.25; margin: 6px 0 12px; }
+.bcard p:not(.label) { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+
+/* ranked bars */
+.ranks { display: grid; gap: 0; }
+.rank {
+  display: grid; grid-template-columns: 52px minmax(140px, 220px) 1fr 64px 92px;
+  align-items: center; gap: 0 18px; padding: 18px 0; border-top: var(--hair) solid var(--line-soft);
+}
+.rank:last-child { border-bottom: var(--hair) solid var(--line-soft); }
+.rank__pos { font-family: var(--serif); font-style: italic; font-size: 20px; color: var(--taupe-text); }
+.rank__driver { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.3; }
+.rank__track { height: 10px; background: var(--tint); position: relative; }
+.rank__fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--taupe); }
+.rank__track::after { content: ""; position: absolute; right: 0; top: -5px; bottom: -5px; width: 1px; background: var(--line); }
+.rank__pct { font-family: var(--serif); font-size: 22px; text-align: right; }
+.rank__verdict { text-align: right; color: var(--ink-2); }
+.rank-legend { display: flex; justify-content: space-between; margin-top: 10px; }
+
+/* donuts */
+.meters { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; }
+.meter { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.meter svg { width: min(200px, 60vw); height: auto; }
+.meter__track { fill: none; stroke: var(--tint); stroke-width: 9; }
+.meter__arc { fill: none; stroke: var(--taupe-text); stroke-width: 9; stroke-linecap: butt; }
+.meter__tick { stroke: var(--line); stroke-width: 1; }
+.meter__val { font-family: var(--serif); font-size: 30px; fill: var(--ink); }
+.meter__cap { font-family: var(--serif); font-size: 19px; line-height: 1.4; margin-top: 18px; max-width: 18ch; }
+.meters__vs { display: none; }
+
+/* core finding */
+.finding { margin-top: var(--space-section); background: var(--tint); position: relative; overflow: hidden; }
+.finding__deco { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: max(110%, 900px); color: var(--deco); opacity: var(--deco-opacity); pointer-events: none; }
+.finding__inner { position: relative; max-width: 860px; margin: 0 auto; text-align: center; padding: clamp(72px, 10vw, 128px) 0; }
+.finding__stmt {
+  font-family: var(--serif); font-weight: 700; font-size: clamp(28px, 4vw, 44px); line-height: 1.2;
+  margin-top: 24px;
+}
+.finding__support { font-family: var(--serif); font-style: italic; font-size: clamp(19px, 2vw, 22px); line-height: 1.55; color: var(--ink-2); max-width: 40em; margin: 28px auto 0; }
+.finding__rank { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px; margin-top: 40px; }
+.pips { display: flex; gap: 10px; }
+.pip { width: 34px; height: 34px; border-radius: 50%; border: var(--hair) solid var(--line); display: grid; place-items: center; font-family: var(--serif); font-size: 15px; color: var(--ink-2); }
+.pip--mark { border: 2px solid var(--ink); color: var(--ink); font-weight: 700; }
+.finding__ranktext { font-size: 15px; color: var(--ink); }
+.finding__ranktext strong { font-family: var(--serif); font-size: 19px; }
+
+/* segments */
+.segs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: clamp(16px, 2vw, 24px); }
+.seg { border: var(--hair) solid var(--line); background: var(--sheet); padding: 24px 22px 26px; display: flex; flex-direction: column; }
+.seg__head { display: flex; align-items: center; gap: 14px; }
+.seg h3 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.2; margin-top: 2px; }
+.seg p:not(.label) { font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-top: 16px; }
+.attrs { margin-top: auto; padding-top: 22px; display: grid; gap: 12px; }
+.attr__row { display: flex; justify-content: space-between; align-items: baseline; }
+.attr__name { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+.attr__val { font-family: var(--serif); font-size: 17px; }
+.attr__track { height: 6px; background: var(--tint); margin-top: 6px; position: relative; }
+.attr__fill { position: absolute; left: 0; top: 0; bottom: 0; background: var(--taupe); }
+
+/* drafted 2x2 */
+.matrix { display: grid; grid-template-columns: 34px 1fr; grid-template-rows: auto auto; gap: 0; }
+.matrix__y { grid-row: 1; grid-column: 1; position: relative; }
+.matrix__y-label {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg);
+  white-space: nowrap;
+}
+.matrix__plot { grid-row: 1; grid-column: 2; position: relative; border-left: var(--hair) solid var(--ink); border-bottom: var(--hair) solid var(--ink); }
+/* end ticks */
+.matrix__plot::before { content: ""; position: absolute; left: -5px; top: 0; width: 9px; height: 1px; background: var(--ink); }
+.matrix__plot::after { content: ""; position: absolute; right: 0; bottom: -5px; width: 1px; height: 9px; background: var(--ink); }
+.matrix__grid { display: grid; grid-template-columns: 1fr 1fr; }
+.quad { padding: clamp(16px, 3vw, 36px); position: relative; }
+.quad:nth-child(1), .quad:nth-child(2) { border-bottom: var(--hair) dashed var(--line); }
+.quad:nth-child(odd) { border-right: var(--hair) dashed var(--line); }
+.quad__coord { display: block; margin-bottom: 10px; }
+.quad h4 { font-family: var(--serif); font-weight: 600; font-size: clamp(18px, 2.2vw, 24px); line-height: 1.2; margin: 0 0 8px; }
+.quad p:not(.label) { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.quad--key { background: var(--tint); outline: 2px solid var(--ink); outline-offset: -2px; }
+.quad--key .quad__badge { display: inline-block; margin-bottom: 10px; padding: 3px 8px; background: var(--plate-dark); color: var(--on-dark); }
+.matrix__x { grid-row: 2; grid-column: 2; display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; gap: 8px; }
+.matrix__x-mid { text-align: center; }
+.matrix__yends { position: absolute; left: 0; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: space-between; }
+
+/* weighted table */
+.vtable { width: 100%; border-collapse: collapse; }
+.vtable th {
+  text-align: left; font-size: 11px; font-weight: 600; letter-spacing: var(--track); text-transform: uppercase;
+  color: var(--taupe-text); padding: 0 16px 14px 0; border-bottom: var(--hair) solid var(--ink); vertical-align: bottom;
+}
+.vtable td { padding: 18px 16px 18px 0; border-bottom: var(--hair) solid var(--line-soft); vertical-align: top; font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.vtable td.dim { font-family: var(--serif); font-weight: 600; font-size: 19px; color: var(--ink); line-height: 1.3; white-space: nowrap; }
+.vtable td.seg-col { color: var(--ink); white-space: nowrap; }
+.vtable th:last-child, .vtable td:last-child { padding-right: 0; }
+.wt { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
+.dots { display: inline-flex; gap: 5px; }
+.dots i { width: 10px; height: 10px; border-radius: 50%; border: var(--hair) solid var(--taupe); display: block; }
+.dots i.on { background: var(--taupe-text); border-color: var(--taupe-text); }
+.wt__n { font-family: var(--serif); font-size: 17px; color: var(--ink); }
+
+/* pull quote */
+.pull { text-align: center; position: relative; padding: clamp(48px, 6vw, 72px) 0; border-top: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); }
+.pull__mark { font-family: var(--serif); font-size: 96px; line-height: 0.6; color: var(--taupe-text); display: block; height: 40px; }
+.pull blockquote p { font-family: var(--serif); font-style: italic; font-weight: 500; font-size: clamp(26px, 3.4vw, 38px); line-height: 1.3; }
+.pull figcaption { margin-top: 24px; }
+.pull figcaption em { font-style: normal; }
+
+/* layers */
+.layers { display: grid; }
+.layer {
+  display: grid; grid-template-columns: 96px 1fr; gap: 0 clamp(16px, 3vw, 36px);
+  padding: 28px 0; border-top: var(--hair) solid var(--line-soft); align-items: start;
+}
+.layer:first-child { border-top: 0; padding-top: 0; }
+.layer:last-child { padding-bottom: 0; }
+.layer__badge { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.layer__num { font-family: var(--serif); font-size: 44px; line-height: 1; }
+.layer__ico { color: var(--taupe-text); }
+.layer__ico .ico { width: 28px; height: 28px; }
+.layer h4 { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.25; margin: 6px 0 10px; }
+.layer p:not(.label) { font-size: 15px; line-height: 1.65; color: var(--ink-2); max-width: 60ch; }
+
+/* engagement flow */
+.flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px 0; counter-reset: step; }
+.step { position: relative; padding-right: 24px; }
+.step__rail { display: flex; align-items: center; }
+.step__rail::after { content: ""; flex: 1; height: 1px; background: var(--taupe); margin-left: 12px; }
+.step:last-child .step__rail::after { background: transparent; border-top: var(--hair) dashed var(--line); }
+.step__num {
+  width: 44px; height: 44px; border-radius: 50%; border: var(--hair) solid var(--ink);
+  display: grid; place-items: center; font-family: var(--serif); font-size: 18px; flex: none;
+}
+.step h3 { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.25; margin: 20px 0 10px; }
+.step p:not(.label) { font-size: 15px; line-height: 1.65; color: var(--ink-2); }
+
+/* closing colophon */
+.colophon { margin-top: var(--space-section); }
+.colophon__sheet { max-width: 880px; margin: 0 auto; border-top: 2px solid var(--ink); border-bottom: var(--hair) solid var(--ink); padding: 36px 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px 48px; }
+.colophon dt { margin-bottom: 14px; }
+.colophon dd ul { display: flex; flex-wrap: wrap; gap: 8px; }
+.colophon dd li { font-size: 14px; padding: 5px 12px; border: var(--hair) solid var(--taupe); color: var(--ink); }
+
+footer { padding: 48px 0 56px; }
+.footer__inner { max-width: 880px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.footer__inner p { color: var(--ink-2); }
+
+.figure__num, .rank__pos, .rank__pct, .meter__val, .attr__val, .wt__n, .pip, .layer__num, .step__num, .title-card__num, .hero__meta dd, .bcard p, .finding__ranktext strong {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .rank { grid-template-columns: 44px 1fr 56px; grid-template-areas: "pos driver pct" "pos bar bar" "pos verdict verdict"; gap: 8px 14px; }
+  .rank__pos { grid-area: pos; align-self: start; }
+  .rank__driver { grid-area: driver; }
+  .rank__track { grid-area: bar; }
+  .rank__pct { grid-area: pct; }
+  .rank__verdict { grid-area: verdict; text-align: left; }
+}
+@media (max-width: 760px) {
+  .vtable thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .vtable, .vtable tbody, .vtable tr, .vtable td { display: block; width: 100%; }
+  .vtable tr { padding: 20px 0; border-bottom: var(--hair) solid var(--line-soft); }
+  .vtable tr:first-child { border-top: var(--hair) solid var(--ink); }
+  .vtable td { border: 0; padding: 4px 0; display: grid; grid-template-columns: 104px 1fr; gap: 12px; white-space: normal !important; }
+  .vtable td::before {
+    content: attr(data-label); font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--taupe-text); padding-top: 4px; line-height: 1.5;
+  }
+  .vtable td.dim { font-size: 20px; }
+  .vtable td.dim::before { padding-top: 6px; }
+}
+@media (max-width: 640px) {
+  .tile, .figure { border-left: 0; border-top: var(--hair) solid var(--line-soft); padding: 24px 0; }
+  .tile:first-child, .figure:first-child { border-top: 0; padding-top: 0; }
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .figures .figure { padding: 20px 8px; }
+  .figures .figure:nth-child(-n+2) { border-top: 0; }
+  .figures .figure:nth-child(even) { border-left: var(--hair) solid var(--line-soft); }
+  .layer { grid-template-columns: 1fr; }
+  .layer__badge { flex-direction: row; align-items: center; margin-bottom: 8px; }
+  .layer__num { font-size: 34px; }
+  .matrix { grid-template-columns: 26px 1fr; }
+  .quad { padding: 14px 12px; }
+  .quad p:not(.label) { font-size: 14px; }
+  .quad .label { font-size: 10px; letter-spacing: 0.12em; }
+  .step { padding-right: 0; }
+  .plate__frame { padding: 20px 16px; }
+  .hero__meta { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hero__top { flex-direction: column; align-items: center; }
+  .hero__top .label { letter-spacing: 0.12em; }
+  .matrix__x { flex-wrap: wrap; }
+  .matrix__x-mid { order: 3; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+@media print {
+  :root { --page: var(--print-paper); --sheet: var(--print-paper); --tint: var(--print-paper); --deco-opacity: 0; }
+  body { background: var(--print-paper); font-size: 11pt; }
+  .hero__deco, .plate-zone__deco, .finding__deco { display: none; }
+  .title-card { background: var(--print-paper); color: var(--print-ink); border: 2px solid var(--print-ink); }
+  .title-card::before { display: none; }
+  .title-card h2, .title-card__num, .title-card__kicker { color: var(--print-ink); }
+  .ico-disc { background: var(--print-paper); color: var(--print-ink); border: 1px solid var(--print-ink); }
+  .quad--key .quad__badge { background: var(--print-paper); color: var(--print-ink); border: 1px solid var(--print-ink); }
+  .rank__fill, .attr__fill { background: var(--print-bar); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .section, .plate, .finding, .pull, .bcard, .seg, .layer, .step, .vtable tr { break-inside: avoid; }
+  .section { padding-top: 32pt; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ SVG symbol library (icons) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- constraints -->
+    <symbol id="i-height" viewBox="0 0 32 32"><path d="M4 6h24" stroke-dasharray="2 2"/><path d="M16 6v4M13.5 8.5 16 11l2.5-2.5"/><path d="M9 28V14h14v14M5 28h22"/><path d="M13 18h2M17 18h2M13 22h2M17 22h2"/></symbol>
+    <symbol id="i-density" viewBox="0 0 32 32"><path d="M5 7h22" stroke-dasharray="2 2"/><rect x="7" y="11" width="5" height="5"/><rect x="13.5" y="11" width="5" height="5"/><rect x="20" y="11" width="5" height="5"/><rect x="7" y="17.5" width="5" height="5"/><rect x="13.5" y="17.5" width="5" height="5"/><rect x="20" y="17.5" width="5" height="5"/><path d="M5 27h22"/></symbol>
+    <symbol id="i-demolition" viewBox="0 0 32 32"><path d="M5 9l9-3 13 4-2 9 2 8-14 1-7-6z"/><path d="M8 5l18 22" stroke-dasharray="2.5 2"/><path d="M5 12l17 16" stroke-dasharray="2.5 2"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 32 32"><path d="M5 6h15l7 6v14H11l-6-5z"/><path d="M13 6v9h-8M13 15h6v11M19 19h8"/><path d="M16 15v2" /></symbol>
+    <!-- figures -->
+    <symbol id="i-interview" viewBox="0 0 40 40"><path d="M5 9h18v12H13l-5 4v-4H5z"/><path d="M27 15h8v12h-3v4l-5-4h-9v-3"/><path d="M9 14h10M9 17h6"/></symbol>
+    <symbol id="i-benchmark" viewBox="0 0 40 40"><path d="M4 34h32"/><path d="M7 34V18h6v16M15 34V10h8v24M25 34V22h7v12"/><path d="M18 14h2M18 18h2M18 22h2"/></symbol>
+    <symbol id="i-dimensions" viewBox="0 0 40 40"><path d="M15 5h10l7 7v10l-7 7H15l-7-7V12z" transform="translate(0 3)"/><path d="M20 8v30M8 23h24M11.5 14.5l17 17M28.5 14.5l-17 17" stroke-dasharray="1.5 2.5"/><circle cx="20" cy="23" r="2"/></symbol>
+    <symbol id="i-moves" viewBox="0 0 40 40"><path d="M8 10h24M8 20h24M8 30h24"/><circle cx="14" cy="10" r="3"/><circle cx="26" cy="20" r="3"/><circle cx="18" cy="30" r="3"/></symbol>
+    <!-- benchmarks -->
+    <symbol id="i-collector" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><rect x="6" y="7" width="12" height="10"/><path d="M6 15l3.5-3.5 3 3 2-2 3.5 3.5"/></symbol>
+    <symbol id="i-courtyard" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5"/><rect x="4" y="9" width="16" height="12"/><rect x="9" y="13" width="6" height="5"/><path d="M12 13v5"/></symbol>
+    <symbol id="i-location" viewBox="0 0 24 24"><path d="M12 21s-6-6.2-6-11a6 6 0 0 1 12 0c0 4.8-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/><path d="M3 21h18"/></symbol>
+    <symbol id="i-heritage" viewBox="0 0 24 24"><path d="M3 8l9-4 9 4H3z"/><path d="M5 8v10M9.5 8v10M14.5 8v10M19 8v10"/><path d="M3 18h18M2 21h20"/></symbol>
+    <!-- segments -->
+    <symbol id="i-legacy" viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M12 8l-5-3M12 8l5-3M12 13l-6-3M12 13l6-3"/><path d="M6 21h12"/></symbol>
+    <symbol id="i-accumulator" viewBox="0 0 24 24"><path d="M3 20h18"/><path d="M4 16l5-5 4 3 7-8"/><path d="M15 6h5v5"/></symbol>
+    <symbol id="i-professional" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13"/><path d="M9 7V4h6v3"/><path d="M3 12h18"/><path d="M11 12v2h2v-2"/></symbol>
+    <symbol id="i-newmoney" viewBox="0 0 24 24"><path d="M12 3l2.5 6 6.5.5-5 4.2 1.6 6.3L12 16.6 6.4 20l1.6-6.3-5-4.2 6.5-.5z"/></symbol>
+    <!-- layers -->
+    <symbol id="i-product" viewBox="0 0 28 28"><path d="M4 5h13l7 5v13H4z"/><path d="M12 5v8H4M12 13h5v10M17 17h7"/></symbol>
+    <symbol id="i-service" viewBox="0 0 28 28"><circle cx="14" cy="14" r="10"/><circle cx="14" cy="4" r="2"/><circle cx="23.5" cy="17" r="2"/><circle cx="4.5" cy="17" r="2"/><circle cx="14" cy="14" r="3"/></symbol>
+    <symbol id="i-narrative" viewBox="0 0 28 28"><path d="M5 4h14l4 4v16H5z"/><path d="M9 10h10M9 14h10M9 18h6"/></symbol>
+  </defs>
+</svg>
+
+<!-- reusable decoration drawing -->
+<header class="hero wrap">
+  <div class="hero__sheet">
+    <span class="corner corner--tl" aria-hidden="true"></span><span class="corner corner--tr" aria-hidden="true"></span>
+    <span class="corner corner--bl" aria-hidden="true"></span><span class="corner corner--br" aria-hidden="true"></span>
+    <svg class="hero__deco" viewBox="0 0 800 800" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="400" cy="400" r="380"/><circle cx="400" cy="400" r="290"/><circle cx="400" cy="400" r="190" stroke-dasharray="4 6"/>
+      <path d="M20 400h760M400 20v760" stroke-dasharray="2 8"/>
+      <path d="M131 131l538 538M669 131L131 669" stroke-dasharray="1 9"/>
+      <path d="M110 400a290 290 0 0 1 580 0" stroke-dasharray="10 6"/>
+      <rect x="196" y="196" width="408" height="408"/>
+    </svg>
+    <div class="hero__inner">
+      <div class="hero__top">
+        <p class="label">Sep — Nov 2021</p>
+        <p class="label hero__disc"><span>Consumer Research</span><span>Product Strategy</span><span>Brand</span></p>
+        <p class="label">For a leading state-owned developer</p>
+      </div>
+      <h1>Ultra-Luxury Residential Insights</h1>
+      <hr class="hero__rule">
+      <p class="hero__standfirst">Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and UHNW buyer psychology.</p>
+      <dl class="hero__meta">
+        <div><dt class="label">Location</dt><dd>Prime inner-city</dd></div>
+        <div><dt class="label">Buyer segments</dt><dd>4</dd></div>
+        <div><dt class="label">Value dimensions</dt><dd>8</dd></div>
+        <div><dt class="label">Benchmark projects</dt><dd>8</dd></div>
+      </dl>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 00 Context ============ -->
+<section class="section wrap" id="context" aria-labelledby="h-context">
+  <header class="title-card">
+    <p class="title-card__num">00</p>
+    <p class="label title-card__kicker">Context</p>
+    <hr class="title-card__rule">
+    <h2 id="h-context">A flagship asset with no obvious comparable</h2>
+  </header>
+  <p class="standfirst measure">Four simultaneous constraints meant the client could not price from precedent.</p>
+
+  <div class="block plate-zone">
+    <svg class="plate-zone__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="600" cy="300" r="280"/><path d="M180 520a420 420 0 0 1 840 0" stroke-dasharray="6 8"/><path d="M0 300h1200" stroke-dasharray="2 10"/>
+    </svg>
+    <figure class="plate">
+      <p class="label plate__label">Plate 01</p>
+      <div class="plate__frame">
+        <ul class="tiles">
+          <li class="tile">
+            <span class="ico-keyline"><svg class="ico" aria-hidden="true"><use href="#i-height"/></svg></span>
+            <h3>Height limits</h3>
+            <p>Policy restrictions cap buildable height, compressing the achievable unit mix.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-keyline"><svg class="ico" aria-hidden="true"><use href="#i-density"/></svg></span>
+            <h3>Density caps</h3>
+            <p>Plot ratio ceilings limit saleable area against a very high land basis.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-keyline"><svg class="ico" aria-hidden="true"><use href="#i-demolition"/></svg></span>
+            <h3>Demolition bands</h3>
+            <p>Phased clearance leaves irregular lot boundaries that resist orthogonal planning.</p>
+          </li>
+          <li class="tile">
+            <span class="ico-keyline"><svg class="ico" aria-hidden="true"><use href="#i-layout"/></svg></span>
+            <h3>Unconventional layouts</h3>
+            <p>Irregular footprints force non-standard floorplans that UHNW buyers scrutinise.</p>
+          </li>
+        </ul>
+      </div>
+      <figcaption class="plate__caption">Four constraints.</figcaption>
+    </figure>
+  </div>
+
+  <div class="block measure prose">
+    <p>Located in a rare prime inner-city plot with school-district advantages and elite community resources, the project faced multiple simultaneous challenges: policy restrictions on height limits, density caps, demolition bands resulting in irregular lot shapes, and unconventional unit layouts.</p>
+    <p>Site-level factors affecting ultra-luxury value perception and investment return pressures meant the client could not price from precedent. We were commissioned to conduct deep ultra-luxury market research and consumer insights — clarifying target buyer profiles, product optimisation directions, and innovative commercial model exploration.</p>
+  </div>
+
+  <div class="block plate-zone">
+    <figure class="plate">
+      <p class="label plate__label">Plate 02</p>
+      <div class="plate__frame">
+        <ul class="figures">
+          <li class="figure"><span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-interview"/></svg></span><p class="figure__num">32</p><p class="label figure__lab">Depth interviews</p></li>
+          <li class="figure"><span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-benchmark"/></svg></span><p class="figure__num">8</p><p class="label figure__lab">Benchmark projects</p></li>
+          <li class="figure"><span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-dimensions"/></svg></span><p class="figure__num">8</p><p class="label figure__lab">Value dimensions</p></li>
+          <li class="figure"><span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-moves"/></svg></span><p class="figure__num">40+</p><p class="label figure__lab">Optimisation moves</p></li>
+        </ul>
+      </div>
+      <figcaption class="plate__caption">Figures.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ 01 Benchmark ============ -->
+<section class="section wrap" id="benchmark" aria-labelledby="h-bench">
+  <header class="title-card">
+    <p class="title-card__num">01</p>
+    <p class="label title-card__kicker">Benchmark analysis</p>
+    <hr class="title-card__rule">
+    <h2 id="h-bench">How comparable assets manufacture scarcity</h2>
+  </header>
+  <p class="standfirst measure">Eight ultra-luxury projects, decomposed by the source of their premium rather than by their marketing claim.</p>
+
+  <div class="block plate-zone">
+    <svg class="plate-zone__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+      <circle cx="240" cy="300" r="230"/><circle cx="960" cy="300" r="230"/><path d="M240 70a460 460 0 0 1 720 0" stroke-dasharray="6 8"/>
+    </svg>
+    <figure class="plate">
+      <p class="label plate__label">Plate 03</p>
+      <ul class="cards">
+        <li class="bcard">
+          <div class="bcard__head"><span class="bcard__letter">A</span><span class="ico-inline"><svg class="ico" aria-hidden="true"><use href="#i-collector"/></svg></span></div>
+          <p class="label bcard__kicker">Collector-oriented</p>
+          <h3>Art &amp; scarcity positioning</h3>
+          <p>Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers under 1,000 UHNW families, invitation-only release cycles.</p>
+        </li>
+        <li class="bcard">
+          <div class="bcard__head"><span class="bcard__letter">B</span><span class="ico-inline"><svg class="ico" aria-hidden="true"><use href="#i-courtyard"/></svg></span></div>
+          <p class="label bcard__kicker">Cultural-form</p>
+          <h3>Chinese courtyard heritage</h3>
+          <p>Courtyard compound design benchmark. Chinese garden plus private courtyard plus multi-space differentiation; buyers are local landowning legacy families.</p>
+        </li>
+        <li class="bcard">
+          <div class="bcard__head"><span class="bcard__letter">C</span><span class="ico-inline"><svg class="ico" aria-hidden="true"><use href="#i-location"/></svg></span></div>
+          <p class="label bcard__kicker">Positional</p>
+          <h3>Absolute location scarcity</h3>
+          <p>Prime location address, pricing and liquidity accepted as the purest embodiment of "location = value". Resale velocity materially above segment average.</p>
+        </li>
+        <li class="bcard">
+          <div class="bcard__head"><span class="bcard__letter">D</span><span class="ico-inline"><svg class="ico" aria-hidden="true"><use href="#i-heritage"/></svg></span></div>
+          <p class="label bcard__kicker">Narrative</p>
+          <h3>Heritage &amp; cultural narrative</h3>
+          <p>Inside a historic conservation district. Historical depth plus cultural-circle premium validates cultural storytelling support for ultra-luxury pricing.</p>
+        </li>
+      </ul>
+      <figcaption class="plate__caption">Benchmark analysis — A, B, C, D.</figcaption>
+    </figure>
+  </div>
+
+  <div class="block">
+    <h3 class="subhead">Premium source hierarchy</h3>
+    <div class="plate-zone">
+      <figure class="plate plate--mid">
+        <p class="label plate__label">Plate 04</p>
+        <div class="plate__frame">
+          <ol class="ranks">
+            <li class="rank"><span class="rank__pos">1st</span><span class="rank__driver">Location scarcity</span><span class="rank__track" role="img" aria-label="Weight 100%"><span class="rank__fill" style="width:100%"></span></span><span class="rank__pct">100%</span><span class="label rank__verdict">Decisive</span></li>
+            <li class="rank"><span class="rank__pos">2nd</span><span class="rank__driver">Architecture &amp; design</span><span class="rank__track" role="img" aria-label="Weight 72%"><span class="rank__fill" style="width:72%"></span></span><span class="rank__pct">72%</span><span class="label rank__verdict">Strong</span></li>
+            <li class="rank"><span class="rank__pos">3rd</span><span class="rank__driver">Service amenities</span><span class="rank__track" role="img" aria-label="Weight 46%"><span class="rank__fill" style="width:46%"></span></span><span class="rank__pct">46%</span><span class="label rank__verdict">Moderate</span></li>
+            <li class="rank"><span class="rank__pos">4th</span><span class="rank__driver">Brand premium</span><span class="rank__track" role="img" aria-label="Weight 24%"><span class="rank__fill" style="width:24%"></span></span><span class="rank__pct">24%</span><span class="label rank__verdict">Weak</span></li>
+          </ol>
+        </div>
+        <figcaption class="plate__caption">Share of realised price premium attributable to each driver, across the eight benchmarks.</figcaption>
+      </figure>
+    </div>
+    <p class="note measure"><em>Value perception varies significantly by buyer type. Legacy families are location-driven; wealth accumulators weight design and display; professional elites weight comfort and design; new money weights brand recognition.</em></p>
+  </div>
+
+  <div class="block">
+    <h3 class="subhead">The contradiction</h3>
+    <div class="plate-zone">
+      <svg class="plate-zone__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="600" cy="300" r="290" stroke-dasharray="3 7"/><circle cx="600" cy="300" r="200"/><path d="M310 300h580"/>
+      </svg>
+      <figure class="plate plate--narrow">
+        <p class="label plate__label">Plate 05</p>
+        <div class="plate__frame">
+          <div class="meters">
+            <div class="meter">
+              <svg viewBox="0 0 120 120" role="img" aria-label="24% of realised premium from brand">
+                <circle class="meter__track" cx="60" cy="60" r="46"/>
+                <circle class="meter__arc" cx="60" cy="60" r="46" pathLength="100" stroke-dasharray="24 100" transform="rotate(-90 60 60)"/>
+                <path class="meter__tick" d="M60 4v10"/>
+                <text class="meter__val" x="60" y="70" text-anchor="middle">24%</text>
+              </svg>
+              <p class="meter__cap">of realised premium from brand</p>
+            </div>
+            <div class="meter">
+              <svg viewBox="0 0 120 120" role="img" aria-label="61% of marketing spend on brand">
+                <circle class="meter__track" cx="60" cy="60" r="46"/>
+                <circle class="meter__arc" cx="60" cy="60" r="46" pathLength="100" stroke-dasharray="61 100" transform="rotate(-90 60 60)"/>
+                <path class="meter__tick" d="M60 4v10"/>
+                <text class="meter__val" x="60" y="70" text-anchor="middle">61%</text>
+              </svg>
+              <p class="meter__cap">of marketing spend on brand</p>
+            </div>
+          </div>
+        </div>
+        <figcaption class="plate__caption">The contradiction.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Core finding ============ -->
+<aside class="finding wrap" aria-labelledby="h-finding">
+  <svg class="finding__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+    <circle cx="600" cy="300" r="270"/><circle cx="600" cy="300" r="330" stroke-dasharray="2 8"/><path d="M0 300h1200M600 0v600" stroke-dasharray="2 10"/>
+  </svg>
+  <div class="finding__inner">
+    <p class="label" id="h-finding">Core finding</p>
+    <p class="finding__stmt">Brand contributes least to realised premium — and receives the largest share of ultra-luxury marketing spend.</p>
+    <p class="finding__support">Reallocating that spend toward location narrative and architectural differentiation is the highest-leverage move available before launch.</p>
+    <div class="finding__rank">
+      <span class="pips" aria-hidden="true"><span class="pip">1</span><span class="pip">2</span><span class="pip">3</span><span class="pip pip--mark">4</span></span>
+      <p class="finding__ranktext">Brand ranks <strong>4th</strong> of four drivers.</p>
+    </div>
+  </div>
+</aside>
+
+<!-- ============ 02 Segments ============ -->
+<section class="section wrap" id="segments" aria-labelledby="h-seg">
+  <header class="title-card">
+    <p class="title-card__num">02</p>
+    <p class="label title-card__kicker">Deliverable</p>
+    <hr class="title-card__rule">
+    <h2 id="h-seg">Four UHNW buyer segments</h2>
+  </header>
+  <p class="standfirst measure">A three-dimensional assessment model — investment, residential and social-circle attributes — resolving a single "luxury buyer" into four addressable groups.</p>
+
+  <div class="block plate-zone">
+    <svg class="plate-zone__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M100 560a500 500 0 0 1 1000 0" stroke-dasharray="6 8"/><circle cx="600" cy="300" r="180"/><path d="M0 120h1200" stroke-dasharray="2 10"/>
+    </svg>
+    <figure class="plate">
+      <p class="label plate__label">Plate 06</p>
+      <ul class="segs">
+        <li class="seg">
+          <div class="seg__head"><span class="ico-disc"><svg class="ico" aria-hidden="true"><use href="#i-legacy"/></svg></span><div><p class="label">Segment 01</p><h3>Legacy families</h3></div></div>
+          <p>Multi-generational holders. Buy the address, not the building. Indifferent to brand; highly sensitive to neighbours, school access and long-run land scarcity.</p>
+          <div class="attrs">
+            <div class="attr"><div class="attr__row"><span class="attr__name">Scarcity</span><span class="attr__val">96</span></div><div class="attr__track"><span class="attr__fill" style="width:96%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Privacy</span><span class="attr__val">78</span></div><div class="attr__track"><span class="attr__fill" style="width:78%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Brand</span><span class="attr__val">12</span></div><div class="attr__track"><span class="attr__fill" style="width:12%"></span></div></div>
+          </div>
+        </li>
+        <li class="seg">
+          <div class="seg__head"><span class="ico-disc"><svg class="ico" aria-hidden="true"><use href="#i-accumulator"/></svg></span><div><p class="label">Segment 02</p><h3>Wealth accumulators</h3></div></div>
+          <p>Treat the unit as a portfolio position. Liquidity and resale velocity dominate; design quality matters as an exit argument rather than a lifestyle preference.</p>
+          <div class="attrs">
+            <div class="attr"><div class="attr__row"><span class="attr__name">Liquidity</span><span class="attr__val">92</span></div><div class="attr__track"><span class="attr__fill" style="width:92%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Prestige</span><span class="attr__val">60</span></div><div class="attr__track"><span class="attr__fill" style="width:60%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Comfort</span><span class="attr__val">34</span></div><div class="attr__track"><span class="attr__fill" style="width:34%"></span></div></div>
+          </div>
+        </li>
+        <li class="seg">
+          <div class="seg__head"><span class="ico-disc"><svg class="ico" aria-hidden="true"><use href="#i-professional"/></svg></span><div><p class="label">Segment 03</p><h3>Professional elite</h3></div></div>
+          <p>C-suite and senior professionals. Prioritise comfort, privacy and circle integration. Extremely high bar on product detail: ceiling height, orientation, flow. Rational decision-making, value-conscious.</p>
+          <div class="attrs">
+            <div class="attr"><div class="attr__row"><span class="attr__name">Comfort</span><span class="attr__val">94</span></div><div class="attr__track"><span class="attr__fill" style="width:94%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Privacy</span><span class="attr__val">88</span></div><div class="attr__track"><span class="attr__fill" style="width:88%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Brand</span><span class="attr__val">26</span></div><div class="attr__track"><span class="attr__fill" style="width:26%"></span></div></div>
+          </div>
+        </li>
+        <li class="seg">
+          <div class="seg__head"><span class="ico-disc"><svg class="ico" aria-hidden="true"><use href="#i-newmoney"/></svg></span><div><p class="label">Segment 04</p><h3>New money</h3></div></div>
+          <p>Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment: most influenced by marketing, most active word-of-mouth amplifiers. Strongest need for circle admission.</p>
+          <div class="attrs">
+            <div class="attr"><div class="attr__row"><span class="attr__name">Belonging</span><span class="attr__val">90</span></div><div class="attr__track"><span class="attr__fill" style="width:90%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Brand</span><span class="attr__val">84</span></div><div class="attr__track"><span class="attr__fill" style="width:84%"></span></div></div>
+            <div class="attr"><div class="attr__row"><span class="attr__name">Scarcity</span><span class="attr__val">40</span></div><div class="attr__track"><span class="attr__fill" style="width:40%"></span></div></div>
+          </div>
+        </li>
+      </ul>
+      <figcaption class="plate__caption">Four UHNW buyer segments.</figcaption>
+    </figure>
+  </div>
+
+  <div class="block">
+    <h3 class="subhead">Segment map — motive against price elasticity</h3>
+    <div class="plate-zone">
+      <svg class="plate-zone__deco" viewBox="0 0 1200 700" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="600" cy="350" r="330"/><circle cx="600" cy="350" r="250" stroke-dasharray="4 8"/>
+      </svg>
+      <figure class="plate plate--mid">
+        <p class="label plate__label">Plate 07</p>
+        <div class="plate__frame">
+          <div class="matrix">
+            <div class="matrix__y"><span class="label matrix__y-label">Price elasticity ↑</span></div>
+            <div class="matrix__plot">
+              <div class="matrix__grid">
+                <div class="quad">
+                  <span class="label quad__coord">High elasticity · Use</span>
+                  <h4>New money</h4>
+                  <p>Responsive to narrative and brand. Needs the circle to be legible.</p>
+                </div>
+                <div class="quad">
+                  <span class="label quad__coord">High elasticity · Asset</span>
+                  <h4>Wealth accumulators</h4>
+                  <p>Buys on exit maths. Will trade design for liquidity.</p>
+                </div>
+                <div class="quad">
+                  <span class="label quad__coord">Low elasticity · Use</span>
+                  <h4>Professional elite</h4>
+                  <p>Will pay for resolved product detail. Walks away from compromise.</p>
+                </div>
+                <div class="quad quad--key">
+                  <span class="label quad__coord">Low elasticity · Asset</span>
+                  <h4>Legacy families</h4>
+                  <p>Primary target. Price-insensitive where scarcity is genuine.</p>
+                </div>
+              </div>
+            </div>
+            <div class="matrix__x">
+              <span class="label">Use</span>
+              <span class="label matrix__x-mid">Purchase motive: use → asset</span>
+              <span class="label">Asset</span>
+            </div>
+          </div>
+        </div>
+        <figcaption class="plate__caption">X axis: purchase motive, use → asset. Y axis: price elasticity.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 Value dimensions ============ -->
+<section class="section wrap" id="dimensions" aria-labelledby="h-dim">
+  <header class="title-card">
+    <p class="title-card__num">03</p>
+    <p class="label title-card__kicker">Deliverable</p>
+    <hr class="title-card__rule">
+    <h2 id="h-dim">Eight value dimensions</h2>
+  </header>
+  <p class="standfirst measure">A product-optimisation framework translating segment psychology into decisions the design and sales teams could act on.</p>
+
+  <div class="block plate-zone">
+    <figure class="plate">
+      <p class="label plate__label">Plate 08</p>
+      <div class="plate__frame">
+        <table class="vtable">
+          <thead><tr><th scope="col">Dimension</th><th scope="col">What it governs</th><th scope="col">Primary segment</th><th scope="col">Weight</th></tr></thead>
+          <tbody>
+            <tr><td class="dim" data-label="Dimension">Scarcity</td><td data-label="Governs">Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</td><td class="seg-col" data-label="Segment">Legacy families</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 5 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span class="wt__n">5</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Value preservation</td><td data-label="Governs">Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</td><td class="seg-col" data-label="Segment">Legacy families</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt__n">4</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Liquidity</td><td data-label="Governs">Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</td><td class="seg-col" data-label="Segment">Wealth accumulators</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt__n">4</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Comfort</td><td data-label="Governs">Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</td><td class="seg-col" data-label="Segment">Professional elite</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt__n">3</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Privacy</td><td data-label="Governs">Security systems, community density, resident-circle homogeneity.</td><td class="seg-col" data-label="Segment">Professional elite</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt__n">3</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Prestige</td><td data-label="Governs">Entry immediacy, exclusive service details, visible service standards.</td><td class="seg-col" data-label="Segment">New money</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span><span class="wt__n">3</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Belonging</td><td data-label="Governs">Circle community resources, resident events, admission mechanics.</td><td class="seg-col" data-label="Segment">New money</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 2 of 5"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span><span class="wt__n">2</span></span></td></tr>
+            <tr><td class="dim" data-label="Dimension">Purity</td><td data-label="Governs">Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</td><td class="seg-col" data-label="Segment">Cross-segment</td><td data-label="Weight"><span class="wt"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span class="wt__n">4</span></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption class="plate__caption">Eight value dimensions.</figcaption>
+    </figure>
+  </div>
+
+  <figure class="block pull measure">
+    <span class="pull__mark" aria-hidden="true">“</span>
+    <blockquote><p>Purity ranked above prestige in every segment — and no benchmark project was designing for it.</p></blockquote>
+    <figcaption class="label"><em>Finding · Depth interviews</em></figcaption>
+  </figure>
+
+  <div class="block">
+    <h3 class="subhead">Three response layers</h3>
+    <div class="plate-zone">
+      <svg class="plate-zone__deco" viewBox="0 0 1200 600" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+        <circle cx="200" cy="300" r="160"/><circle cx="200" cy="300" r="240" stroke-dasharray="3 7"/><path d="M200 60a240 240 0 0 1 900 240" stroke-dasharray="6 8"/>
+      </svg>
+      <figure class="plate plate--mid">
+        <p class="label plate__label">Plate 09</p>
+        <div class="plate__frame">
+          <ol class="layers">
+            <li class="layer">
+              <div class="layer__badge"><span class="layer__num">01</span><span class="layer__ico"><svg class="ico" aria-hidden="true"><use href="#i-product"/></svg></span></div>
+              <div><p class="label">Layer 01 · Product</p><h4>Layout remediation programme</h4><p>Forty-plus specific moves converting policy-forced irregularity into differentiated unit typologies rather than compromised ones.</p></div>
+            </li>
+            <li class="layer">
+              <div class="layer__badge"><span class="layer__num">02</span><span class="layer__ico"><svg class="ico" aria-hidden="true"><use href="#i-service"/></svg></span></div>
+              <div><p class="label">Layer 02 · Service</p><h4>Circle admission design</h4><p>Resident-community mechanics that make belonging legible to new-money buyers without diluting the homogeneity legacy families are paying for.</p></div>
+            </li>
+            <li class="layer">
+              <div class="layer__badge"><span class="layer__num">03</span><span class="layer__ico"><svg class="ico" aria-hidden="true"><use href="#i-narrative"/></svg></span></div>
+              <div><p class="label">Layer 03 · Narrative</p><h4>Scarcity story architecture</h4><p>A sales narrative sequenced by segment, leading with location scarcity and treating brand as supporting evidence rather than the headline.</p></div>
+            </li>
+          </ol>
+        </div>
+        <figcaption class="plate__caption">Three response layers.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 Engagement arc ============ -->
+<section class="section wrap" id="engagement" aria-labelledby="h-eng">
+  <header class="title-card">
+    <p class="title-card__num">04</p>
+    <p class="label title-card__kicker">Engagement arc</p>
+    <hr class="title-card__rule">
+    <h2 id="h-eng">From ethnography to launch strategy</h2>
+  </header>
+
+  <div class="block plate-zone">
+    <svg class="plate-zone__deco" viewBox="0 0 1200 500" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1">
+      <path d="M60 420a560 560 0 0 1 1080 0" stroke-dasharray="6 8"/><path d="M0 250h1200" stroke-dasharray="2 10"/><circle cx="1050" cy="250" r="140"/>
+    </svg>
+    <figure class="plate">
+      <p class="label plate__label">Plate 10</p>
+      <div class="plate__frame">
+        <ol class="flow">
+          <li class="step"><div class="step__rail"><span class="step__num">1</span></div><h3>Ethnographic fieldwork</h3><p>Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p></li>
+          <li class="step"><div class="step__rail"><span class="step__num">2</span></div><h3>Benchmark decomposition</h3><p>Premium sources separated from marketing claims to establish the real driver hierarchy.</p></li>
+          <li class="step"><div class="step__rail"><span class="step__num">3</span></div><h3>Segment &amp; value model</h3><p>Four segments mapped against eight value dimensions into a single prioritisation grid.</p></li>
+          <li class="step"><div class="step__rail"><span class="step__num">4</span></div><h3>Product &amp; launch strategy</h3><p>Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p></li>
+        </ol>
+      </div>
+      <figcaption class="plate__caption">From ethnography to launch strategy.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ Closing ============ -->
+<section class="colophon wrap" aria-label="Closing">
+  <dl class="colophon__sheet">
+    <div>
+      <dt class="label">Core competencies</dt>
+      <dd><ul><li>Consumer Research</li><li>Product Strategy</li><li>Market Analysis</li><li>Brand Strategy</li><li>Segmentation</li></ul></dd>
+    </div>
+    <div>
+      <dt class="label">Industry domains</dt>
+      <dd><ul><li>Real Estate</li><li>Consumer</li></ul></dd>
+    </div>
+  </dl>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <div class="footer__inner">
+    <p class="label">2021 Consulting Engagement · Deliverables Showcase</p>
+    <p class="label">Client identity anonymised</p>
+  </div>
+</footer>
+
+</body>
+</html>
