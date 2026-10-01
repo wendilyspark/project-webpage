@@ -15,7 +15,7 @@ Project Webpage reads your consulting project materials and generates a self-con
 **What you get:**
 
 - **A complete single-file HTML page** — no build step, no dependencies, opens in any browser
-- **Professional navy-and-gold design** — Playfair Display headings, clean section layouts, subtle scroll animations
+- **Thirteen professional styles to choose from** — browse them all on one page before you pick; navy-and-gold Harbour is the default
 - **Full content fidelity** — every analysis section, deliverable, and metric from your source material, reorganized for visual impact
 - **Built-in client anonymization** — real client names are replaced with neutral descriptors ("Leading State-Owned Developer", "Multilateral Development Bank") — safe to publish publicly
 - **Component-rich layouts** — card grids, layer stacks, stat callouts, benchmark tables, and tag clouds map your content to the right visual pattern automatically
@@ -102,11 +102,12 @@ Once installed, trigger the skill by describing what you want:
 You can also invoke it directly with `/project-webpage` in any Claude Code session.
 
 **The skill will:**
-1. Ask for (or read) your source material
-2. Extract all content — every bullet, every metric, every deliverable
-3. Propose a sanitized client descriptor for your review
-4. Generate the HTML file and save it to the location you specify
-5. Offer to iterate on layout, color balance, or content depth
+1. Ask for your source material, and ask for more if it is too thin to make a full page
+2. Ask which style you want — and if you're not sure, open a single style-browser page where you can flip through all thirteen
+3. Extract all content — every bullet, every metric, every deliverable
+4. Propose a sanitized client descriptor for your review
+5. Generate the HTML file in your chosen style and save it to the location you specify
+6. Offer to iterate on layout, color balance, or content depth
 
 ## License
 
