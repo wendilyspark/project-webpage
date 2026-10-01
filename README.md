@@ -52,8 +52,8 @@ A single self-contained `.html` file that opens in any browser, in any of twelve
 <table>
 <tr>
 <td align="center" valign="top" width="33%"><a href="references/themes/harbour.html"><img src="references/thumbnails/harbour.jpg" alt="Harbour style" width="260"></a><br><b>Harbour</b><br><sub>The original and default — navy, sky blue, gold</sub></td>
-<td align="center" valign="top" width="33%"><a href="references/template.html"><img src="references/thumbnails/editorial.jpg" alt="Editorial style" width="260"></a><br><b>Editorial</b><br><sub>Canonical editorial design system</sub></td>
 <td align="center" valign="top" width="33%"><a href="references/themes/accented.html"><img src="references/thumbnails/accented.jpg" alt="Accented style" width="260"></a><br><b>Accented</b><br><sub>Navy section bands on cool blue-grey</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/template.html"><img src="references/thumbnails/editorial.jpg" alt="Editorial style" width="260"></a><br><b>Editorial</b><br><sub>Canonical editorial design system</sub></td>
 </tr>
 <tr>
 <td align="center" valign="top" width="33%"><a href="references/themes/mat.html"><img src="references/thumbnails/mat.jpg" alt="Mat style" width="260"></a><br><b>Mat</b><br><sub>Forest green and cream environments</sub></td>

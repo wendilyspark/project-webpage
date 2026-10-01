@@ -44,8 +44,8 @@ Ask the user which style they want. There are twelve, all built from the same sa
 | Style | Reference file | Character |
 |---|---|---|
 | Harbour *(default)* | `references/themes/harbour.html` | Navy, sky blue and brass gold; the original design |
-| Editorial | `references/template.html` | Canonical editorial design system |
 | Accented | `references/themes/accented.html` | Navy section bands on a cool blue-grey ground |
+| Editorial | `references/template.html` | Canonical editorial design system |
 | Mat | `references/themes/mat.html` | Forest green and cream environments |
 | Raw Grid | `references/themes/raw-grid.html` | Neobrutalist block grid with offset shadows |
 | Monochrome | `references/themes/monochrome.html` | An accounting ledger in black on white |
