@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+<!-- BASELINE: the original design, rebuilt faithfully from references/template-guide.md.
+     Intentionally NOT upgraded to the new rules — this is the "before" for comparison. -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    serif: ['Playfair Display', 'serif'],
+                    sans: ['Plus Jakarta Sans', 'sans-serif'],
+                },
+                colors: {
+                    primary:'#0f2d3e', secondary:'#d4a055', accent:'#a6cde2',
+                    blue800:'#1d4a63', blue100:'#d9edf5', blue50:'#f0f7fb', muted:'#4a5a6a',
+                }
+            }
+        }
+    }
+</script>
+<style>
+    body { background:#f0f7fb; }
+    .hero-bg { background:linear-gradient(135deg,#e8f4fb 0%,#e8f4fb 50%,#f5ede0 100%); position:relative; overflow:hidden; }
+    .hero-bg::before { content:''; position:absolute; inset:0;
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M12 4v16M4 12h16' stroke='%23d4a055' stroke-width='0.6' stroke-opacity='0.22'/%3E%3C/svg%3E");
+        background-size:24px 24px; pointer-events:none; }
+    .card-hover { transition:all .3s cubic-bezier(.4,0,.2,1); }
+    .card-hover:hover { transform:translateY(-4px); box-shadow:0 20px 40px -15px rgba(15,45,62,.12); }
+    .layer-card { background:#fff; border-left:4px solid #d4a055; }
+    .metric-card { background:linear-gradient(135deg,#1d4a63 0%,#2a5f7a 100%); }
+    .insight-card { background:#fff; border:1px solid rgba(15,45,62,.08); }
+    .section-pill { display:inline-flex; align-items:center; padding:4px 14px; border-radius:999px; font-size:11px; font-weight:700; letter-spacing:.08em;
+        background:rgba(212,160,85,.14); border:1px solid rgba(212,160,85,.35); color:#7a4a10; }
+    .scroll-reveal { opacity:0; transform:translateY(28px); transition:all .8s ease-out; }
+    .scroll-reveal.active { opacity:1; transform:translateY(0); }
+</style>
+</head>
+<body class="font-sans antialiased" style="background:#f0f7fb;color:#333;">
+
+<header class="hero-bg">
+  <div class="relative max-w-7xl mx-auto px-6 pt-10 pb-20 lg:pt-14 lg:pb-28" style="z-index:2;">
+    <div class="flex flex-wrap items-center gap-2 mb-5">
+      <span style="display:inline-flex;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.1em;background:rgba(15,45,62,.08);border:1px solid rgba(15,45,62,.14);color:#0f2d3e;">SEP — NOV 2021</span>
+      <span style="display:inline-flex;padding:4px 14px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.08em;background:rgba(212,160,85,.14);border:1px solid rgba(212,160,85,.32);color:#7a4a10;">CONSUMER RESEARCH · PRODUCT STRATEGY · BRAND</span>
+    </div>
+    <h1 class="font-serif text-4xl lg:text-5xl font-bold leading-[1.1] tracking-tight mb-5" style="color:#0f2d3e;">
+      State-Owned Developer<br/><span style="color:#d4a055;">Ultra-Luxury Residential Insights</span>
+    </h1>
+    <p class="text-base lg:text-lg max-w-2xl leading-relaxed mb-7" style="color:#4a5a6a;">Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and UHNW buyer psychology.</p>
+    <div class="flex flex-wrap gap-6 text-sm" style="color:#4a5a6a;">
+      <div class="flex items-center gap-2"><i class="fas fa-map-marker-alt text-xs" style="color:#a6cde2;"></i><span>Prime Inner-City Location</span></div>
+      <div class="flex items-center gap-2"><i class="fas fa-users text-xs" style="color:#a6cde2;"></i><span>4 UHNW Segments</span></div>
+      <div class="flex items-center gap-2"><i class="fas fa-layer-group text-xs" style="color:#a6cde2;"></i><span>8 Value Dimensions</span></div>
+      <div class="flex items-center gap-2"><i class="fas fa-building text-xs" style="color:#a6cde2;"></i><span>8 Benchmark Projects</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="pt-16 pb-0" style="background:#fff;">
+  <div class="max-w-7xl mx-auto px-6"><div class="scroll-reveal mb-10">
+    <h2 class="font-serif text-3xl font-bold mb-6" style="color:#0f2d3e;">Project Background</h2>
+    <p class="text-lg leading-relaxed max-w-4xl" style="color:#4a5a6a;">Located in a rare prime inner-city plot with school-district advantages and elite community resources, the project faced multiple simultaneous challenges: policy restrictions on height limits, density caps, demolition bands resulting in irregular lot shapes, and unconventional unit layouts. Site-level factors affecting ultra-luxury value perception and investment return pressures meant the client could not price from precedent. We were commissioned to conduct deep ultra-luxury market research and consumer insights — clarifying target buyer profiles, product optimisation directions, and innovative commercial model exploration.</p>
+  </div></div>
+  <hr style="border:none;border-top:1px solid rgba(0,0,0,.18);margin:0;">
+</section>
+
+<section class="py-16" style="background:#fff;"><div class="max-w-7xl mx-auto px-6">
+  <div class="grid md:grid-cols-4 gap-6 scroll-reveal">
+    <div class="metric-card rounded-2xl p-6 text-white text-center"><div class="text-4xl font-bold mb-2">32</div><div class="text-sm" style="color:#a6cde2;">Depth Interviews</div></div>
+    <div class="metric-card rounded-2xl p-6 text-white text-center"><div class="text-4xl font-bold mb-2">8</div><div class="text-sm" style="color:#a6cde2;">Benchmark Projects</div></div>
+    <div class="metric-card rounded-2xl p-6 text-white text-center"><div class="text-4xl font-bold mb-2">8</div><div class="text-sm" style="color:#a6cde2;">Value Dimensions</div></div>
+    <div class="rounded-2xl p-6 text-white text-center" style="background:linear-gradient(135deg,#2a5f7a 0%,#3a7090 100%);"><div class="text-4xl font-bold mb-2">40+</div><div class="text-sm" style="color:#d4a055;">Optimisation Moves</div></div>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#f0f7fb;"><div class="max-w-7xl mx-auto px-6">
+  <div class="scroll-reveal mb-12">
+    <div class="flex items-center gap-4 mb-4"><span class="section-pill">ANALYSIS 01</span></div>
+    <h2 class="font-serif text-3xl lg:text-4xl font-bold mb-4" style="color:#0f2d3e;">How Comparable Assets Manufacture Scarcity</h2>
+    <p class="text-base max-w-3xl leading-relaxed" style="color:#4a5a6a;">Eight ultra-luxury projects, decomposed by the source of their premium rather than by their marketing claim.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-6 scroll-reveal">
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(166,205,226,.18);color:#3a80a6;"><i class="fas fa-palette"></i></div><h4 class="font-bold text-sm" style="color:#0f2d3e;">Project A — Art &amp; Scarcity Positioning</h4></div><p class="text-xs leading-relaxed" style="color:#4a5a6a;">Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers under 1,000 UHNW families, invitation-only release cycles.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,160,85,.12);color:#9a6010;"><i class="fas fa-torii-gate"></i></div><h4 class="font-bold text-sm" style="color:#0f2d3e;">Project B — Chinese Courtyard Heritage</h4></div><p class="text-xs leading-relaxed" style="color:#4a5a6a;">Courtyard compound design benchmark. Chinese garden plus private courtyard plus multi-space differentiation; buyers are local landowning legacy families.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(166,205,226,.18);color:#3a80a6;"><i class="fas fa-map-pin"></i></div><h4 class="font-bold text-sm" style="color:#0f2d3e;">Project C — Absolute Location Scarcity</h4></div><p class="text-xs leading-relaxed" style="color:#4a5a6a;">Prime location address, pricing and liquidity accepted as the purest embodiment of "location = value". Resale velocity materially above segment average.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background:rgba(212,160,85,.12);color:#9a6010;"><i class="fas fa-landmark"></i></div><h4 class="font-bold text-sm" style="color:#0f2d3e;">Project D — Heritage &amp; Cultural Narrative</h4></div><p class="text-xs leading-relaxed" style="color:#4a5a6a;">Inside a historic conservation district. Historical depth plus cultural-circle premium validates cultural storytelling support for ultra-luxury pricing.</p></div>
+  </div>
+  <div class="mt-10 scroll-reveal">
+    <h3 class="font-bold mb-6 flex items-center gap-2" style="color:#0f2d3e;"><i class="fas fa-star" style="color:#d4a055;"></i>Benchmark Core Insight: Premium Source Hierarchy</h3>
+    <div class="flex flex-col md:flex-row items-stretch gap-4">
+      <div class="flex-1 bg-white rounded-xl p-6 shadow-sm text-center" style="border:1px solid rgba(15,45,62,.08);"><div class="text-2xl font-bold" style="color:#0f2d3e;">1st</div><div class="text-sm mt-2" style="color:#4a5a6a;">Location Scarcity</div></div>
+      <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-chevron-right"></i></div>
+      <div class="flex-1 bg-white rounded-xl p-6 shadow-sm text-center" style="border:1px solid rgba(15,45,62,.08);"><div class="text-2xl font-bold" style="color:#0f2d3e;">2nd</div><div class="text-sm mt-2" style="color:#4a5a6a;">Architecture &amp; Design</div></div>
+      <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-chevron-right"></i></div>
+      <div class="flex-1 bg-white rounded-xl p-6 shadow-sm text-center" style="border:1px solid rgba(15,45,62,.08);"><div class="text-2xl font-bold" style="color:#0f2d3e;">3rd</div><div class="text-sm mt-2" style="color:#4a5a6a;">Service Amenities</div></div>
+      <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-chevron-right"></i></div>
+      <div class="flex-1 bg-white rounded-xl p-6 shadow-sm text-center" style="border:1px solid rgba(15,45,62,.08);"><div class="text-2xl font-bold" style="color:#0f2d3e;">4th</div><div class="text-sm mt-2" style="color:#4a5a6a;">Brand Premium</div></div>
+    </div>
+    <p class="text-xs mt-4" style="color:#4a5a6a;">Value perception varies significantly by buyer type. Legacy families are location-driven; wealth accumulators weight design and display; professional elites weight comfort and design; new money weights brand recognition.</p>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#fff;"><div class="max-w-7xl mx-auto px-6">
+  <div class="rounded-2xl p-8 text-white scroll-reveal" style="background:linear-gradient(135deg,#1d4a63 0%,#2a5f7a 100%);">
+    <h4 class="font-bold mb-6 flex items-center gap-2"><i class="fas fa-lightbulb" style="color:#a6cde2;"></i>Core Finding</h4>
+    <p class="font-serif text-2xl leading-snug mb-4">Brand contributes least to realised premium — and receives the largest share of ultra-luxury marketing spend.</p>
+    <p class="text-sm" style="color:#d9edf5;">Reallocating that spend toward location narrative and architectural differentiation is the highest-leverage move available before launch. Brand: 24% of realised premium, 61% of marketing spend — ranks 4th of four drivers.</p>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#f0f7fb;"><div class="max-w-7xl mx-auto px-6">
+  <div class="scroll-reveal mb-12">
+    <div class="flex items-center gap-4 mb-4"><span class="section-pill">DELIVERABLE 01</span></div>
+    <h2 class="font-serif text-3xl lg:text-4xl font-bold mb-4" style="color:#0f2d3e;">Four UHNW Buyer Segments &amp; Value Framework</h2>
+    <p class="text-base max-w-3xl leading-relaxed" style="color:#4a5a6a;">A three-dimensional assessment model — investment, residential and social-circle attributes — resolving a single "luxury buyer" into four addressable groups.</p>
+  </div>
+  <div class="grid md:grid-cols-2 gap-6 scroll-reveal">
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style="background:#0f2d3e;"><i class="fas fa-crown"></i></div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Legacy Families</h4><p class="text-sm" style="color:#4a5a6a;">Multi-generational holders. Buy the address, not the building. Indifferent to brand; highly sensitive to neighbours, school access and long-run land scarcity.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style="background:#1d4a63;"><i class="fas fa-chart-line"></i></div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Wealth Accumulators</h4><p class="text-sm" style="color:#4a5a6a;">Treat the unit as a portfolio position. Liquidity and resale velocity dominate; design quality matters as an exit argument rather than a lifestyle preference.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style="background:#0f2d3e;"><i class="fas fa-user-tie"></i></div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Professional Elite</h4><p class="text-sm" style="color:#4a5a6a;">C-suite and senior professionals. Prioritise comfort, privacy and circle integration. Extremely high bar on product detail: ceiling height, orientation, flow. Rational decision-making, value-conscious.</p></div>
+    <div class="card-hover insight-card rounded-2xl p-6"><div class="w-12 h-12 rounded-xl flex items-center justify-center text-white mb-4" style="background:#1d4a63;"><i class="fas fa-gem"></i></div><h4 class="font-bold mb-2" style="color:#0f2d3e;">New Money</h4><p class="text-sm" style="color:#4a5a6a;">Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment: most influenced by marketing, most active word-of-mouth amplifiers. Strongest need for circle admission.</p></div>
+  </div>
+  <div class="mt-10 scroll-reveal">
+    <h3 class="font-bold mb-6" style="color:#0f2d3e;">Segment Map — Motive Against Price Elasticity</h3>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div class="insight-card rounded-2xl p-6"><div class="text-xs mb-2" style="color:#4a5a6a;">LOW ELASTICITY · USE MOTIVE</div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Professional Elite</h4><p class="text-xs" style="color:#4a5a6a;">Will pay for resolved product detail. Walks away from compromise.</p></div>
+      <div class="rounded-2xl p-6" style="background:rgba(212,160,85,.12);border:1px solid rgba(212,160,85,.35);"><div class="text-xs mb-2" style="color:#7a4a10;">LOW ELASTICITY · ASSET MOTIVE</div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Legacy Families</h4><p class="text-xs" style="color:#4a5a6a;">Primary target. Price-insensitive where scarcity is genuine.</p></div>
+      <div class="insight-card rounded-2xl p-6"><div class="text-xs mb-2" style="color:#4a5a6a;">HIGH ELASTICITY · USE MOTIVE</div><h4 class="font-bold mb-2" style="color:#0f2d3e;">New Money</h4><p class="text-xs" style="color:#4a5a6a;">Responsive to narrative and brand. Needs the circle to be legible.</p></div>
+      <div class="insight-card rounded-2xl p-6"><div class="text-xs mb-2" style="color:#4a5a6a;">HIGH ELASTICITY · ASSET MOTIVE</div><h4 class="font-bold mb-2" style="color:#0f2d3e;">Wealth Accumulators</h4><p class="text-xs" style="color:#4a5a6a;">Buys on exit maths. Will trade design for liquidity.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#fff;"><div class="max-w-7xl mx-auto px-6">
+  <div class="scroll-reveal mb-12">
+    <div class="flex items-center gap-4 mb-4"><span class="section-pill">DELIVERABLE 02</span></div>
+    <h2 class="font-serif text-3xl lg:text-4xl font-bold mb-4" style="color:#0f2d3e;">Eight Value Dimensions — Product Optimisation Framework</h2>
+    <p class="text-base max-w-3xl leading-relaxed" style="color:#4a5a6a;">Translating segment psychology into decisions the design and sales teams could act on.</p>
+  </div>
+  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 scroll-reveal">
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Scarcity</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</p><div class="text-xs" style="color:#9a6010;">LEGACY FAMILIES</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Value Preservation</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</p><div class="text-xs" style="color:#9a6010;">LEGACY FAMILIES</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Liquidity</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</p><div class="text-xs" style="color:#9a6010;">WEALTH ACCUMULATORS</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Comfort</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</p><div class="text-xs" style="color:#9a6010;">PROFESSIONAL ELITE</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Privacy</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Security systems, community density, resident-circle homogeneity.</p><div class="text-xs" style="color:#9a6010;">PROFESSIONAL ELITE</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Prestige</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Entry immediacy, exclusive service details, visible service standards.</p><div class="text-xs" style="color:#9a6010;">NEW MONEY</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Belonging</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Circle community resources, resident events, admission mechanics.</p><div class="text-xs" style="color:#9a6010;">NEW MONEY</div></div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm card-hover" style="border:1px solid rgba(15,45,62,.08);"><h4 class="font-bold mb-2" style="color:#0f2d3e;">Purity</h4><p class="text-sm mb-3" style="color:#4a5a6a;">Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</p><div class="text-xs" style="color:#9a6010;">CROSS-SEGMENT</div></div>
+  </div>
+  <div class="mt-12 scroll-reveal"><div class="rounded-2xl p-8" style="background:rgba(212,160,85,.08);border-left:4px solid #d4a055;">
+    <p class="font-serif text-2xl leading-snug mb-2" style="color:#0f2d3e;">"Purity ranked above prestige in every segment — and no benchmark project was designing for it."</p>
+    <div class="text-xs" style="color:#7a4a10;">FINDING · DEPTH INTERVIEWS</div>
+  </div></div>
+  <div class="space-y-5 mt-12 scroll-reveal">
+    <div class="layer-card rounded-2xl p-8 shadow-sm card-hover"><div class="flex items-start gap-6"><div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-lg shrink-0" style="background:#0f2d3e;"><i class="fas fa-drafting-compass"></i></div><div><div class="text-xs mb-1" style="color:#9a6010;">LAYER 01 · PRODUCT</div><h3 class="text-lg font-bold mb-2" style="color:#0f2d3e;">Layout Remediation Programme</h3><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Forty-plus specific moves converting policy-forced irregularity into differentiated unit typologies rather than compromised ones.</p></div></div></div>
+    <div class="layer-card rounded-2xl p-8 shadow-sm card-hover" style="border-left-color:#a6cde2;"><div class="flex items-start gap-6"><div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-lg shrink-0" style="background:#1d4a63;"><i class="fas fa-users"></i></div><div><div class="text-xs mb-1" style="color:#9a6010;">LAYER 02 · SERVICE</div><h3 class="text-lg font-bold mb-2" style="color:#0f2d3e;">Circle Admission Design</h3><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Resident-community mechanics that make belonging legible to new-money buyers without diluting the homogeneity legacy families are paying for.</p></div></div></div>
+    <div class="layer-card rounded-2xl p-8 shadow-sm card-hover"><div class="flex items-start gap-6"><div class="w-14 h-14 rounded-2xl flex items-center justify-center text-lg shrink-0" style="background:rgba(212,160,85,.14);color:#7a4a10;"><i class="fas fa-book"></i></div><div><div class="text-xs mb-1" style="color:#9a6010;">LAYER 03 · NARRATIVE</div><h3 class="text-lg font-bold mb-2" style="color:#0f2d3e;">Scarcity Story Architecture</h3><p class="text-sm leading-relaxed" style="color:#4a5a6a;">A sales narrative sequenced by segment, leading with location scarcity and treating brand as supporting evidence rather than the headline.</p></div></div></div>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#f0f7fb;"><div class="max-w-7xl mx-auto px-6">
+  <div class="scroll-reveal mb-12"><div class="flex items-center gap-4 mb-4"><span class="section-pill">ENGAGEMENT ARC</span></div>
+    <h2 class="font-serif text-3xl lg:text-4xl font-bold mb-4" style="color:#0f2d3e;">From Ethnography to Launch Strategy</h2></div>
+  <div class="flex flex-col md:flex-row items-stretch gap-4 scroll-reveal">
+    <div class="flex-1 bg-white rounded-xl p-6 shadow-sm" style="border:1px solid rgba(15,45,62,.08);"><span class="w-10 h-10 rounded-lg inline-flex items-center justify-center font-bold text-sm mb-3" style="background:rgba(212,160,85,.14);color:#d4a055;">P1</span><h5 class="font-bold mb-2" style="color:#0f2d3e;">Ethnographic Fieldwork</h5><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p></div>
+    <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-arrow-right"></i></div>
+    <div class="flex-1 bg-white rounded-xl p-6 shadow-sm" style="border:1px solid rgba(15,45,62,.08);"><span class="w-10 h-10 rounded-lg inline-flex items-center justify-center font-bold text-sm mb-3" style="background:rgba(212,160,85,.14);color:#d4a055;">P2</span><h5 class="font-bold mb-2" style="color:#0f2d3e;">Benchmark Decomposition</h5><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Premium sources separated from marketing claims to establish the real driver hierarchy.</p></div>
+    <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-arrow-right"></i></div>
+    <div class="flex-1 bg-white rounded-xl p-6 shadow-sm" style="border:1px solid rgba(15,45,62,.08);"><span class="w-10 h-10 rounded-lg inline-flex items-center justify-center font-bold text-sm mb-3" style="background:rgba(212,160,85,.14);color:#d4a055;">P3</span><h5 class="font-bold mb-2" style="color:#0f2d3e;">Segment &amp; Value Model</h5><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Four segments mapped against eight value dimensions into a single prioritisation grid.</p></div>
+    <div class="hidden md:flex items-center text-2xl" style="color:#a6cde2;"><i class="fas fa-arrow-right"></i></div>
+    <div class="flex-1 bg-white rounded-xl p-6 shadow-sm" style="border:1px solid rgba(15,45,62,.08);"><span class="w-10 h-10 rounded-lg inline-flex items-center justify-center font-bold text-sm mb-3" style="background:rgba(212,160,85,.14);color:#d4a055;">P4</span><h5 class="font-bold mb-2" style="color:#0f2d3e;">Product &amp; Launch Strategy</h5><p class="text-sm leading-relaxed" style="color:#4a5a6a;">Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p></div>
+  </div>
+</div></section>
+
+<section class="py-16" style="background:#0f2d3e;"><div class="max-w-7xl mx-auto px-6"><div class="grid lg:grid-cols-2 gap-12">
+  <div><h3 class="font-serif text-2xl font-bold mb-6 flex items-center gap-3" style="color:#fff;"><i class="fas fa-tools" style="color:#a6cde2;"></i>Core Competencies</h3><div class="flex flex-wrap gap-3">
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(166,205,226,.1);color:#d9edf5;border:1px solid rgba(166,205,226,.2);">Consumer Research</span>
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(166,205,226,.1);color:#d9edf5;border:1px solid rgba(166,205,226,.2);">Product Strategy</span>
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(166,205,226,.1);color:#d9edf5;border:1px solid rgba(166,205,226,.2);">Market Analysis</span>
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(166,205,226,.1);color:#d9edf5;border:1px solid rgba(166,205,226,.2);">Brand Strategy</span>
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(166,205,226,.1);color:#d9edf5;border:1px solid rgba(166,205,226,.2);">Segmentation</span></div></div>
+  <div><h3 class="font-serif text-2xl font-bold mb-6 flex items-center gap-3" style="color:#fff;"><i class="fas fa-industry" style="color:#d4a055;"></i>Industry Domains</h3><div class="flex flex-wrap gap-3">
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(212,160,85,.15);color:#d4a055;border:1px solid rgba(212,160,85,.3);">Real Estate</span>
+    <span class="px-4 py-2 rounded-full text-sm" style="background:rgba(212,160,85,.15);color:#d4a055;border:1px solid rgba(212,160,85,.3);">Consumer</span></div></div>
+</div></div></section>
+
+<footer class="py-8" style="background:#0a1e2a;"><div class="max-w-7xl mx-auto px-6 text-center">
+  <p class="text-sm" style="color:rgba(166,205,226,.5);">2021 Consulting Engagement | Deliverables Showcase · Client identity anonymised</p>
+</div></footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+  }, { threshold: 0, rootMargin: '0px' });
+  const revealEls = document.querySelectorAll('.scroll-reveal');
+  revealEls.forEach(el => observer.observe(el));
+  setTimeout(() => revealEls.forEach(el => el.classList.add('active')), 1200);
+</script>
+</body>
+</html>
