@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Jost:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MONOCHROME — THE LEDGER
+   Accounting ledger / financial statement / letterpress index.
+   All design values live here; nothing below hardcodes a colour.
+   ============================================================ */
+:root{
+  /* surfaces */
+  --paper:#FFFFFF;
+  --paper-alt:#F3F4F5;
+  --ink:#1A1A16;               /* text, bars, bands */
+  --graphite:#5E5E54;          /* secondary text (6.5:1 on paper) */
+  --graphite-light:#8A8A80;    /* graphics only (3.5:1 on paper) - never small text */
+  --on-ink:#FFFFFF;            /* type on black bands */
+  --on-ink-muted:#B4B4AA;      /* secondary type on black bands */
+  --band-rule:#4A4A42;         /* margin rule inside black bands */
+  --rule:#C9CAC5;              /* hairline separators */
+  --rule-strong:#1A1A16;       /* heavy ledger rules */
+  --track:#E3E4E2;             /* empty part of meters and bars */
+
+  /* type */
+  --serif:'Lora', Georgia, 'Times New Roman', serif;
+  --sans:'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  /* ledger geometry - the three columns every row obeys */
+  --m:90px;        /* line-number margin */
+  --fig:160px;     /* right-aligned figures column */
+  --g:28px;        /* column gap */
+  --wrap:1240px;
+  --gutter:32px;
+  --hair:1px;
+  --heavy:3px;
+  --row-pad:22px;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--serif);margin:0;line-height:1.15;color:inherit}
+p{margin:0}
+svg{display:block}
+.num,.f,.mono,.m{font-variant-numeric:tabular-nums lining-nums}
+
+/* ---------- the ledger wrap: persistent margin rule ---------- */
+.wrap{
+  max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter);
+  position:relative;
+}
+.ledger{position:relative}
+.ledger::before{               /* the margin column's rule, running the whole page */
+  content:"";position:absolute;top:0;bottom:0;z-index:0;
+  left:calc(max(0px, (100% - var(--wrap)) / 2) + var(--gutter) + var(--m) + (var(--g) / 2));
+  width:var(--hair);background:var(--ink);opacity:.9;
+}
+.ledger::after{                /* faint rule bounding the figures column */
+  content:"";position:absolute;top:0;bottom:0;z-index:0;
+  right:calc(max(0px, (100% - var(--wrap)) / 2) + var(--gutter) + var(--fig) + (var(--g) / 2));
+  width:var(--hair);background:var(--rule);
+}
+
+/* one ruled row: margin | content | figure */
+.r{
+  display:grid;grid-template-columns:var(--m) minmax(0,1fr) var(--fig);
+  column-gap:var(--g);padding:var(--row-pad) 0;
+  border-bottom:var(--hair) solid var(--rule);
+  position:relative;z-index:1;
+}
+.r > .m{
+  font-family:var(--mono);font-size:13px;font-weight:500;color:var(--graphite);
+  text-align:right;padding-right:6px;letter-spacing:.02em;line-height:1.9;
+}
+.r > .c{min-width:0}
+.r > .f{
+  font-family:var(--mono);text-align:right;font-weight:500;
+  overflow-wrap:anywhere;min-width:0;
+}
+.r > .wide{grid-column:2 / 4;min-width:0;background:var(--paper);position:relative}
+.r.tight{padding:14px 0}
+.r.rule-heavy{border-bottom:var(--heavy) solid var(--rule-strong)}
+.r.alt{background:var(--paper-alt)}
+
+.kicker{
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--graphite);
+}
+.standfirst{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.45;max-width:46ch}
+.body{max-width:68ch}
+.body + .body{margin-top:0}
+h3.sub{font-size:24px;font-weight:700}
+.caption{font-family:var(--serif);font-style:italic;color:var(--graphite);font-size:16px;margin-top:4px}
+
+/* ---------- running head + hero ---------- */
+.runhead{border-top:var(--heavy) solid var(--rule-strong)}
+.runhead .c,.runhead .f{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;line-height:1.9}
+.runhead .f{color:var(--ink);font-weight:700}
+.runhead .c{color:var(--graphite)}
+
+.hero-title{padding:56px 0 30px}
+.hero-title h1{
+  font-size:clamp(40px,7vw,92px);font-weight:700;letter-spacing:-.02em;line-height:1.02;
+  max-width:14ch;
+}
+.hero-title .m{line-height:1.2;padding-top:14px}
+.hero-title .f{align-self:end}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.tags li{
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  border:var(--hair) solid var(--ink);padding:5px 10px;line-height:1.4;
+}
+.tags.solid li{background:var(--ink);color:var(--on-ink)}
+.client{font-family:var(--serif);font-size:19px;font-weight:600}
+.meta-row .c{display:flex;align-items:baseline;gap:12px;min-width:0}
+.meta-row .lab{font-size:17px;font-weight:500;white-space:nowrap}
+.leader{flex:1;border-bottom:var(--hair) dotted var(--graphite-light);transform:translateY(-5px);min-width:16px}
+.meta-row .f{font-size:30px;line-height:1.1}
+.meta-row .f.text{font-size:15px;line-height:1.5;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+
+/* ---------- section band (rule 1) ---------- */
+.band{background:var(--ink);color:var(--on-ink);position:relative;z-index:2;margin-top:72px}
+.band .r{border-bottom:0;padding:38px 0 40px}
+.band .r > .m{
+  color:var(--on-ink);font-size:30px;font-weight:700;line-height:1.1;padding-right:6px;
+}
+.band .r > .f{color:var(--on-ink-muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase;line-height:2}
+.band .kicker{color:var(--on-ink-muted);display:block;margin-bottom:10px}
+.band h2{font-size:clamp(28px,4.2vw,46px);font-weight:700;letter-spacing:-.01em;max-width:24ch}
+.band .wrap::before{
+  content:"";position:absolute;top:0;bottom:0;
+  left:calc(var(--gutter) + var(--m) + (var(--g) / 2));width:var(--hair);background:var(--band-rule);
+}
+
+/* ---------- icons ---------- */
+.ico{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.ico-key{                      /* keyline square treatment */
+  width:52px;height:52px;border:var(--hair) solid var(--ink);display:grid;place-items:center;flex:none;
+}
+.ico-solid{                    /* filled black square treatment */
+  width:52px;height:52px;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;flex:none;
+}
+.ico-bare .ico{width:40px;height:40px;stroke-width:1.25}
+
+/* ---------- constraint tiles: keyline boxes ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border:var(--hair) solid var(--ink)}
+.tile{padding:24px 22px 26px;border-right:var(--hair) solid var(--ink);border-bottom:var(--hair) solid var(--ink);margin:0 -1px -1px 0;background:var(--paper)}
+.tile .ico-key{margin-bottom:18px}
+.tile .ico-key .ico{width:30px;height:30px}
+.tile h3{font-size:20px;font-weight:700;margin-bottom:8px}
+.tile p{font-size:15.5px;line-height:1.55;color:var(--graphite)}
+.tile .idx{font-family:var(--mono);font-size:12px;color:var(--graphite);letter-spacing:.1em;float:right}
+
+/* ---------- figure tiles: heavy-ruled cells ---------- */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));border-top:var(--heavy) solid var(--rule-strong);border-bottom:var(--hair) solid var(--ink)}
+.fig{padding:26px 22px 26px 0;border-right:var(--hair) solid var(--rule)}
+.fig + .fig{padding-left:22px}
+.fig:last-child{border-right:0}
+.fig .ico-bare{margin-bottom:22px}
+.fig .val{font-family:var(--mono);font-weight:700;font-size:clamp(46px,5.6vw,68px);line-height:1;letter-spacing:-.03em}
+.fig .lab{display:block;margin-top:12px;font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);font-weight:500}
+
+/* ---------- benchmark cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));gap:20px}
+.card{border:var(--hair) solid var(--ink);background:var(--paper)}
+.card-head{display:flex;align-items:center;gap:14px;background:var(--paper-alt);border-bottom:var(--hair) solid var(--ink);padding:0 16px 0 0}
+.card-head .letter{
+  width:52px;height:52px;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;
+  font-family:var(--mono);font-weight:700;font-size:22px;flex:none;
+}
+.card-head .kicker{flex:1;color:var(--ink)}
+.card-head .ico{flex:none}
+.card-body{padding:20px 22px 24px}
+.card-body h3{font-size:22px;font-weight:700;margin-bottom:10px}
+.card-body p{font-size:15.5px;line-height:1.6;color:var(--graphite)}
+
+/* ---------- premium hierarchy: black ledger bars ---------- */
+.rank .c{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);column-gap:24px;align-items:center}
+.rank .driver{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.25}
+.rank .verdict{display:block;font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);margin-top:3px}
+.lbar{height:26px;background:var(--track);position:relative}
+.lbar i{position:absolute;inset:0 auto 0 0;width:calc(var(--v) * 1%);background:var(--ink)}
+.rank .f{font-size:26px;line-height:1.2;align-self:center}
+.rank .m{align-self:center;line-height:1.2}
+.scale{display:grid;grid-template-columns:minmax(150px,230px) minmax(0,1fr);column-gap:24px}
+.scale-ticks{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--graphite);border-top:var(--hair) solid var(--ink);padding-top:6px}
+
+/* ---------- contradiction meters ---------- */
+.meter-row .c{display:flex;align-items:center;gap:28px}
+.donut{width:116px;height:116px;flex:none}
+.donut circle{fill:none;stroke-width:14}
+.donut .trk{stroke:var(--track)}
+.donut .val{stroke:var(--ink)}
+.donut .val.grey{stroke:var(--graphite-light)}
+.meter-row .what{font-family:var(--serif);font-size:23px;line-height:1.3;font-weight:600;max-width:22ch}
+.meter-row .f{font-size:52px;font-weight:700;line-height:1;align-self:center;letter-spacing:-.03em}
+.meter-row .m,.meter-row .f{align-self:center}
+.vs{font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+/* ---------- core finding: the "total" line ---------- */
+.total{border-top:var(--heavy) solid var(--rule-strong);margin-top:40px;position:relative;z-index:1}
+.total::before{content:"";display:block;height:3px;border-bottom:var(--hair) solid var(--rule-strong)}
+.total .r{border-bottom:var(--heavy) solid var(--rule-strong);padding:40px 0 44px}
+.total .m{font-size:30px;line-height:1;color:var(--ink);font-weight:700}
+.total h3.label{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.total .statement{font-family:var(--serif);font-weight:700;font-size:clamp(26px,3.4vw,40px);line-height:1.2;letter-spacing:-.01em;max-width:30ch}
+.total .follow{font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.5;color:var(--graphite);margin-top:18px;max-width:58ch}
+.total .f{font-size:56px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.rankstrip{display:flex;align-items:center;gap:18px;margin-top:26px;flex-wrap:wrap}
+.rankstrip .cells{display:flex}
+.rankstrip .cell{
+  width:58px;height:40px;border:var(--hair) solid var(--ink);margin-right:-1px;display:grid;place-items:center;
+  font-family:var(--mono);font-size:13px;font-weight:500;color:var(--graphite);
+}
+.rankstrip .cell.on{background:var(--ink);color:var(--on-ink);font-weight:700}
+.rankstrip p{font-size:16px}
+
+/* ---------- segments: profile + attribute bars on the figures column ---------- */
+.seg{
+  display:grid;column-gap:var(--g);row-gap:10px;
+  grid-template-columns:var(--m) minmax(0,1fr) minmax(0,1fr) var(--fig);
+  grid-template-rows:auto auto auto 1fr;
+  padding:28px 0 30px;border-bottom:var(--hair) solid var(--rule);position:relative;z-index:1;
+}
+.seg > .m{grid-column:1;grid-row:1;font-family:var(--mono);font-size:30px;font-weight:700;text-align:right;padding-right:6px;line-height:1}
+.seg > .txt{grid-column:2;grid-row:1 / 5;min-width:0}
+.seg .txt h3{font-size:26px;font-weight:700;margin:6px 0 10px}
+.seg .txt p{font-size:16px;line-height:1.6;color:var(--graphite);max-width:52ch}
+.seg > .attr{grid-column:3;min-width:0;align-self:center}
+.seg > .val{grid-column:4;text-align:right;font-family:var(--mono);font-size:22px;font-weight:700;line-height:1;align-self:end;margin-bottom:-4px}
+.seg > .a1,.seg > .v1{grid-row:1}
+.seg > .a2,.seg > .v2{grid-row:2}
+.seg > .a3,.seg > .v3{grid-row:3}
+.seg > .a1,.seg > .v1{margin-top:8px}
+.attr .alab{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);font-weight:500;margin-bottom:5px}
+.sbar{height:12px;background:var(--track);position:relative}
+.sbar i{position:absolute;inset:0 auto 0 0;width:calc(var(--v) * 1%);background:var(--ink)}
+
+/* ---------- segment map: ruled 2x2 ---------- */
+.map{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;gap:0}
+.map .yaxis{grid-column:1;grid-row:1;display:flex;align-items:center;justify-content:center;padding-right:14px}
+.map .yaxis span{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);font-weight:500;white-space:nowrap}
+.map .grid{grid-column:2;grid-row:1;display:grid;grid-template-columns:auto repeat(2,minmax(0,1fr))}
+.map .xaxis{grid-column:2;grid-row:2;padding-top:12px;text-align:center;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500}
+.map .rowlab{display:flex;align-items:center;justify-content:flex-end;padding-right:12px;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);font-weight:500;border-top:var(--hair) solid var(--ink)}
+.map .rowlab:nth-last-child(-n+3){border-bottom:var(--hair) solid var(--ink)}
+.map .collab{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--graphite);font-weight:500;padding:0 0 8px 18px}
+.q{border:var(--hair) solid var(--ink);margin:0 -1px -1px 0;padding:22px 22px 26px;min-width:0;background:var(--paper)}
+.q .qk{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);font-weight:500;display:block;margin-bottom:10px}
+.q h4{font-family:var(--serif);font-size:22px;font-weight:700;margin:0 0 8px;line-height:1.2}
+.q p{font-size:15.5px;line-height:1.55}
+.q.hot{background:var(--ink);color:var(--on-ink)}
+.q.hot .qk{color:var(--on-ink-muted)}
+.q.hot .flag{display:inline-block;margin-top:14px;border:var(--hair) solid var(--on-ink);padding:3px 8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ---------- value dimensions: real table on the ledger grid ---------- */
+.vtable{width:100%;border-collapse:collapse;table-layout:fixed;position:relative;z-index:1}
+.vtable col.c-m{width:calc(var(--m) + var(--g))}
+.vtable col.c-dim{width:21%}
+.vtable col.c-seg{width:17%}
+.vtable col.c-sq{width:118px}
+.vtable col.c-f{width:calc(var(--fig) + (var(--g) / 2))}
+.vtable th{
+  font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  text-align:left;padding:14px 16px 12px 0;border-bottom:var(--heavy) solid var(--rule-strong);vertical-align:bottom;
+}
+.vtable td{padding:18px 16px 18px 0;border-bottom:var(--hair) solid var(--rule);vertical-align:top;font-size:15.5px;line-height:1.55}
+.vtable td.n{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--graphite);text-align:right;padding-right:calc(var(--g) / 2 + 12px);line-height:1.9}
+.vtable th.n{padding-right:calc(var(--g) / 2 + 12px);text-align:right}
+.vtable td.dim{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.3}
+.vtable td.gov{color:var(--graphite)}
+.vtable td.seg-c{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;line-height:1.6;padding-top:20px}
+.vtable td.f,.vtable th.f{text-align:right;padding-right:0}
+.vtable td.f{font-family:var(--mono);font-size:24px;font-weight:700;line-height:1.1}
+.sq{display:flex;gap:4px;padding-top:5px}
+.sq i{width:14px;height:14px;border:1.5px solid var(--ink);flex:none}
+.sq i.on{background:var(--ink)}
+.vtable tr:hover td{background:var(--paper-alt)}
+
+/* ---------- pull quote ---------- */
+.quote .c{border-top:var(--heavy) solid var(--rule-strong);border-bottom:var(--hair) solid var(--ink);padding:34px 0 30px;position:relative}
+.quote blockquote{margin:0}
+.quote blockquote p{font-family:var(--serif);font-weight:700;font-size:clamp(25px,3.2vw,36px);line-height:1.25;letter-spacing:-.01em;max-width:30ch}
+.quote cite{display:block;margin-top:18px;font-style:normal;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite);font-weight:500}
+.quote .ghost{position:absolute;right:0;top:20px;width:96px;height:96px;color:var(--track)}
+.quote .m{font-family:var(--serif);font-size:56px;line-height:.9;color:var(--ink);font-weight:700;padding-top:30px}
+
+/* ---------- response layers ---------- */
+.layer .c{display:grid;grid-template-columns:52px minmax(0,1fr);column-gap:22px;align-items:start}
+.layer h3{font-size:22px;font-weight:700;margin:4px 0 8px}
+.layer p{font-size:16px;line-height:1.6;color:var(--graphite);max-width:64ch}
+.layer .f{font-size:13px;color:var(--graphite);letter-spacing:.1em;text-transform:uppercase;line-height:1.9}
+
+/* ---------- engagement arc ---------- */
+.arc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));list-style:none;margin:0;padding:0;counter-reset:step}
+.arc li{position:relative;padding:0 22px 8px 0}
+.arc .track{display:flex;align-items:center;margin-bottom:22px}
+.arc .badge{width:44px;height:44px;background:var(--ink);color:var(--on-ink);display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:18px;flex:none}
+.arc .line{flex:1;height:var(--heavy);background:var(--ink)}
+.arc li:last-child .line{background:none;border-top:var(--hair) dashed var(--graphite-light);height:0}
+.arc h3{font-size:20px;font-weight:700;margin-bottom:8px;padding-right:6px}
+.arc p{font-size:15.5px;line-height:1.55;color:var(--graphite)}
+
+/* ---------- closing + footer ---------- */
+.closing .c{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center}
+.closing .lab{font-family:var(--serif);font-weight:700;font-size:19px;min-width:190px}
+.foot{background:var(--ink);color:var(--on-ink);margin-top:72px;position:relative}
+.foot.ledger::before,.foot.ledger::after{display:none}
+.foot .r{border:0;padding:28px 0;grid-template-columns:var(--m) minmax(0,1fr) auto}
+.foot .c,.foot .f{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;line-height:1.9}
+.foot .c{color:var(--on-ink)}
+.foot .f{color:var(--on-ink-muted);grid-column:3}
+.foot .m{color:var(--on-ink-muted)}
+.foot .wrap::before{
+  content:"";position:absolute;top:0;bottom:0;
+  left:calc(var(--gutter) + var(--m) + (var(--g) / 2));width:var(--hair);background:var(--band-rule);
+}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.gap-top{margin-top:44px}
+
+/* ============ responsive ============ */
+@media (max-width:980px){
+  :root{--m:56px;--fig:104px;--g:18px;--gutter:24px}
+  .seg{grid-template-columns:var(--m) minmax(0,1fr) var(--fig);grid-template-rows:auto}
+  .seg > .txt{grid-column:2;grid-row:1}
+  .seg > .attr{grid-column:2}
+  .seg > .val{grid-column:3}
+  .seg > .a1,.seg > .v1{grid-row:2;margin-top:10px}
+  .seg > .a2,.seg > .v2{grid-row:3}
+  .seg > .a3,.seg > .v3{grid-row:4}
+  .seg > .val{align-self:end}
+  .rank .c,.scale{grid-template-columns:minmax(0,1fr)}
+  .rank .lbar{margin-top:10px}
+  .scale > span{display:none}
+  .meter-row .f{font-size:40px}
+  .total .f{font-size:42px}
+}
+@media (max-width:640px){
+  :root{--m:38px;--fig:72px;--g:12px;--gutter:16px;--row-pad:18px}
+  body{font-size:16px}
+  .r > .m{font-size:11.5px;padding-right:2px}
+  .r:has(> .f:empty:not(.keep)) > .c{grid-column:2 / 4}
+  .r > .f:empty:not(.keep){display:none}
+  .ledger::after{display:none}
+  .total .r > .m{grid-row:1}
+  .total .r > .f{grid-column:3;grid-row:1}
+  .total .r{row-gap:18px;padding-top:28px}
+  .total .r > .c{grid-column:2 / 4;grid-row:2}
+  .standfirst{font-size:18.5px}
+  .band{margin-top:52px}
+  .band .r{padding:28px 0 30px}
+  .band .r > .m{font-size:17px}
+  .band .r > .f{display:none}
+  .band .r > .c{grid-column:2 / 4}
+  .hero-title{padding:36px 0 22px}
+  .meta-row .f{font-size:22px}
+  .meta-row .f.text{font-size:11px;letter-spacing:0}
+  .meta-row .lab{font-size:15px;white-space:normal}
+  .seg > .m{font-size:18px}
+  .seg .txt h3{font-size:22px}
+  .seg > .val{font-size:18px}
+  .meter-row .c{flex-direction:column;align-items:flex-start;gap:14px}
+  .donut{width:88px;height:88px}
+  .meter-row .what{font-size:19px}
+  .meter-row .f{font-size:30px}
+  .rank .f{font-size:19px}
+  .total .m{font-size:20px}
+  .total .f{font-size:28px}
+  .rankstrip .cell{width:44px}
+  .fig{padding:22px 14px 22px 0}
+  .figs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fig + .fig{padding-left:0}
+  .fig:nth-child(even){padding-left:14px;border-right:0}
+  .fig:nth-child(-n+2){border-bottom:var(--hair) solid var(--rule)}
+  .fig .val{font-size:44px}
+  .cards{grid-template-columns:minmax(0,1fr)}
+  .tiles{grid-template-columns:minmax(0,1fr)}
+  .quote .m{font-size:36px}
+  .quote .ghost{display:none}
+  .layer .c{grid-template-columns:minmax(0,1fr);row-gap:14px}
+  .layer .f{font-size:11px;letter-spacing:.04em}
+  .map{grid-template-columns:minmax(0,1fr)}
+  .map .yaxis{grid-column:1;grid-row:1;justify-content:flex-start;padding:0 0 10px}
+  .map .yaxis span{writing-mode:horizontal-tb;transform:none}
+  .map .grid{grid-column:1;grid-row:2;grid-template-columns:minmax(0,1fr)}
+  .map .xaxis{grid-column:1;grid-row:3;text-align:left}
+  .map .collab,.map .rowlab{display:none}
+  .q .qk{font-size:11px}
+  .closing .lab{min-width:0;width:100%}
+  .foot .r > .f{grid-column:2 / 4;text-align:left}
+
+  /* 4-column table -> labelled stacked rows */
+  .vtable,.vtable tbody{display:block}
+  .vtable thead,.vtable colgroup{display:none}
+  .vtable tr{
+    display:grid;grid-template-columns:var(--m) minmax(0,1fr) var(--fig);column-gap:var(--g);
+    border-bottom:var(--hair) solid var(--rule);padding:16px 0;
+  }
+  .vtable td{border:0;padding:0}
+  .vtable td.n{grid-column:1;grid-row:1 / 5;padding:0 2px 0 0;font-size:11.5px}
+  .vtable td.dim{grid-column:2;grid-row:1}
+  .vtable td.f{grid-column:3;grid-row:1}
+  .vtable td.gov{grid-column:2 / 4;grid-row:2;margin-top:6px}
+  .vtable td.seg-c{grid-column:2 / 4;grid-row:3;margin-top:10px;padding:0}
+  .vtable td.sqc{grid-column:2 / 4;grid-row:4;margin-top:8px}
+  .vtable td[data-label]::before{
+    content:attr(data-label);display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--graphite);font-weight:500;margin-bottom:2px;
+  }
+  .vtable td.dim::before,.vtable td.f::before,.vtable td.sqc::before{display:none !important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important}
+}
+
+/* ============ print ============ */
+@media print{
+  :root{--gutter:0px}
+  body{font-size:11pt}
+  .band,.foot{background:var(--paper) !important;color:var(--ink) !important;border-top:var(--heavy) solid var(--ink);border-bottom:var(--hair) solid var(--ink)}
+  .band .r > .m,.band h2{color:var(--ink) !important}
+  .band .kicker,.band .r > .f,.foot .f,.foot .m{color:var(--graphite) !important}
+  .band .wrap::before,.foot .wrap::before{background:var(--ink)}
+  .q.hot,.ico-solid,.card-head .letter,.arc .badge,.rankstrip .cell.on,.tags.solid li{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .lbar i,.sbar i,.sq i.on,.donut{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section,.seg,.card,.tile,.total,.map,.quote,.arc li,.vtable tr{break-inside:avoid}
+  .band{break-after:avoid}
+  .vtable tr:hover td{background:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG symbol sheet: every glyph uses currentColor -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-height" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M7 21V11h10v10"/><path d="M10 14h1M13 14h1M10 17h1M13 17h1"/><path d="M3 4h18" stroke-dasharray="2 2"/><path d="M12 4v4.5M9.8 6.6 12 8.8l2.2-2.2"/></symbol>
+    <symbol id="i-density" viewBox="0 0 24 24"><path d="M3 4h18"/><path d="M12 4v3"/><rect x="5" y="9" width="14" height="12"/><path d="M5 15h14M9.67 9v12M14.33 9v12"/></symbol>
+    <symbol id="i-demolition" viewBox="0 0 24 24"><path d="M4 20V9l5-5 4 3 7-1v8l-3 2v4z"/><path d="M7 4.5 17 20.5" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><path d="M3 4h10v5h8v11H9v-6H3z"/><path d="M13 9v5H9"/><path d="M16 14v6"/></symbol>
+    <symbol id="i-interview" viewBox="0 0 24 24"><path d="M3 4h12v8H8l-3 3v-3H3z"/><path d="M15 8h6v8h-2v3l-3-3h-5v-4"/></symbol>
+    <symbol id="i-bench" viewBox="0 0 24 24"><path d="M2 21h20"/><path d="M4 21V9l4-3v15"/><path d="M8 21V11h5v10"/><path d="M13 21V4h6v17"/><path d="M15.5 8h1M15.5 11h1M15.5 14h1"/></symbol>
+    <symbol id="i-dims" viewBox="0 0 24 24"><path d="M12 3l6.36 2.64L21 12l-2.64 6.36L12 21l-6.36-2.64L3 12l2.64-6.36z"/><path d="M12 3v18M3 12h18M5.64 5.64l12.72 12.72M18.36 5.64 5.64 18.36" stroke-width="0.75"/></symbol>
+    <symbol id="i-moves" viewBox="0 0 24 24"><path d="M3 6h4M11 6h10M3 12h10M17 12h4M3 18h3M10 18h11"/><rect x="7" y="4" width="4" height="4"/><rect x="13" y="10" width="4" height="4"/><rect x="6" y="16" width="4" height="4"/></symbol>
+    <symbol id="i-collector" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16"/><rect x="6" y="7" width="12" height="10"/><path d="M6 17l4-5 3 3 2-2 3 4"/></symbol>
+    <symbol id="i-courtyard" viewBox="0 0 24 24"><path d="M2 9l10-5 10 5"/><path d="M4 9v11h16V9"/><path d="M9.5 20v-5h5v5"/><path d="M4 12.5h5M15 12.5h5"/></symbol>
+    <symbol id="i-position" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></symbol>
+    <symbol id="i-heritage" viewBox="0 0 24 24"><path d="M3 21h18M4 18h16M4 8h16L12 3z"/><path d="M7 8v10M12 8v10M17 8v10"/></symbol>
+    <symbol id="i-plan" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18"/><path d="M3 12h7M14 12h7M12 3v5M12 16v5"/></symbol>
+    <symbol id="i-circle" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6.5 20a5.5 5.5 0 0 1 11 0"/><circle cx="4.5" cy="10.5" r="2"/><circle cx="19.5" cy="10.5" r="2"/><path d="M1.5 18a3 3 0 0 1 4-2.8M22.5 18a3 3 0 0 0-4-2.8"/></symbol>
+    <symbol id="i-story" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4"/><path d="M8 11h8M8 14h8M8 17h5"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M4 18v-5c0-4 2-7 6-8M14 18v-5c0-4 2-7 6-8"/><path d="M4 13h5v5H4zM14 13h5v5h-5z"/></symbol>
+  </defs>
+</svg>
+
+<header class="ledger">
+  <div class="wrap">
+    <div class="r runhead tight">
+      <span class="m">L.00</span>
+      <span class="c">Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</span>
+      <span class="f num">Sep — Nov 2021</span>
+    </div>
+
+    <div class="r hero-title rule-heavy">
+      <span class="m">H</span>
+      <div class="c">
+        <h1>Ultra-Luxury Residential Insights</h1>
+      </div>
+      <span class="f"></span>
+    </div>
+
+    <div class="r">
+      <span class="m">a</span>
+      <p class="c standfirst">Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and UHNW buyer psychology.</p>
+      <span class="f"></span>
+    </div>
+
+    <div class="r">
+      <span class="m">b</span>
+      <div class="c">
+        <p class="client">For a leading state-owned developer</p>
+      </div>
+      <span class="f"></span>
+    </div>
+
+    <div class="r">
+      <span class="m">c</span>
+      <div class="c">
+        <span class="kicker" style="display:block;margin-bottom:8px">Disciplines</span>
+        <ul class="tags solid">
+          <li>Consumer Research</li><li>Product Strategy</li><li>Brand</li>
+        </ul>
+      </div>
+      <span class="f"></span>
+    </div>
+
+    <div class="r meta-row tight">
+      <span class="m">d.1</span>
+      <div class="c"><span class="lab">Location</span><span class="leader" aria-hidden="true"></span></div>
+      <span class="f text">Prime inner-city</span>
+    </div>
+    <div class="r meta-row tight">
+      <span class="m">d.2</span>
+      <div class="c"><span class="lab">Buyer segments</span><span class="leader" aria-hidden="true"></span></div>
+      <span class="f num">4</span>
+    </div>
+    <div class="r meta-row tight">
+      <span class="m">d.3</span>
+      <div class="c"><span class="lab">Value dimensions</span><span class="leader" aria-hidden="true"></span></div>
+      <span class="f num">8</span>
+    </div>
+    <div class="r meta-row tight rule-heavy">
+      <span class="m">d.4</span>
+      <div class="c"><span class="lab">Benchmark projects</span><span class="leader" aria-hidden="true"></span></div>
+      <span class="f num">8</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ====================== 00 CONTEXT ====================== -->
+<section class="ledger" aria-labelledby="s00">
+  <div class="band">
+    <div class="wrap">
+      <div class="r">
+        <span class="m">00</span>
+        <div class="c"><span class="kicker">Context</span><h2 id="s00">A flagship asset with no obvious comparable</h2></div>
+        <span class="f"></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="r">
+      <span class="m">¶</span>
+      <p class="c standfirst">Four simultaneous constraints meant the client could not price from precedent.</p>
+      <span class="f"></span>
+    </div>
+
+    <div class="r">
+      <span class="m">0.1</span>
+      <div class="wide">
+        <div class="tiles">
+          <div class="tile">
+            <span class="ico-key"><svg class="ico" aria-hidden="true"><use href="#i-height"/></svg></span>
+            <h3>Height limits</h3>
+            <p>Policy restrictions cap buildable height, compressing the achievable unit mix.</p>
+          </div>
+          <div class="tile">
+            <span class="ico-key"><svg class="ico" aria-hidden="true"><use href="#i-density"/></svg></span>
+            <h3>Density caps</h3>
+            <p>Plot ratio ceilings limit saleable area against a very high land basis.</p>
+          </div>
+          <div class="tile">
+            <span class="ico-key"><svg class="ico" aria-hidden="true"><use href="#i-demolition"/></svg></span>
+            <h3>Demolition bands</h3>
+            <p>Phased clearance leaves irregular lot boundaries that resist orthogonal planning.</p>
+          </div>
+          <div class="tile">
+            <span class="ico-key"><svg class="ico" aria-hidden="true"><use href="#i-layout"/></svg></span>
+            <h3>Unconventional layouts</h3>
+            <p>Irregular footprints force non-standard floorplans that UHNW buyers scrutinise.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r">
+      <span class="m">0.2</span>
+      <p class="c body">Located in a rare prime inner-city plot with school-district advantages and elite community resources, the project faced multiple simultaneous challenges: policy restrictions on height limits, density caps, demolition bands resulting in irregular lot shapes, and unconventional unit layouts.</p>
+      <span class="f"></span>
+    </div>
+    <div class="r">
+      <span class="m">0.3</span>
+      <p class="c body">Site-level factors affecting ultra-luxury value perception and investment return pressures meant the client could not price from precedent. We were commissioned to conduct deep ultra-luxury market research and consumer insights — clarifying target buyer profiles, product optimisation directions, and innovative commercial model exploration.</p>
+      <span class="f"></span>
+    </div>
+
+    <!-- figures -->
+    <div class="r gap-top" style="border-bottom:0" aria-label="Engagement figures">
+      <span class="m">Σ</span>
+      <div class="wide">
+        <div class="figs">
+          <div class="fig">
+            <span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-interview"/></svg></span>
+            <span class="val num">32</span>
+            <span class="lab">Depth interviews</span>
+          </div>
+          <div class="fig">
+            <span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-bench"/></svg></span>
+            <span class="val num">8</span>
+            <span class="lab">Benchmark projects</span>
+          </div>
+          <div class="fig">
+            <span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-dims"/></svg></span>
+            <span class="val num">8</span>
+            <span class="lab">Value dimensions</span>
+          </div>
+          <div class="fig">
+            <span class="ico-bare"><svg class="ico" aria-hidden="true"><use href="#i-moves"/></svg></span>
+            <span class="val num">40+</span>
+            <span class="lab">Optimisation moves</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 01 BENCHMARK ====================== -->
+<section class="ledger" aria-labelledby="s01">
+  <div class="band">
+    <div class="wrap">
+      <div class="r">
+        <span class="m">01</span>
+        <div class="c"><span class="kicker">Benchmark analysis</span><h2 id="s01">How comparable assets manufacture scarcity</h2></div>
+        <span class="f"></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="r">
+      <span class="m">¶</span>
+      <p class="c standfirst">Eight ultra-luxury projects, decomposed by the source of their premium rather than by their marketing claim.</p>
+      <span class="f"></span>
+    </div>
+
+    <div class="r">
+      <span class="m">1.1</span>
+      <div class="wide">
+        <div class="cards">
+          <article class="card">
+            <div class="card-head"><span class="letter">A</span><span class="kicker">Collector-oriented</span><svg class="ico" aria-hidden="true"><use href="#i-collector"/></svg></div>
+            <div class="card-body"><h3>Art &amp; scarcity positioning</h3><p>Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers under 1,000 UHNW families, invitation-only release cycles.</p></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><span class="letter">B</span><span class="kicker">Cultural-form</span><svg class="ico" aria-hidden="true"><use href="#i-courtyard"/></svg></div>
+            <div class="card-body"><h3>Chinese courtyard heritage</h3><p>Courtyard compound design benchmark. Chinese garden plus private courtyard plus multi-space differentiation; buyers are local landowning legacy families.</p></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><span class="letter">C</span><span class="kicker">Positional</span><svg class="ico" aria-hidden="true"><use href="#i-position"/></svg></div>
+            <div class="card-body"><h3>Absolute location scarcity</h3><p>Prime location address, pricing and liquidity accepted as the purest embodiment of "location = value". Resale velocity materially above segment average.</p></div>
+          </article>
+          <article class="card">
+            <div class="card-head"><span class="letter">D</span><span class="kicker">Narrative</span><svg class="ico" aria-hidden="true"><use href="#i-heritage"/></svg></div>
+            <div class="card-body"><h3>Heritage &amp; cultural narrative</h3><p>Inside a historic conservation district. Historical depth plus cultural-circle premium validates cultural storytelling support for ultra-luxury pricing.</p></div>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <!-- premium hierarchy -->
+    <div class="r gap-top rule-heavy" style="padding-bottom:16px">
+      <span class="m">1.2</span>
+      <div class="c">
+        <h3 class="sub">Premium source hierarchy</h3>
+        <p class="caption">Share of realised price premium attributable to each driver, across the eight benchmarks.</p>
+      </div>
+      <span class="f kicker" style="align-self:end">Weight</span>
+    </div>
+    <div class="r rank">
+      <span class="m">1st</span>
+      <div class="c"><div><span class="driver">Location scarcity</span><span class="verdict">Decisive</span></div><div class="lbar" role="img" aria-label="100%"><i style="--v:100"></i></div></div>
+      <span class="f num">100%</span>
+    </div>
+    <div class="r rank">
+      <span class="m">2nd</span>
+      <div class="c"><div><span class="driver">Architecture &amp; design</span><span class="verdict">Strong</span></div><div class="lbar" role="img" aria-label="72%"><i style="--v:72"></i></div></div>
+      <span class="f num">72%</span>
+    </div>
+    <div class="r rank">
+      <span class="m">3rd</span>
+      <div class="c"><div><span class="driver">Service amenities</span><span class="verdict">Moderate</span></div><div class="lbar" role="img" aria-label="46%"><i style="--v:46"></i></div></div>
+      <span class="f num">46%</span>
+    </div>
+    <div class="r rank">
+      <span class="m">4th</span>
+      <div class="c"><div><span class="driver">Brand premium</span><span class="verdict">Weak</span></div><div class="lbar" role="img" aria-label="24%"><i style="--v:24"></i></div></div>
+      <span class="f num">24%</span>
+    </div>
+    <div class="r tight" aria-hidden="true" style="border-bottom:0;padding-bottom:0">
+      <span class="m"></span>
+      <div class="c scale"><span></span><div class="scale-ticks num"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div></div>
+      <span class="f keep"></span>
+    </div>
+    <div class="r">
+      <span class="m">n.</span>
+      <p class="c caption body">Value perception varies significantly by buyer type. Legacy families are location-driven; wealth accumulators weight design and display; professional elites weight comfort and design; new money weights brand recognition.</p>
+      <span class="f"></span>
+    </div>
+
+    <!-- contradiction -->
+    <div class="r gap-top rule-heavy" style="padding-bottom:16px">
+      <span class="m">1.3</span>
+      <div class="c"><h3 class="sub">The contradiction</h3></div>
+      <span class="f"></span>
+    </div>
+    <div class="r meter-row">
+      <span class="m">i</span>
+      <div class="c">
+        <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="24%">
+          <circle class="trk" cx="60" cy="60" r="50"/>
+          <circle class="val" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="24 100" transform="rotate(-90 60 60)"/>
+        </svg>
+        <p class="what">of realised premium from brand</p>
+      </div>
+      <span class="f num">24%</span>
+    </div>
+    <div class="r tight" style="padding:10px 0">
+      <span class="m vs">vs</span>
+      <span class="c"></span>
+      <span class="f"></span>
+    </div>
+    <div class="r meter-row">
+      <span class="m">ii</span>
+      <div class="c">
+        <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="61%">
+          <circle class="trk" cx="60" cy="60" r="50"/>
+          <circle class="val grey" cx="60" cy="60" r="50" pathLength="100" stroke-dasharray="61 100" transform="rotate(-90 60 60)"/>
+        </svg>
+        <p class="what">of marketing spend on brand</p>
+      </div>
+      <span class="f num">61%</span>
+    </div>
+  </div>
+
+  <!-- core finding: the ledger's total line -->
+  <div class="wrap">
+    <div class="total">
+      <div class="r">
+        <span class="m">∴</span>
+        <div class="c">
+          <h3 class="label">Core finding</h3>
+          <p class="statement">Brand contributes least to realised premium — and receives the largest share of ultra-luxury marketing spend.</p>
+          <p class="follow">Reallocating that spend toward location narrative and architectural differentiation is the highest-leverage move available before launch.</p>
+          <div class="rankstrip">
+            <div class="cells" aria-hidden="true"><span class="cell">1st</span><span class="cell">2nd</span><span class="cell">3rd</span><span class="cell on">4th</span></div>
+            <p>Brand ranks <strong>4th</strong> of four drivers.</p>
+          </div>
+        </div>
+        <span class="f num">4th</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 02 SEGMENTS ====================== -->
+<section class="ledger" aria-labelledby="s02">
+  <div class="band">
+    <div class="wrap">
+      <div class="r">
+        <span class="m">02</span>
+        <div class="c"><span class="kicker">Deliverable</span><h2 id="s02">Four UHNW buyer segments</h2></div>
+        <span class="f"></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="r rule-heavy">
+      <span class="m">¶</span>
+      <p class="c standfirst" style="max-width:60ch">A three-dimensional assessment model — investment, residential and social-circle attributes — resolving a single "luxury buyer" into four addressable groups.</p>
+      <span class="f"></span>
+    </div>
+
+    <article class="seg">
+      <span class="m">01</span>
+      <div class="txt"><span class="kicker">Segment 01</span><h3>Legacy families</h3><p>Multi-generational holders. Buy the address, not the building. Indifferent to brand; highly sensitive to neighbours, school access and long-run land scarcity.</p></div>
+      <div class="attr a1"><span class="alab">Scarcity</span><div class="sbar"><i style="--v:96"></i></div></div><span class="val v1 num">96</span>
+      <div class="attr a2"><span class="alab">Privacy</span><div class="sbar"><i style="--v:78"></i></div></div><span class="val v2 num">78</span>
+      <div class="attr a3"><span class="alab">Brand</span><div class="sbar"><i style="--v:12"></i></div></div><span class="val v3 num">12</span>
+    </article>
+    <article class="seg">
+      <span class="m">02</span>
+      <div class="txt"><span class="kicker">Segment 02</span><h3>Wealth accumulators</h3><p>Treat the unit as a portfolio position. Liquidity and resale velocity dominate; design quality matters as an exit argument rather than a lifestyle preference.</p></div>
+      <div class="attr a1"><span class="alab">Liquidity</span><div class="sbar"><i style="--v:92"></i></div></div><span class="val v1 num">92</span>
+      <div class="attr a2"><span class="alab">Prestige</span><div class="sbar"><i style="--v:60"></i></div></div><span class="val v2 num">60</span>
+      <div class="attr a3"><span class="alab">Comfort</span><div class="sbar"><i style="--v:34"></i></div></div><span class="val v3 num">34</span>
+    </article>
+    <article class="seg">
+      <span class="m">03</span>
+      <div class="txt"><span class="kicker">Segment 03</span><h3>Professional elite</h3><p>C-suite and senior professionals. Prioritise comfort, privacy and circle integration. Extremely high bar on product detail: ceiling height, orientation, flow. Rational decision-making, value-conscious.</p></div>
+      <div class="attr a1"><span class="alab">Comfort</span><div class="sbar"><i style="--v:94"></i></div></div><span class="val v1 num">94</span>
+      <div class="attr a2"><span class="alab">Privacy</span><div class="sbar"><i style="--v:88"></i></div></div><span class="val v2 num">88</span>
+      <div class="attr a3"><span class="alab">Brand</span><div class="sbar"><i style="--v:26"></i></div></div><span class="val v3 num">26</span>
+    </article>
+    <article class="seg">
+      <span class="m">04</span>
+      <div class="txt"><span class="kicker">Segment 04</span><h3>New money</h3><p>Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment: most influenced by marketing, most active word-of-mouth amplifiers. Strongest need for circle admission.</p></div>
+      <div class="attr a1"><span class="alab">Belonging</span><div class="sbar"><i style="--v:90"></i></div></div><span class="val v1 num">90</span>
+      <div class="attr a2"><span class="alab">Brand</span><div class="sbar"><i style="--v:84"></i></div></div><span class="val v2 num">84</span>
+      <div class="attr a3"><span class="alab">Scarcity</span><div class="sbar"><i style="--v:40"></i></div></div><span class="val v3 num">40</span>
+    </article>
+
+    <!-- segment map -->
+    <div class="r gap-top">
+      <span class="m">2.1</span>
+      <div class="c"><h3 class="sub">Segment map — motive against price elasticity</h3></div>
+      <span class="f"></span>
+    </div>
+    <div class="r" style="border-bottom:0">
+      <span class="m"></span>
+      <div class="wide">
+        <div class="map">
+          <div class="yaxis"><span>Price elasticity</span></div>
+          <div class="grid">
+            <span></span>
+            <span class="collab">Use</span>
+            <span class="collab">Asset</span>
+
+            <span class="rowlab">Low</span>
+            <div class="q">
+              <span class="qk">Low elasticity / use</span>
+              <h4>Professional elite</h4>
+              <p>Will pay for resolved product detail. Walks away from compromise.</p>
+            </div>
+            <div class="q hot">
+              <span class="qk">Low elasticity / asset</span>
+              <h4>Legacy families</h4>
+              <p>Primary target. Price-insensitive where scarcity is genuine.</p>
+            </div>
+
+            <span class="rowlab">High</span>
+            <div class="q">
+              <span class="qk">High elasticity / use</span>
+              <h4>New money</h4>
+              <p>Responsive to narrative and brand. Needs the circle to be legible.</p>
+            </div>
+            <div class="q">
+              <span class="qk">High elasticity / asset</span>
+              <h4>Wealth accumulators</h4>
+              <p>Buys on exit maths. Will trade design for liquidity.</p>
+            </div>
+          </div>
+          <div class="xaxis">Purchase motive: use → asset</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 03 VALUE DIMENSIONS ====================== -->
+<section class="ledger" aria-labelledby="s03">
+  <div class="band">
+    <div class="wrap">
+      <div class="r">
+        <span class="m">03</span>
+        <div class="c"><span class="kicker">Deliverable</span><h2 id="s03">Eight value dimensions</h2></div>
+        <span class="f"></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="r">
+      <span class="m">¶</span>
+      <p class="c standfirst" style="max-width:60ch">A product-optimisation framework translating segment psychology into decisions the design and sales teams could act on.</p>
+      <span class="f"></span>
+    </div>
+
+    <table class="vtable">
+      <colgroup><col class="c-m"><col class="c-dim"><col><col class="c-seg"><col class="c-sq"><col class="c-f"></colgroup>
+      <thead>
+        <tr><th class="n" scope="col"><span class="sr">Line</span>#</th><th scope="col">Dimension</th><th scope="col">What it governs</th><th scope="col">Primary segment</th><th class="f" scope="col" colspan="2">Weight</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="n">01</td><td class="dim">Scarcity</td><td class="gov" data-label="What it governs">Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</td><td class="seg-c" data-label="Primary segment">Legacy families</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></td><td class="f num">5</td></tr>
+        <tr><td class="n">02</td><td class="dim">Value preservation</td><td class="gov" data-label="What it governs">Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</td><td class="seg-c" data-label="Primary segment">Legacy families</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="f num">4</td></tr>
+        <tr><td class="n">03</td><td class="dim">Liquidity</td><td class="gov" data-label="What it governs">Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</td><td class="seg-c" data-label="Primary segment">Wealth accumulators</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="f num">4</td></tr>
+        <tr><td class="n">04</td><td class="dim">Comfort</td><td class="gov" data-label="What it governs">Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</td><td class="seg-c" data-label="Primary segment">Professional elite</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td class="f num">3</td></tr>
+        <tr><td class="n">05</td><td class="dim">Privacy</td><td class="gov" data-label="What it governs">Security systems, community density, resident-circle homogeneity.</td><td class="seg-c" data-label="Primary segment">Professional elite</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td class="f num">3</td></tr>
+        <tr><td class="n">06</td><td class="dim">Prestige</td><td class="gov" data-label="What it governs">Entry immediacy, exclusive service details, visible service standards.</td><td class="seg-c" data-label="Primary segment">New money</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></span></td><td class="f num">3</td></tr>
+        <tr><td class="n">07</td><td class="dim">Belonging</td><td class="gov" data-label="What it governs">Circle community resources, resident events, admission mechanics.</td><td class="seg-c" data-label="Primary segment">New money</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i><i></i></span></td><td class="f num">2</td></tr>
+        <tr><td class="n">08</td><td class="dim">Purity</td><td class="gov" data-label="What it governs">Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</td><td class="seg-c" data-label="Primary segment">Cross-segment</td><td class="sqc"><span class="sq" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></td><td class="f num">4</td></tr>
+      </tbody>
+    </table>
+
+    <!-- pull quote -->
+    <div class="r quote gap-top" style="border-bottom:0">
+      <span class="m" aria-hidden="true">“</span>
+      <div class="c">
+        <svg class="ghost ico" aria-hidden="true"><use href="#i-quote"/></svg>
+        <blockquote><p>"Purity ranked above prestige in every segment — and no benchmark project was designing for it."</p></blockquote>
+        <cite>Finding · Depth interviews</cite>
+      </div>
+      <span class="f"></span>
+    </div>
+
+    <!-- response layers -->
+    <div class="r gap-top rule-heavy" style="padding-bottom:16px">
+      <span class="m">3.1</span>
+      <div class="c"><h3 class="sub">Three response layers</h3></div>
+      <span class="f"></span>
+    </div>
+    <div class="r layer">
+      <span class="m">L01</span>
+      <div class="c">
+        <span class="ico-solid"><svg class="ico" aria-hidden="true"><use href="#i-plan"/></svg></span>
+        <div><span class="kicker">Layer 01 · Product</span><h3>Layout remediation programme</h3><p>Forty-plus specific moves converting policy-forced irregularity into differentiated unit typologies rather than compromised ones.</p></div>
+      </div>
+      <span class="f"></span>
+    </div>
+    <div class="r layer">
+      <span class="m">L02</span>
+      <div class="c">
+        <span class="ico-solid"><svg class="ico" aria-hidden="true"><use href="#i-circle"/></svg></span>
+        <div><span class="kicker">Layer 02 · Service</span><h3>Circle admission design</h3><p>Resident-community mechanics that make belonging legible to new-money buyers without diluting the homogeneity legacy families are paying for.</p></div>
+      </div>
+      <span class="f"></span>
+    </div>
+    <div class="r layer">
+      <span class="m">L03</span>
+      <div class="c">
+        <span class="ico-solid"><svg class="ico" aria-hidden="true"><use href="#i-story"/></svg></span>
+        <div><span class="kicker">Layer 03 · Narrative</span><h3>Scarcity story architecture</h3><p>A sales narrative sequenced by segment, leading with location scarcity and treating brand as supporting evidence rather than the headline.</p></div>
+      </div>
+      <span class="f"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== 04 ENGAGEMENT ARC ====================== -->
+<section class="ledger" aria-labelledby="s04">
+  <div class="band">
+    <div class="wrap">
+      <div class="r">
+        <span class="m">04</span>
+        <div class="c"><span class="kicker">Engagement arc</span><h2 id="s04">From ethnography to launch strategy</h2></div>
+        <span class="f"></span>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="r" style="padding-top:36px;border-bottom:0">
+      <span class="m">4.1</span>
+      <div class="wide">
+        <ol class="arc">
+          <li><div class="track"><span class="badge num">1</span><span class="line"></span></div><h3>Ethnographic fieldwork</h3><p>Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p></li>
+          <li><div class="track"><span class="badge num">2</span><span class="line"></span></div><h3>Benchmark decomposition</h3><p>Premium sources separated from marketing claims to establish the real driver hierarchy.</p></li>
+          <li><div class="track"><span class="badge num">3</span><span class="line"></span></div><h3>Segment &amp; value model</h3><p>Four segments mapped against eight value dimensions into a single prioritisation grid.</p></li>
+          <li><div class="track"><span class="badge num">4</span><span class="line"></span></div><h3>Product &amp; launch strategy</h3><p>Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="r closing gap-top" style="border-top:var(--heavy) solid var(--rule-strong)">
+      <span class="m">e.1</span>
+      <div class="c">
+        <span class="lab">Core competencies</span>
+        <ul class="tags"><li>Consumer Research</li><li>Product Strategy</li><li>Market Analysis</li><li>Brand Strategy</li><li>Segmentation</li></ul>
+      </div>
+      <span class="f"></span>
+    </div>
+    <div class="r closing rule-heavy">
+      <span class="m">e.2</span>
+      <div class="c">
+        <span class="lab">Industry domains</span>
+        <ul class="tags"><li>Real Estate</li><li>Consumer</li></ul>
+      </div>
+      <span class="f"></span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot ledger">
+  <div class="wrap">
+    <div class="r">
+      <span class="m">END</span>
+      <span class="c">2021 Consulting Engagement · Deliverables Showcase</span>
+      <span class="f">Client identity anonymised</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
