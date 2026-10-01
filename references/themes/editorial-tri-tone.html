@@ -16,23 +16,23 @@
   /* the three hexes */
   --blush:#F2B6C6;
   --butter:#F2D86A;
-  --burgundy:#7A1F35;
+  --burgundy:#571E26;   /* deep muted crimson: darker and less saturated than the earlier #7A1F35 */
 
   /* opacity variants (rgb channels of the three hexes) */
   --blush-rgb:242,182,198;
   --butter-rgb:242,216,106;
-  --burgundy-rgb:122,31,53;
+  --burgundy-rgb:87,30,38;
 
   /* surfaces */
-  --ground:#FBE9EE;   /* page: blush at 30% over white, pre-composited so the tint holds inside an iframe on any host background */
-  --surface:rgba(var(--blush-rgb),.42);       /* card plate, layered on ground */
+  --ground:#FDF2F5;   /* page: blush at 18% over white, pre-composited so the tint holds inside an iframe on any host background */
+  --surface:rgba(var(--blush-rgb),.30);       /* card plate, layered on ground */
   --track:rgba(var(--blush-rgb),.85);         /* bar / donut tracks */
   --ghost:rgba(var(--blush-rgb),.75);         /* watermark marks (decorative) */
   --band:var(--burgundy);                     /* section header ground */
   --plate:var(--butter);                      /* core-finding plate */
 
   /* ink */
-  --ink:var(--burgundy);                      /* 8.7:1 on ground */
+  --ink:var(--burgundy);                      /* 11.8:1 on ground */
   --ink-soft:rgba(var(--burgundy-rgb),.84);   /* ≥5.9:1 on ground and surface */
   --rule:rgba(var(--burgundy-rgb),.28);       /* hairlines */
   --rule-strong:var(--burgundy);
@@ -40,7 +40,7 @@
 
   /* on burgundy */
   --on-band-head:var(--butter);               /* 7.1:1 */
-  --on-band-text:var(--blush);                /* 5.9:1 */
+  --on-band-text:var(--blush);                /* 7.6:1 */
   --numeral:rgba(var(--blush-rgb),.86);       /* quiet oversized numeral, 4.8:1 */
 
   /* type */
