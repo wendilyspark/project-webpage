@@ -138,9 +138,9 @@ h1 em { font-style: italic; }
 
 /* ---------- rooms (asymmetric alternation) ---------- */
 .room { padding: clamp(56px, 7vw, 104px) 0; border-top: 1px solid var(--rule); }
-.room-grid { display: grid; gap: var(--room-gap); align-items: start; }
-.room--left .room-grid { grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); }
-.room--right .room-grid { grid-template-columns: minmax(0, 52fr) minmax(0, 48fr); }
+.room-grid { display: grid; gap: clamp(28px, 4vw, 64px); align-items: start; }
+.room--left .room-grid { grid-template-columns: minmax(0, 80fr) minmax(150px, 20fr); }   /* content takes four-fifths; the catalogue label the rest */
+.room--right .room-grid { grid-template-columns: minmax(150px, 20fr) minmax(0, 80fr); }
 .room--left .room-body { grid-column: 1; grid-row: 1; }
 .room--left .wall { grid-column: 2; grid-row: 1; justify-self: start; }
 .room--right .room-body { grid-column: 2; grid-row: 1; }
