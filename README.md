@@ -57,7 +57,7 @@ A single self-contained `.html` file that opens in any browser, in any of thirte
 </tr>
 <tr>
 <td align="center" valign="top" width="33%"><a href="references/themes/mat.html"><img src="references/thumbnails/mat.jpg" alt="Mat style" width="260"></a><br><b>Mat</b><br><sub>Forest green and cream environments</sub></td>
-<td align="center" valign="top" width="33%"><a href="references/themes/signal.html"><img src="references/thumbnails/signal.jpg" alt="Signal style" width="260"></a><br><b>Signal</b><br><sub>Sticky rail, navy bands on cream</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/raw-grid.html"><img src="references/thumbnails/raw-grid.jpg" alt="Raw Grid style" width="260"></a><br><b>Raw Grid</b><br><sub>Neobrutalist block grid</sub></td>
 <td align="center" valign="top" width="33%"><a href="references/themes/monochrome.html"><img src="references/thumbnails/monochrome.jpg" alt="Monochrome style" width="260"></a><br><b>Monochrome</b><br><sub>Accounting ledger, black on white</sub></td>
 </tr>
 <tr>
@@ -71,7 +71,7 @@ A single self-contained `.html` file that opens in any browser, in any of thirte
 <td align="center" valign="top" width="33%"><a href="references/themes/biennale-yellow.html"><img src="references/thumbnails/biennale-yellow.jpg" alt="Biennale Yellow style" width="260"></a><br><b>Biennale Yellow</b><br><sub>Exhibition catalogue, alternating rooms</sub></td>
 </tr>
 <tr>
-<td align="center" valign="top" width="33%"><a href="references/themes/raw-grid.html"><img src="references/thumbnails/raw-grid.jpg" alt="Raw Grid style" width="260"></a><br><b>Raw Grid</b><br><sub>Neobrutalist block grid</sub></td>
+<td align="center" valign="top" width="33%"><a href="references/themes/signal.html"><img src="references/thumbnails/signal.jpg" alt="Signal style" width="260"></a><br><b>Signal</b><br><sub>Sticky rail, navy bands on cream</sub></td>
 </tr>
 </table>
 

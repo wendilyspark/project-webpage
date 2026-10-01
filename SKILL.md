@@ -47,7 +47,7 @@ Ask the user which style they want. There are thirteen, all built from the same 
 | Editorial | `references/template.html` | Canonical editorial design system |
 | Accented | `references/themes/accented.html` | Navy section bands on a cool blue-grey ground |
 | Mat | `references/themes/mat.html` | Forest green and cream environments |
-| Signal | `references/themes/signal.html` | Sticky side rail, navy bands on cream |
+| Raw Grid | `references/themes/raw-grid.html` | Neobrutalist block grid with offset shadows |
 | Monochrome | `references/themes/monochrome.html` | An accounting ledger in black on white |
 | Cartesian | `references/themes/cartesian.html` | Museum monograph with framed plates |
 | Cobalt Grid | `references/themes/cobalt-grid.html` | Engineering drawing sheet on graph paper |
@@ -55,7 +55,7 @@ Ask the user which style they want. There are thirteen, all built from the same 
 | Blue Professional | `references/themes/blue-professional.html` | Product docs with a sidebar table of contents |
 | Editorial Tri-Tone | `references/themes/editorial-tri-tone.html` | Poster report in blush, butter and crimson |
 | Biennale Yellow | `references/themes/biennale-yellow.html` | Exhibition catalogue with alternating rooms |
-| Raw Grid | `references/themes/raw-grid.html` | Neobrutalist block grid with offset shadows |
+| Signal | `references/themes/signal.html` | Sticky side rail, navy bands on cream |
 
 **If the user names a style**, confirm the match and continue.
 
