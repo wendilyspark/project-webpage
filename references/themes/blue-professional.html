@@ -1,0 +1,893 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ultra-Luxury Residential Insights | Consumer Research &amp; Product Strategy</title>
+<meta name="description" content="Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and UHNW buyer psychology.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Blue Professional — The Product Doc
+   All design values live on :root. Selectors are BEM single-class on purpose:
+   no element-level rules inside components, so nothing generic can outrank
+   a component's own styles (the old callout-title specificity bug).
+   ========================================================================== */
+:root {
+  /* surfaces */
+  --page: #F7F9FC;
+  --surface: #FFFFFF;
+  --strip: #111111;
+  /* ink */
+  --ink: #111111;
+  --muted: #6B6B6B;          /* 5.0:1 on --page, 5.3:1 on --surface */
+  --light: #9A9A9A;          /* decoration only — never text */
+  --on-strip: #FFFFFF;
+  --on-strip-muted: #A8A8A8; /* 7.9:1 on --strip */
+  /* cobalt */
+  --cobalt: #1E2BFA;
+  --cobalt-ink: #1A25D6;     /* text on cobalt tints */
+  --cobalt-light: #8F97FF;   /* text/marks on --strip, 7.2:1 */
+  --cobalt-04: rgba(30, 43, 250, .04);
+  --cobalt-08: rgba(30, 43, 250, .08);
+  --cobalt-20: rgba(30, 43, 250, .20);
+  /* lines & tracks */
+  --hair: #E2E6EE;
+  --hair-strong: #CDD3DE;
+  --track: #E8EBF3;
+  --dot-empty: #D3D8E3;
+  /* type */
+  --font-head: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-body: 16px;
+  --fs-small: 14px;
+  --fs-micro: 12px;
+  --lh-body: 1.65;
+  /* geometry */
+  --radius: 6px;
+  --sidebar-w: 250px;
+  --col: 78ch;
+  --gutter: 16px;
+  --gap: 16px;
+  --section-gap: 88px;
+  --print-ink: #000000;
+  --print-paper: #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+}
+p { margin: 0; }
+a { color: inherit; }
+svg { display: block; }
+.num { font-variant-numeric: tabular-nums; }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; left: -999px; top: 8px; background: var(--strip); color: var(--on-strip); padding: 8px 12px; border-radius: var(--radius); z-index: 50; }
+.skip:focus { left: 8px; }
+
+/* ---------------------------------------------------------------- sidebar */
+.side {
+  position: fixed; inset: 0 auto 0 0; width: var(--sidebar-w);
+  background: var(--surface); border-right: 1px solid var(--hair);
+  padding: 28px 22px 24px; overflow-y: auto; z-index: 20;
+  display: flex; flex-direction: column; gap: 22px;
+}
+.side__brand { display: flex; flex-direction: column; gap: 6px; }
+.side__mark { width: 28px; height: 28px; border-radius: var(--radius); background: var(--cobalt); color: var(--on-strip); display: grid; place-items: center; }
+.side__title { font-family: var(--font-head); font-weight: 700; font-size: 17px; line-height: 1.25; letter-spacing: -.01em; margin: 6px 0 0; }
+.side__sub { font-size: var(--fs-small); color: var(--muted); line-height: 1.4; }
+.side__meta { display: grid; gap: 8px; padding: 12px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.side__metarow { display: flex; flex-direction: column; gap: 1px; }
+.side__metakey { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.side__metaval { font-size: var(--fs-small); color: var(--ink); line-height: 1.4; }
+.toc { display: flex; flex-direction: column; gap: 2px; }
+.toc__head { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+.toc__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.toc__link {
+  display: flex; gap: 8px; align-items: baseline;
+  padding: 5px 8px; border-radius: var(--radius); border-left: 2px solid transparent;
+  text-decoration: none; font-size: var(--fs-small); line-height: 1.35; color: var(--muted);
+}
+.toc__link:hover { color: var(--ink); background: var(--cobalt-04); }
+.toc__link:focus-visible { outline: 2px solid var(--cobalt); outline-offset: 1px; }
+.toc__link--sub { padding-left: 34px; font-size: 13px; }
+.toc__n { font-family: var(--font-head); font-weight: 600; font-size: 12px; color: var(--muted); min-width: 18px; font-variant-numeric: tabular-nums; }
+.toc__link.is-active { color: var(--cobalt-ink); background: var(--cobalt-08); border-left-color: var(--cobalt); font-weight: 600; }
+.toc__link.is-active .toc__n { color: var(--cobalt-ink); }
+.side__foot { margin-top: auto; font-size: var(--fs-micro); color: var(--muted); line-height: 1.45; }
+
+/* ---------------------------------------------------------------- main column */
+.main { margin-left: var(--sidebar-w); padding: 56px 40px 40px; }
+.col { max-width: var(--col); margin: 0 auto; }
+.block { margin-top: var(--section-gap); scroll-margin-top: 24px; }
+.stack > * + * { margin-top: 20px; }
+.prose { max-width: 66ch; color: var(--ink); }
+.prose + .prose { margin-top: 14px; }
+
+/* ---------------------------------------------------------------- chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 500; line-height: 1; padding: 6px 10px;
+  border-radius: 999px; border: 1px solid var(--cobalt-20); background: var(--cobalt-04); color: var(--cobalt-ink);
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.chip--neutral { border-color: var(--hair-strong); background: var(--surface); color: var(--ink); }
+.chip__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+/* ---------------------------------------------------------------- hero */
+.hero { padding-top: 8px; }
+.hero__crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+.hero__crumbsep { color: var(--light); }
+.hero__client { margin-top: 18px; font-size: 14px; font-weight: 500; color: var(--muted); }
+.hero__title { font-family: var(--font-head); font-weight: 700; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; letter-spacing: -.025em; margin: 6px 0 16px; }
+.hero__lead { font-size: 19px; line-height: 1.55; color: var(--muted); max-width: 62ch; }
+.hero__props { margin: 28px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border: 1px solid var(--hair); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.hero__prop { padding: 14px 16px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); margin: -1px -1px 0 0; display: flex; flex-direction: column; gap: 4px; }
+.hero__propkey { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.hero__propval { font-family: var(--font-head); font-weight: 600; font-size: 20px; line-height: 1.2; margin: 0; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- section strip (rule 1) */
+.strip {
+  background: var(--strip); color: var(--on-strip); border-radius: var(--radius);
+  padding: 22px 26px 24px; margin-bottom: 28px;
+  display: grid; grid-template-columns: auto 1fr; column-gap: 18px; row-gap: 4px; align-items: baseline;
+}
+.strip__num { font-family: var(--font-head); font-weight: 700; font-size: 15px; color: var(--cobalt-light); letter-spacing: .02em; grid-row: span 2; font-variant-numeric: tabular-nums; padding-top: 2px; }
+.strip__kicker { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--on-strip-muted); }
+.strip__title { font-family: var(--font-head); font-weight: 700; font-size: clamp(24px, 3.2vw, 32px); line-height: 1.15; letter-spacing: -.015em; margin: 0; color: var(--on-strip); grid-column: 2; }
+.strip__title .anchor { color: var(--cobalt-light); }
+.lead { font-size: 18px; line-height: 1.55; color: var(--muted); max-width: 64ch; margin-bottom: 28px; }
+
+/* anchored headings */
+.anchor { margin-left: 10px; text-decoration: none; font-weight: 500; opacity: 0; transition: opacity .15s; }
+.strip__title:hover .anchor, .h3:hover .anchor, .anchor:focus-visible { opacity: 1; }
+.h3 { font-family: var(--font-head); font-weight: 700; font-size: 21px; line-height: 1.25; letter-spacing: -.01em; margin: 44px 0 6px; color: var(--ink); scroll-margin-top: 24px; }
+.h3 .anchor { color: var(--cobalt); }
+.h3-cap { font-size: 15px; color: var(--muted); margin-bottom: 18px; max-width: 64ch; }
+
+/* ---------------------------------------------------------------- callouts */
+.callout {
+  border-left: 3px solid var(--cobalt); background: var(--cobalt-04);
+  border-radius: 0 var(--radius) var(--radius) 0; padding: 16px 20px 18px;
+}
+.callout__label {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-body); font-size: 11.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--cobalt-ink); margin: 0 0 8px; line-height: 1.2;
+}
+.callout__label svg { width: 14px; height: 14px; }
+.callout__body { font-size: 15.5px; line-height: 1.6; color: var(--ink); }
+.callout__cite { margin-top: 12px; font-size: 13px; color: var(--muted); font-style: italic; }
+.callout--quote .callout__body { font-family: var(--font-head); font-weight: 600; font-size: clamp(20px, 2.6vw, 25px); line-height: 1.3; letter-spacing: -.01em; }
+
+/* ---------------------------------------------------------------- figure cards */
+.fig { margin: 0; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); overflow: hidden; }
+.fig__body { padding: 20px 22px; }
+.fig__cap { display: flex; gap: 10px; align-items: baseline; padding: 11px 22px; border-top: 1px solid var(--hair); background: var(--page); font-size: 13px; color: var(--muted); line-height: 1.5; }
+.fig__tag { flex: none; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink); }
+
+/* ---------------------------------------------------------------- constraint tiles (keyline-square icons) */
+.grid { display: grid; gap: var(--gap); }
+.grid--4 { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+.tile { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; }
+.tile__icon { width: 40px; height: 40px; border: 1.5px solid var(--cobalt); border-radius: var(--radius); color: var(--cobalt); display: grid; place-items: center; }
+.tile__icon svg { width: 22px; height: 22px; }
+.tile__label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+.tile__title { font-family: var(--font-head); font-weight: 700; font-size: 17px; line-height: 1.25; margin: 0; }
+.tile__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* ---------------------------------------------------------------- stat band (filled-disc icons) */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); overflow: hidden; list-style: none; margin: 0; padding: 0; }
+.stat { padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--hair); border-bottom: 1px solid var(--hair); margin: 0 -1px -1px 0; }
+.stat__icon { width: 36px; height: 36px; border-radius: 50%; background: var(--cobalt); color: var(--on-strip); display: grid; place-items: center; }
+.stat__icon svg { width: 18px; height: 18px; }
+.stat__fig { font-family: var(--font-head); font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.stat__label { font-size: 14px; color: var(--muted); line-height: 1.35; }
+
+/* ---------------------------------------------------------------- benchmark cards (numbered badge) */
+.bench { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 20px 20px 22px; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; row-gap: 6px; align-content: start; }
+.bench__badge { width: 32px; height: 32px; border-radius: var(--radius); background: var(--strip); color: var(--on-strip); font-family: var(--font-head); font-weight: 700; font-size: 15px; display: grid; place-items: center; grid-row: span 2; }
+.bench__type { font-family: var(--font-head); font-weight: 700; font-size: 17px; line-height: 1.25; margin: 0; }
+.bench__sub { font-size: 13px; font-weight: 500; color: var(--cobalt-ink); line-height: 1.35; }
+.bench__text { grid-column: 1 / -1; margin-top: 8px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+
+/* ---------------------------------------------------------------- spec tables */
+.spec { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+.spec__th { text-align: left; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding: 0 12px 10px; border-bottom: 1px solid var(--hair-strong); white-space: nowrap; }
+.spec__td { padding: 13px 12px; border-bottom: 1px solid var(--hair); vertical-align: top; line-height: 1.5; }
+.spec__row:last-child .spec__td { border-bottom: 0; }
+.spec__th:first-child, .spec__td:first-child { padding-left: 0; }
+.spec__th:last-child, .spec__td:last-child { padding-right: 0; }
+.spec__name { font-family: var(--font-head); font-weight: 700; font-size: 15.5px; white-space: nowrap; }
+.spec__muted { color: var(--muted); }
+.spec__rank { font-family: var(--font-head); font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ranked bars */
+.rank__bar { display: flex; align-items: center; gap: 12px; min-width: 200px; }
+.rank__track { flex: 1; height: 10px; background: var(--track); border-radius: 999px; overflow: hidden; }
+.rank__fill { height: 100%; background: var(--cobalt); border-radius: 999px; }
+.rank__pct { font-family: var(--font-head); font-weight: 700; min-width: 44px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* weighted dots */
+.dots { display: inline-flex; align-items: center; gap: 5px; }
+.dots__d { width: 10px; height: 10px; border-radius: 50%; background: var(--dot-empty); }
+.dots__d--on { background: var(--cobalt); }
+.dots__n { margin-left: 6px; font-family: var(--font-head); font-weight: 700; font-size: 14px; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- contradiction donuts */
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--gap); }
+.donut { display: flex; align-items: center; gap: 20px; }
+.donut__svg { width: 116px; height: 116px; flex: none; transform: rotate(-90deg); }
+.donut__track { fill: none; stroke: var(--track); stroke-width: 3.6; }
+.donut__arc { fill: none; stroke: var(--cobalt); stroke-width: 3.6; stroke-linecap: butt; }
+.donut__fig { font-family: var(--font-head); font-weight: 700; font-size: 44px; line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.donut__label { font-size: 14.5px; color: var(--muted); margin-top: 6px; line-height: 1.4; max-width: 22ch; }
+.vs { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------------------------------------------------------------- core finding */
+.core { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); overflow: hidden; position: relative; }
+.core__top { position: relative; padding: 30px 240px 26px 30px; border-left: 3px solid var(--cobalt); background: var(--cobalt-04); }
+.core__ghost { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); font-family: var(--font-head); font-weight: 700; font-size: 128px; line-height: 1; letter-spacing: -.05em; color: var(--cobalt-08); pointer-events: none; user-select: none; }
+.core__statement { position: relative; font-family: var(--font-head); font-weight: 700; font-size: clamp(23px, 3vw, 30px); line-height: 1.22; letter-spacing: -.015em; max-width: 30ch; }
+.core__bottom { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border-top: 1px solid var(--hair); }
+.core__cell { padding: 20px 26px 22px; }
+.core__cell + .core__cell { border-left: 1px solid var(--hair); }
+.core__reco { font-style: italic; font-size: 15.5px; line-height: 1.6; }
+.rankpos { display: flex; gap: 6px; margin-top: 4px; }
+.rankpos__s { flex: 1; min-width: 0; border: 1px solid var(--hair-strong); border-radius: var(--radius); padding: 8px 6px; text-align: center; font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rankpos__s--on { background: var(--strip); border-color: var(--strip); color: var(--on-strip); }
+.rankpos__line { margin-top: 10px; font-size: 14.5px; color: var(--ink); }
+
+/* ---------------------------------------------------------------- segment cards (ghost watermark + bars) */
+.seg { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; }
+.seg__ghost { position: absolute; right: 12px; top: 6px; font-family: var(--font-head); font-weight: 700; font-size: 64px; line-height: 1; color: var(--cobalt-08); pointer-events: none; user-select: none; font-variant-numeric: tabular-nums; }
+.seg__icon { color: var(--cobalt); width: 30px; height: 30px; }
+.seg__icon svg { width: 30px; height: 30px; }
+.seg__kicker { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.seg__name { font-family: var(--font-head); font-weight: 700; font-size: 20px; line-height: 1.2; margin: -4px 0 0; }
+.seg__text { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.attrs { list-style: none; margin: 6px 0 0; padding: 14px 0 0; border-top: 1px solid var(--hair); display: grid; gap: 10px; }
+.attr { display: grid; grid-template-columns: 78px 1fr 30px; align-items: center; gap: 10px; font-size: 13px; }
+.attr__k { color: var(--ink); font-weight: 500; }
+.attr__track { height: 6px; background: var(--track); border-radius: 999px; overflow: hidden; }
+.attr__fill { height: 100%; background: var(--cobalt); border-radius: 999px; }
+.attr__v { text-align: right; font-family: var(--font-head); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------------------------------------------- 2x2 */
+.matrix { display: grid; grid-template-columns: 34px 1fr; grid-template-rows: auto auto; gap: 0; }
+.matrix__y { grid-row: 1; grid-column: 1; display: flex; align-items: center; justify-content: center; }
+.matrix__ytext { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.matrix__grid { grid-row: 1; grid-column: 2; display: grid; grid-template-columns: auto 1fr 1fr; grid-template-rows: auto auto auto; gap: 8px; }
+.matrix__rowlab, .matrix__collab { font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.matrix__rowlab { display: flex; align-items: center; padding-right: 4px; writing-mode: vertical-rl; transform: rotate(180deg); justify-content: center; }
+.matrix__collab { text-align: center; padding-top: 2px; }
+.matrix__x { grid-row: 2; grid-column: 2; text-align: center; margin-top: 10px; font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.quad { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+.quad__pos { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.quad__name { font-family: var(--font-head); font-weight: 700; font-size: 17px; line-height: 1.25; margin: 0; color: var(--ink); }
+.quad__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.quad--hi { background: var(--cobalt-08); border: 2px solid var(--cobalt); padding: 15px 15px 17px; }
+.quad--hi .quad__pos { color: var(--cobalt-ink); }
+.quad--hi .quad__text { color: var(--ink); }
+.quad__flag { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--on-strip); background: var(--cobalt); padding: 4px 8px; border-radius: 999px; }
+.quad__flag svg { width: 12px; height: 12px; }
+
+/* ---------------------------------------------------------------- layers (inline mark) */
+.layers { list-style: none; margin: 0; padding: 0; border: 1px solid var(--hair); border-radius: var(--radius); background: var(--surface); overflow: hidden; }
+.layer { display: grid; grid-template-columns: 190px 1fr; gap: 20px; padding: 20px 22px; border-bottom: 1px solid var(--hair); }
+.layer:last-child { border-bottom: 0; }
+.layer__meta { display: flex; flex-direction: column; gap: 8px; }
+.layer__stack { display: flex; flex-direction: column; gap: 3px; width: 44px; }
+.layer__bar { height: 5px; border-radius: 2px; background: var(--track); }
+.layer__bar--on { background: var(--cobalt); }
+.layer__kicker { white-space: nowrap; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.layer__kicker svg { width: 15px; height: 15px; color: var(--cobalt); flex: none; }
+.layer__title { font-family: var(--font-head); font-weight: 700; font-size: 17.5px; line-height: 1.25; margin: 0 0 6px; }
+.layer__text { font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+
+/* ---------------------------------------------------------------- engagement flow (numbered disc) */
+.flow { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--gap); counter-reset: none; }
+.step { position: relative; display: flex; flex-direction: column; gap: 10px; }
+.step__head { display: flex; align-items: center; gap: 10px; }
+.step__n { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--surface); border: 2px solid var(--cobalt); color: var(--cobalt-ink); font-family: var(--font-head); font-weight: 700; font-size: 15px; display: grid; place-items: center; font-variant-numeric: tabular-nums; }
+.step__rule { flex: 1; height: 2px; background: var(--cobalt-20); border-radius: 2px; }
+.step:last-child .step__rule { background: transparent; }
+.step__title { font-family: var(--font-head); font-weight: 700; font-size: 16.5px; line-height: 1.3; margin: 0; }
+.step__text { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.step__card { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+
+/* ---------------------------------------------------------------- closing + footer */
+.closing { background: var(--surface); border: 1px solid var(--hair); border-radius: var(--radius); padding: 6px 22px; }
+.closing__row { display: grid; grid-template-columns: 170px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--hair); align-items: center; }
+.closing__row:last-child { border-bottom: 0; }
+.closing__key { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0; }
+.foot { margin-top: 56px; padding: 18px 0 8px; border-top: 1px solid var(--hair); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; font-size: 13px; color: var(--muted); }
+
+/* ---------------------------------------------------------------- responsive */
+@media (max-width: 1100px) { .main { padding-left: 32px; padding-right: 32px; } }
+@media (max-width: 899px) {
+  .side {
+    position: sticky; top: 0; inset: auto; width: auto; height: auto; overflow: visible;
+    border-right: 0; border-bottom: 1px solid var(--hair);
+    padding: 10px var(--gutter) 0; gap: 6px; flex-direction: column;
+  }
+  .side__brand { flex-direction: row; align-items: center; gap: 10px; }
+  .side__mark { width: 22px; height: 22px; flex: none; }
+  .side__mark svg { width: 13px; height: 13px; }
+  .side__title { font-size: 14.5px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .side__sub, .side__meta, .side__foot, .toc__head, .toc__link--sub { display: none; }
+  .toc { margin: 0 calc(-1 * var(--gutter)); }
+  .toc__list { flex-direction: row; gap: 4px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; padding: 2px var(--gutter) 8px; }
+  .toc__list::-webkit-scrollbar { display: none; }
+  .toc__item--sub { display: none; }
+  .toc__link { white-space: nowrap; border-left: 0; border-bottom: 2px solid transparent; border-radius: var(--radius) var(--radius) 0 0; padding: 6px 10px; }
+  .toc__link.is-active { border-bottom-color: var(--cobalt); }
+  .main { margin-left: 0; padding: 32px var(--gutter) 32px; }
+  .block, .h3 { scroll-margin-top: 100px; }
+}
+@media (max-width: 640px) {
+  :root { --section-gap: 64px; }
+  .strip { padding: 18px 18px 20px; column-gap: 12px; }
+  .hero__lead { font-size: 17px; }
+  .lead { font-size: 16.5px; }
+  .fig__body { padding: 16px; }
+  .fig__cap { padding: 10px 16px; flex-direction: column; gap: 2px; }
+  .core__top { padding: 22px 20px 20px; }
+  .core__ghost { display: none; }
+  .core__cell { padding: 18px 20px; }
+  .core__cell + .core__cell { border-left: 0; border-top: 1px solid var(--hair); }
+  .layer { grid-template-columns: 1fr; gap: 12px; padding: 18px; }
+  .step__rule { display: none; }
+  .layer__meta { flex-direction: row; align-items: center; gap: 12px; }
+  .closing__row { grid-template-columns: 1fr; gap: 10px; }
+  .matrix { grid-template-columns: 1fr; }
+  .matrix__grid { grid-column: 1; grid-template-columns: 1fr; }
+  .matrix__y, .matrix__x, .matrix__collab, .matrix__corner, .matrix__rowlab { display: none; }
+  /* stacked spec tables (rule 13) */
+  .spec, .spec__body, .spec__row, .spec__td { display: block; width: 100%; }
+  .spec__head { display: none; }
+  .spec__row { padding: 12px 0; border-bottom: 1px solid var(--hair); }
+  .spec__row:last-child { border-bottom: 0; }
+  .spec__td { border: 0; padding: 4px 0; display: grid; grid-template-columns: 96px 1fr; gap: 12px; }
+  .spec__td::before { content: attr(data-label); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+  .spec__name { white-space: normal; }
+  .spec__td > .chip { justify-self: start; }
+  .rank__bar { min-width: 0; }
+}
+
+/* ---------------------------------------------------------------- print (rule 16) */
+@media print {
+  body { background: var(--print-paper); color: var(--print-ink); }
+  .side, .skip, .anchor { display: none !important; }
+  .main { margin: 0; padding: 0; }
+  .col { max-width: none; }
+  .strip { background: var(--print-paper); color: var(--print-ink); border: 2px solid var(--print-ink); }
+  .strip__title, .strip__num, .strip__kicker { color: var(--print-ink); }
+  .block, .fig, .tile, .bench, .seg, .quad, .layer, .step, .core, .callout, .stat { break-inside: avoid; }
+  .strip, .h3 { break-after: avoid; }
+  .bench__badge, .rankpos__s--on { background: var(--print-paper); color: var(--print-ink); border: 1px solid var(--print-ink); }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+
+<!-- SVG symbol library (inline, currentColor) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-height" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16"/><path d="M12 20V8"/><path d="M8.5 11.5 12 8l3.5 3.5"/><path d="M7 20h10"/></g></symbol>
+    <symbol id="i-density" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M4 12h16M12 4v16"/><path d="M14.5 14.5h3v3h-3z" fill="currentColor" stroke="none"/></g></symbol>
+    <symbol id="i-demolition" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6 11 4l9 3-2 6 2 7-9-1-7 1 1-7z"/><path d="M8 4.8 6 20M15.5 5.5 14 19.5" stroke-dasharray="2 2.2"/></g></symbol>
+    <symbol id="i-layout" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h10l6 6v10H9l-5-5z"/><path d="M14 4v6h6M9 20v-5H4M9 15h5v-5"/></g></symbol>
+    <symbol id="i-interview" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h11v8H9l-3 3v-3H4z"/><path d="M15 9h5v8h-2v3l-3-3h-4v-2"/></g></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V5l7-2v17M12 9l7 2v9M3 20h18"/><path d="M8 8v.01M8 12v.01M8 16v.01M15.5 14v.01M15.5 17v.01"/></g></symbol>
+    <symbol id="i-dims" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"><path d="M9 3h6l6 6v6l-6 6H9l-6-6V9z"/><circle cx="12" cy="12" r="2.5"/></g></symbol>
+    <symbol id="i-moves" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></g></symbol>
+    <symbol id="i-legacy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-8"/><path d="M12 13c-4 0-7-2.5-7-6 2.5 0 5 1 7 3 2-2 4.5-3 7-3 0 3.5-3 6-7 6z"/><path d="M8 21h8M12 13V3"/></g></symbol>
+    <symbol id="i-accum" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M4 16l5-5 4 3 7-8"/><path d="M15 6h5v5"/></g></symbol>
+    <symbol id="i-pro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="1.5"/><path d="M9 7V4.5h6V7M3 12.5h18"/><path d="M11 12.5h2v2h-2z"/></g></symbol>
+    <symbol id="i-newmoney" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3l2.4 5.6L20 9.3l-4.3 3.9 1.3 5.8L12 16l-5 3 1.3-5.8L4 9.3l5.6-.7z"/></g></symbol>
+    <symbol id="i-product" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 12h8V4M12 16v4"/></g></symbol>
+    <symbol id="i-service" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.3c3 0 6 1.7 6 5.7"/></g></symbol>
+    <symbol id="i-narrative" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5c3 0 6 .5 8 2 2-1.5 5-2 8-2v13c-3 0-6 .5-8 2-2-1.5-5-2-8-2z"/><path d="M12 7v13"/></g></symbol>
+    <symbol id="i-finding" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></g></symbol>
+    <symbol id="i-method" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/></g></symbol>
+    <symbol id="i-reco" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></g></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M9 12h6M9 16h6"/></g></symbol>
+  </defs>
+</svg>
+
+<!-- ================================================================ sidebar -->
+<aside class="side" aria-label="Case study navigation">
+  <div class="side__brand">
+    <span class="side__mark" aria-hidden="true"><svg width="16" height="16"><use href="#i-doc"/></svg></span>
+    <p class="side__title">Ultra-Luxury Residential Insights</p>
+    <p class="side__sub">Consumer Research &amp; Product Strategy</p>
+  </div>
+  <dl class="side__meta">
+    <div class="side__metarow"><dt class="side__metakey">Client</dt><dd class="side__metaval" style="margin:0">For a leading state-owned developer</dd></div>
+    <div class="side__metarow"><dt class="side__metakey">Dates</dt><dd class="side__metaval num" style="margin:0">Sep — Nov 2021</dd></div>
+  </dl>
+  <nav class="toc" aria-label="Table of contents">
+    <p class="toc__head">On this page</p>
+    <ul class="toc__list">
+      <li class="toc__item"><a class="toc__link" href="#overview"><span class="toc__n">—</span>Overview</a></li>
+      <li class="toc__item"><a class="toc__link" href="#context"><span class="toc__n">00</span>Context</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#figures">Figures</a></li>
+      <li class="toc__item"><a class="toc__link" href="#benchmark"><span class="toc__n">01</span>Benchmark analysis</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#premium-source-hierarchy">Premium source hierarchy</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#the-contradiction">The contradiction</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#core-finding">Core finding</a></li>
+      <li class="toc__item"><a class="toc__link" href="#segments"><span class="toc__n">02</span>Four UHNW buyer segments</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#segment-map">Segment map</a></li>
+      <li class="toc__item"><a class="toc__link" href="#dimensions"><span class="toc__n">03</span>Eight value dimensions</a></li>
+      <li class="toc__item toc__item--sub"><a class="toc__link toc__link--sub" href="#three-response-layers">Three response layers</a></li>
+      <li class="toc__item"><a class="toc__link" href="#engagement"><span class="toc__n">04</span>Engagement arc</a></li>
+      <li class="toc__item"><a class="toc__link" href="#closing"><span class="toc__n">—</span>Closing</a></li>
+    </ul>
+  </nav>
+  <p class="side__foot">Client identity anonymised</p>
+</aside>
+
+<main class="main" id="content">
+<div class="col">
+
+  <!-- ============================================================ hero -->
+  <header class="hero block" id="overview" style="margin-top:0">
+    <ul class="chips" aria-label="Disciplines and dates">
+      <li class="chip"><span class="chip__dot" aria-hidden="true"></span>Consumer Research</li>
+      <li class="chip"><span class="chip__dot" aria-hidden="true"></span>Product Strategy</li>
+      <li class="chip"><span class="chip__dot" aria-hidden="true"></span>Brand</li>
+      <li class="chip chip--neutral">Sep — Nov 2021</li>
+    </ul>
+    <p class="hero__client">For a leading state-owned developer</p>
+    <h1 class="hero__title">Ultra-Luxury Residential Insights</h1>
+    <p class="hero__lead">Deep consumer ethnography and product strategy for a prime inner-city project — navigating policy constraints, irregular floorplans and UHNW buyer psychology.</p>
+    <dl class="hero__props">
+      <div class="hero__prop"><dt class="hero__propkey">Location</dt><dd class="hero__propval" style="margin:0">Prime inner-city</dd></div>
+      <div class="hero__prop"><dt class="hero__propkey">Buyer segments</dt><dd class="hero__propval" style="margin:0">4</dd></div>
+      <div class="hero__prop"><dt class="hero__propkey">Value dimensions</dt><dd class="hero__propval" style="margin:0">8</dd></div>
+      <div class="hero__prop"><dt class="hero__propkey">Benchmark projects</dt><dd class="hero__propval" style="margin:0">8</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============================================================ 00 Context -->
+  <section class="block" id="context" aria-labelledby="h-context">
+    <div class="strip">
+      <span class="strip__num">00</span>
+      <span class="strip__kicker">Context</span>
+      <h2 class="strip__title" id="h-context">A flagship asset with no obvious comparable<a class="anchor" href="#context" aria-label="Link to this section">#</a></h2>
+    </div>
+    <p class="lead">Four simultaneous constraints meant the client could not price from precedent.</p>
+
+    <ul class="grid grid--4" style="list-style:none;margin:0;padding:0" aria-label="Four constraints">
+      <li class="tile">
+        <span class="tile__icon" aria-hidden="true"><svg><use href="#i-height"/></svg></span>
+        <span class="tile__label">Constraint 01</span>
+        <h3 class="tile__title">Height limits</h3>
+        <p class="tile__text">Policy restrictions cap buildable height, compressing the achievable unit mix.</p>
+      </li>
+      <li class="tile">
+        <span class="tile__icon" aria-hidden="true"><svg><use href="#i-density"/></svg></span>
+        <span class="tile__label">Constraint 02</span>
+        <h3 class="tile__title">Density caps</h3>
+        <p class="tile__text">Plot ratio ceilings limit saleable area against a very high land basis.</p>
+      </li>
+      <li class="tile">
+        <span class="tile__icon" aria-hidden="true"><svg><use href="#i-demolition"/></svg></span>
+        <span class="tile__label">Constraint 03</span>
+        <h3 class="tile__title">Demolition bands</h3>
+        <p class="tile__text">Phased clearance leaves irregular lot boundaries that resist orthogonal planning.</p>
+      </li>
+      <li class="tile">
+        <span class="tile__icon" aria-hidden="true"><svg><use href="#i-layout"/></svg></span>
+        <span class="tile__label">Constraint 04</span>
+        <h3 class="tile__title">Unconventional layouts</h3>
+        <p class="tile__text">Irregular footprints force non-standard floorplans that UHNW buyers scrutinise.</p>
+      </li>
+    </ul>
+
+    <div style="margin-top:32px">
+      <p class="prose">Located in a rare prime inner-city plot with school-district advantages and elite community resources, the project faced multiple simultaneous challenges: policy restrictions on height limits, density caps, demolition bands resulting in irregular lot shapes, and unconventional unit layouts.</p>
+      <p class="prose">Site-level factors affecting ultra-luxury value perception and investment return pressures meant the client could not price from precedent. We were commissioned to conduct deep ultra-luxury market research and consumer insights — clarifying target buyer profiles, product optimisation directions, and innovative commercial model exploration.</p>
+    </div>
+
+    <!-- Figures -->
+    <ul class="stats" id="figures" style="margin-top:40px;scroll-margin-top:100px" aria-label="Figures">
+      <li class="stat"><span class="stat__icon" aria-hidden="true"><svg><use href="#i-interview"/></svg></span><span class="stat__fig">32</span><span class="stat__label">Depth interviews</span></li>
+      <li class="stat"><span class="stat__icon" aria-hidden="true"><svg><use href="#i-building"/></svg></span><span class="stat__fig">8</span><span class="stat__label">Benchmark projects</span></li>
+      <li class="stat"><span class="stat__icon" aria-hidden="true"><svg><use href="#i-dims"/></svg></span><span class="stat__fig">8</span><span class="stat__label">Value dimensions</span></li>
+      <li class="stat"><span class="stat__icon" aria-hidden="true"><svg><use href="#i-moves"/></svg></span><span class="stat__fig">40+</span><span class="stat__label">Optimisation moves</span></li>
+    </ul>
+  </section>
+
+  <!-- ============================================================ 01 Benchmark -->
+  <section class="block" id="benchmark" aria-labelledby="h-benchmark">
+    <div class="strip">
+      <span class="strip__num">01</span>
+      <span class="strip__kicker">Benchmark analysis</span>
+      <h2 class="strip__title" id="h-benchmark">How comparable assets manufacture scarcity<a class="anchor" href="#benchmark" aria-label="Link to this section">#</a></h2>
+    </div>
+    <p class="lead">Eight ultra-luxury projects, decomposed by the source of their premium rather than by their marketing claim.</p>
+
+    <div class="grid grid--2">
+      <article class="bench">
+        <span class="bench__badge" aria-hidden="true">A</span>
+        <h3 class="bench__type"><span class="vh">A · </span>Collector-oriented</h3>
+        <span class="bench__sub">Art &amp; scarcity positioning</span>
+        <p class="bench__text">Art collection as an extreme scarcity anchor. Ultra-exclusive clubhouse, buyers under 1,000 UHNW families, invitation-only release cycles.</p>
+      </article>
+      <article class="bench">
+        <span class="bench__badge" aria-hidden="true">B</span>
+        <h3 class="bench__type"><span class="vh">B · </span>Cultural-form</h3>
+        <span class="bench__sub">Chinese courtyard heritage</span>
+        <p class="bench__text">Courtyard compound design benchmark. Chinese garden plus private courtyard plus multi-space differentiation; buyers are local landowning legacy families.</p>
+      </article>
+      <article class="bench">
+        <span class="bench__badge" aria-hidden="true">C</span>
+        <h3 class="bench__type"><span class="vh">C · </span>Positional</h3>
+        <span class="bench__sub">Absolute location scarcity</span>
+        <p class="bench__text">Prime location address, pricing and liquidity accepted as the purest embodiment of "location = value". Resale velocity materially above segment average.</p>
+      </article>
+      <article class="bench">
+        <span class="bench__badge" aria-hidden="true">D</span>
+        <h3 class="bench__type"><span class="vh">D · </span>Narrative</h3>
+        <span class="bench__sub">Heritage &amp; cultural narrative</span>
+        <p class="bench__text">Inside a historic conservation district. Historical depth plus cultural-circle premium validates cultural storytelling support for ultra-luxury pricing.</p>
+      </article>
+    </div>
+
+    <h3 class="h3" id="premium-source-hierarchy">Premium source hierarchy<a class="anchor" href="#premium-source-hierarchy" aria-label="Link to this heading">#</a></h3>
+    <figure class="fig">
+      <div class="fig__body">
+        <table class="spec">
+          <thead class="spec__head">
+            <tr class="spec__row"><th class="spec__th" scope="col">Rank</th><th class="spec__th" scope="col">Driver</th><th class="spec__th" scope="col" style="width:46%">Weight</th><th class="spec__th" scope="col">Verdict</th></tr>
+          </thead>
+          <tbody class="spec__body">
+            <tr class="spec__row">
+              <td class="spec__td spec__rank" data-label="Rank">1st</td>
+              <td class="spec__td spec__name" data-label="Driver">Location scarcity</td>
+              <td class="spec__td" data-label="Weight"><div class="rank__bar"><div class="rank__track" aria-hidden="true"><div class="rank__fill" style="width:100%"></div></div><span class="rank__pct">100%</span></div></td>
+              <td class="spec__td" data-label="Verdict"><span class="chip chip--neutral">Decisive</span></td>
+            </tr>
+            <tr class="spec__row">
+              <td class="spec__td spec__rank" data-label="Rank">2nd</td>
+              <td class="spec__td spec__name" data-label="Driver">Architecture &amp; design</td>
+              <td class="spec__td" data-label="Weight"><div class="rank__bar"><div class="rank__track" aria-hidden="true"><div class="rank__fill" style="width:72%"></div></div><span class="rank__pct">72%</span></div></td>
+              <td class="spec__td" data-label="Verdict"><span class="chip chip--neutral">Strong</span></td>
+            </tr>
+            <tr class="spec__row">
+              <td class="spec__td spec__rank" data-label="Rank">3rd</td>
+              <td class="spec__td spec__name" data-label="Driver">Service amenities</td>
+              <td class="spec__td" data-label="Weight"><div class="rank__bar"><div class="rank__track" aria-hidden="true"><div class="rank__fill" style="width:46%"></div></div><span class="rank__pct">46%</span></div></td>
+              <td class="spec__td" data-label="Verdict"><span class="chip chip--neutral">Moderate</span></td>
+            </tr>
+            <tr class="spec__row">
+              <td class="spec__td spec__rank" data-label="Rank">4th</td>
+              <td class="spec__td spec__name" data-label="Driver">Brand premium</td>
+              <td class="spec__td" data-label="Weight"><div class="rank__bar"><div class="rank__track" aria-hidden="true"><div class="rank__fill" style="width:24%"></div></div><span class="rank__pct">24%</span></div></td>
+              <td class="spec__td" data-label="Verdict"><span class="chip chip--neutral">Weak</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <figcaption class="fig__cap"><span class="fig__tag">Fig. 1</span><span>Share of realised price premium attributable to each driver, across the eight benchmarks.</span></figcaption>
+    </figure>
+    <aside class="callout" style="margin-top:16px">
+      <p class="callout__label"><svg aria-hidden="true"><use href="#i-finding"/></svg>Finding</p>
+      <p class="callout__body">Value perception varies significantly by buyer type. Legacy families are location-driven; wealth accumulators weight design and display; professional elites weight comfort and design; new money weights brand recognition.</p>
+    </aside>
+
+    <h3 class="h3" id="the-contradiction">The contradiction<a class="anchor" href="#the-contradiction" aria-label="Link to this heading">#</a></h3>
+    <figure class="fig" style="margin-top:14px">
+      <div class="fig__body">
+        <div class="pair">
+          <div class="donut">
+            <svg class="donut__svg" viewBox="0 0 42 42" role="img" aria-label="24 percent"><circle class="donut__track" cx="21" cy="21" r="15.915"/><circle class="donut__arc" cx="21" cy="21" r="15.915" stroke-dasharray="24 76"/></svg>
+            <div><div class="donut__fig">24%</div><p class="donut__label">of realised premium from brand</p></div>
+          </div>
+          <div class="donut">
+            <svg class="donut__svg" viewBox="0 0 42 42" role="img" aria-label="61 percent"><circle class="donut__track" cx="21" cy="21" r="15.915"/><circle class="donut__arc" cx="21" cy="21" r="15.915" stroke-dasharray="61 39"/></svg>
+            <div><div class="donut__fig">61%</div><p class="donut__label">of marketing spend on brand</p></div>
+          </div>
+        </div>
+      </div>
+    </figure>
+
+    <!-- Core finding -->
+    <div class="core" id="core-finding" style="margin-top:40px;scroll-margin-top:100px">
+      <div class="core__top">
+        <span class="core__ghost" aria-hidden="true">4th</span>
+        <p class="callout__label"><svg aria-hidden="true"><use href="#i-finding"/></svg>Core finding</p>
+        <p class="core__statement">Brand contributes least to realised premium — and receives the largest share of ultra-luxury marketing spend.</p>
+      </div>
+      <div class="core__bottom">
+        <div class="core__cell">
+          <p class="callout__label"><svg aria-hidden="true"><use href="#i-reco"/></svg>Recommendation</p>
+          <p class="core__reco">Reallocating that spend toward location narrative and architectural differentiation is the highest-leverage move available before launch.</p>
+        </div>
+        <div class="core__cell">
+          <div class="rankpos" aria-hidden="true">
+            <span class="rankpos__s">1st</span><span class="rankpos__s">2nd</span><span class="rankpos__s">3rd</span><span class="rankpos__s rankpos__s--on">4th</span>
+          </div>
+          <p class="rankpos__line">Brand ranks <strong class="num">4th</strong> of four drivers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 02 Segments -->
+  <section class="block" id="segments" aria-labelledby="h-segments">
+    <div class="strip">
+      <span class="strip__num">02</span>
+      <span class="strip__kicker">Deliverable</span>
+      <h2 class="strip__title" id="h-segments">Four UHNW buyer segments<a class="anchor" href="#segments" aria-label="Link to this section">#</a></h2>
+    </div>
+    <aside class="callout" style="margin-bottom:28px">
+      <p class="callout__label"><svg aria-hidden="true"><use href="#i-method"/></svg>Method</p>
+      <p class="callout__body">A three-dimensional assessment model — investment, residential and social-circle attributes — resolving a single "luxury buyer" into four addressable groups.</p>
+    </aside>
+
+    <div class="grid grid--2">
+      <article class="seg">
+        <span class="seg__ghost" aria-hidden="true">01</span>
+        <span class="seg__icon" aria-hidden="true"><svg><use href="#i-legacy"/></svg></span>
+        <span class="seg__kicker">Segment 01</span>
+        <h3 class="seg__name">Legacy families</h3>
+        <p class="seg__text">Multi-generational holders. Buy the address, not the building. Indifferent to brand; highly sensitive to neighbours, school access and long-run land scarcity.</p>
+        <ul class="attrs">
+          <li class="attr"><span class="attr__k">Scarcity</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:96%;display:block"></span></span><span class="attr__v">96</span></li>
+          <li class="attr"><span class="attr__k">Privacy</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:78%;display:block"></span></span><span class="attr__v">78</span></li>
+          <li class="attr"><span class="attr__k">Brand</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:12%;display:block"></span></span><span class="attr__v">12</span></li>
+        </ul>
+      </article>
+      <article class="seg">
+        <span class="seg__ghost" aria-hidden="true">02</span>
+        <span class="seg__icon" aria-hidden="true"><svg><use href="#i-accum"/></svg></span>
+        <span class="seg__kicker">Segment 02</span>
+        <h3 class="seg__name">Wealth accumulators</h3>
+        <p class="seg__text">Treat the unit as a portfolio position. Liquidity and resale velocity dominate; design quality matters as an exit argument rather than a lifestyle preference.</p>
+        <ul class="attrs">
+          <li class="attr"><span class="attr__k">Liquidity</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:92%;display:block"></span></span><span class="attr__v">92</span></li>
+          <li class="attr"><span class="attr__k">Prestige</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:60%;display:block"></span></span><span class="attr__v">60</span></li>
+          <li class="attr"><span class="attr__k">Comfort</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:34%;display:block"></span></span><span class="attr__v">34</span></li>
+        </ul>
+      </article>
+      <article class="seg">
+        <span class="seg__ghost" aria-hidden="true">03</span>
+        <span class="seg__icon" aria-hidden="true"><svg><use href="#i-pro"/></svg></span>
+        <span class="seg__kicker">Segment 03</span>
+        <h3 class="seg__name">Professional elite</h3>
+        <p class="seg__text">C-suite and senior professionals. Prioritise comfort, privacy and circle integration. Extremely high bar on product detail: ceiling height, orientation, flow. Rational decision-making, value-conscious.</p>
+        <ul class="attrs">
+          <li class="attr"><span class="attr__k">Comfort</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:94%;display:block"></span></span><span class="attr__v">94</span></li>
+          <li class="attr"><span class="attr__k">Privacy</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:88%;display:block"></span></span><span class="attr__v">88</span></li>
+          <li class="attr"><span class="attr__k">Brand</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:26%;display:block"></span></span><span class="attr__v">26</span></li>
+        </ul>
+      </article>
+      <article class="seg">
+        <span class="seg__ghost" aria-hidden="true">04</span>
+        <span class="seg__icon" aria-hidden="true"><svg><use href="#i-newmoney"/></svg></span>
+        <span class="seg__kicker">Segment 04</span>
+        <h3 class="seg__name">New money</h3>
+        <p class="seg__text">Emerging wealth. Prioritise belonging and prestige. Most brand-sensitive segment: most influenced by marketing, most active word-of-mouth amplifiers. Strongest need for circle admission.</p>
+        <ul class="attrs">
+          <li class="attr"><span class="attr__k">Belonging</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:90%;display:block"></span></span><span class="attr__v">90</span></li>
+          <li class="attr"><span class="attr__k">Brand</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:84%;display:block"></span></span><span class="attr__v">84</span></li>
+          <li class="attr"><span class="attr__k">Scarcity</span><span class="attr__track" aria-hidden="true"><span class="attr__fill" style="width:40%;display:block"></span></span><span class="attr__v">40</span></li>
+        </ul>
+      </article>
+    </div>
+
+    <h3 class="h3" id="segment-map">Segment map — motive against price elasticity<a class="anchor" href="#segment-map" aria-label="Link to this heading">#</a></h3>
+    <figure class="fig" style="margin-top:14px">
+      <div class="fig__body">
+        <div class="matrix">
+          <div class="matrix__y"><span class="matrix__ytext">Price elasticity</span></div>
+          <div class="matrix__grid">
+            <span class="matrix__corner" aria-hidden="true"></span>
+            <span class="matrix__collab">Use</span>
+            <span class="matrix__collab">Asset</span>
+
+            <span class="matrix__rowlab">High</span>
+            <div class="quad">
+              <span class="quad__pos">High elasticity / use</span>
+              <h4 class="quad__name">New money</h4>
+              <p class="quad__text">Responsive to narrative and brand. Needs the circle to be legible.</p>
+            </div>
+            <div class="quad">
+              <span class="quad__pos">High elasticity / asset</span>
+              <h4 class="quad__name">Wealth accumulators</h4>
+              <p class="quad__text">Buys on exit maths. Will trade design for liquidity.</p>
+            </div>
+
+            <span class="matrix__rowlab">Low</span>
+            <div class="quad">
+              <span class="quad__pos">Low elasticity / use</span>
+              <h4 class="quad__name">Professional elite</h4>
+              <p class="quad__text">Will pay for resolved product detail. Walks away from compromise.</p>
+            </div>
+            <div class="quad quad--hi">
+              <span class="quad__flag"><svg aria-hidden="true"><use href="#i-target"/></svg>Primary target</span>
+              <span class="quad__pos">Low elasticity / asset</span>
+              <h4 class="quad__name">Legacy families</h4>
+              <p class="quad__text">Price-insensitive where scarcity is genuine.</p>
+            </div>
+          </div>
+          <div class="matrix__x" style="grid-column:2">Purchase motive: use → asset</div>
+        </div>
+      </div>
+    </figure>
+  </section>
+
+  <!-- ============================================================ 03 Dimensions -->
+  <section class="block" id="dimensions" aria-labelledby="h-dimensions">
+    <div class="strip">
+      <span class="strip__num">03</span>
+      <span class="strip__kicker">Deliverable</span>
+      <h2 class="strip__title" id="h-dimensions">Eight value dimensions<a class="anchor" href="#dimensions" aria-label="Link to this section">#</a></h2>
+    </div>
+    <aside class="callout" style="margin-bottom:28px">
+      <p class="callout__label"><svg aria-hidden="true"><use href="#i-method"/></svg>Method</p>
+      <p class="callout__body">A product-optimisation framework translating segment psychology into decisions the design and sales teams could act on.</p>
+    </aside>
+
+    <figure class="fig">
+      <div class="fig__body">
+        <table class="spec">
+          <thead class="spec__head">
+            <tr class="spec__row"><th class="spec__th" scope="col">Dimension</th><th class="spec__th" scope="col">What it governs</th><th class="spec__th" scope="col">Primary segment</th><th class="spec__th" scope="col">Weight</th></tr>
+          </thead>
+          <tbody class="spec__body">
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Scarcity</td><td class="spec__td spec__muted" data-label="What it governs">Irreproducibility of location, architecture and unit type. Legacy families rely on it almost exclusively.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Legacy families</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 5 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><b class="dots__n" aria-hidden="true">5</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Value preservation</td><td class="spec__td spec__muted" data-label="What it governs">Historical price trajectory and future liquidity. School-district anchor is the strongest single support.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Legacy families</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">4</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Liquidity</td><td class="spec__td spec__muted" data-label="What it governs">Market transaction depth. Ultra-luxury segment liquidity is thin by design — a key concern for investor-type buyers.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Wealth accumulators</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">4</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Comfort</td><td class="spec__td spec__muted" data-label="What it governs">Layout, finish standards, property services. Policy-constrained irregular layouts require design mitigation.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Professional elite</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">3</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Privacy</td><td class="spec__td spec__muted" data-label="What it governs">Security systems, community density, resident-circle homogeneity.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Professional elite</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">3</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Prestige</td><td class="spec__td spec__muted" data-label="What it governs">Entry immediacy, exclusive service details, visible service standards.</td><td class="spec__td" data-label="Primary segment"><span class="chip">New money</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 3 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">3</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Belonging</td><td class="spec__td spec__muted" data-label="What it governs">Circle community resources, resident events, admission mechanics.</td><td class="spec__td" data-label="Primary segment"><span class="chip">New money</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 2 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><i class="dots__d"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">2</b></span></td></tr>
+            <tr class="spec__row"><td class="spec__td spec__name" data-label="Dimension">Purity</td><td class="spec__td spec__muted" data-label="What it governs">Pure residential with no commercial interference — the top hidden priority for legacy and professional segments.</td><td class="spec__td" data-label="Primary segment"><span class="chip">Cross-segment</span></td><td class="spec__td" data-label="Weight"><span class="dots" role="img" aria-label="Weight 4 of 5"><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d dots__d--on"></i><i class="dots__d"></i><b class="dots__n" aria-hidden="true">4</b></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </figure>
+
+    <aside class="callout callout--quote" style="margin-top:28px">
+      <p class="callout__label"><svg aria-hidden="true"><use href="#i-finding"/></svg>Finding</p>
+      <blockquote style="margin:0"><p class="callout__body">&ldquo;Purity ranked above prestige in every segment — and no benchmark project was designing for it.&rdquo;</p></blockquote>
+      <p class="callout__cite">— Finding · Depth interviews</p>
+    </aside>
+
+    <h3 class="h3" id="three-response-layers">Three response layers<a class="anchor" href="#three-response-layers" aria-label="Link to this heading">#</a></h3>
+    <ol class="layers" style="margin-top:14px">
+      <li class="layer">
+        <div class="layer__meta">
+          <span class="layer__stack" aria-hidden="true"><span class="layer__bar layer__bar--on"></span><span class="layer__bar"></span><span class="layer__bar"></span></span>
+          <span class="layer__kicker"><svg aria-hidden="true"><use href="#i-product"/></svg>Layer 01 · Product</span>
+        </div>
+        <div><h4 class="layer__title">Layout remediation programme</h4><p class="layer__text">Forty-plus specific moves converting policy-forced irregularity into differentiated unit typologies rather than compromised ones.</p></div>
+      </li>
+      <li class="layer">
+        <div class="layer__meta">
+          <span class="layer__stack" aria-hidden="true"><span class="layer__bar"></span><span class="layer__bar layer__bar--on"></span><span class="layer__bar"></span></span>
+          <span class="layer__kicker"><svg aria-hidden="true"><use href="#i-service"/></svg>Layer 02 · Service</span>
+        </div>
+        <div><h4 class="layer__title">Circle admission design</h4><p class="layer__text">Resident-community mechanics that make belonging legible to new-money buyers without diluting the homogeneity legacy families are paying for.</p></div>
+      </li>
+      <li class="layer">
+        <div class="layer__meta">
+          <span class="layer__stack" aria-hidden="true"><span class="layer__bar"></span><span class="layer__bar"></span><span class="layer__bar layer__bar--on"></span></span>
+          <span class="layer__kicker"><svg aria-hidden="true"><use href="#i-narrative"/></svg>Layer 03 · Narrative</span>
+        </div>
+        <div><h4 class="layer__title">Scarcity story architecture</h4><p class="layer__text">A sales narrative sequenced by segment, leading with location scarcity and treating brand as supporting evidence rather than the headline.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================================================ 04 Engagement -->
+  <section class="block" id="engagement" aria-labelledby="h-engagement">
+    <div class="strip">
+      <span class="strip__num">04</span>
+      <span class="strip__kicker">Engagement arc</span>
+      <h2 class="strip__title" id="h-engagement">From ethnography to launch strategy<a class="anchor" href="#engagement" aria-label="Link to this section">#</a></h2>
+    </div>
+    <ol class="flow">
+      <li class="step">
+        <div class="step__head"><span class="step__n">1</span><span class="step__rule" aria-hidden="true"></span></div>
+        <div class="step__card"><h3 class="step__title">Ethnographic fieldwork</h3><p class="step__text">Depth interviews with UHNW buyers, agents and existing residents across eight comparable assets.</p></div>
+      </li>
+      <li class="step">
+        <div class="step__head"><span class="step__n">2</span><span class="step__rule" aria-hidden="true"></span></div>
+        <div class="step__card"><h3 class="step__title">Benchmark decomposition</h3><p class="step__text">Premium sources separated from marketing claims to establish the real driver hierarchy.</p></div>
+      </li>
+      <li class="step">
+        <div class="step__head"><span class="step__n">3</span><span class="step__rule" aria-hidden="true"></span></div>
+        <div class="step__card"><h3 class="step__title">Segment &amp; value model</h3><p class="step__text">Four segments mapped against eight value dimensions into a single prioritisation grid.</p></div>
+      </li>
+      <li class="step">
+        <div class="step__head"><span class="step__n">4</span><span class="step__rule" aria-hidden="true"></span></div>
+        <div class="step__card"><h3 class="step__title">Product &amp; launch strategy</h3><p class="step__text">Layout remediation programme and segment-sequenced sales narrative handed to design and sales.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================================================ Closing -->
+  <section class="block" id="closing" aria-label="Closing" style="margin-top:64px">
+    <dl class="closing">
+      <div class="closing__row">
+        <dt class="closing__key">Core competencies</dt>
+        <dd style="margin:0"><ul class="chips"><li class="chip">Consumer Research</li><li class="chip">Product Strategy</li><li class="chip">Market Analysis</li><li class="chip">Brand Strategy</li><li class="chip">Segmentation</li></ul></dd>
+      </div>
+      <div class="closing__row">
+        <dt class="closing__key">Industry domains</dt>
+        <dd style="margin:0"><ul class="chips"><li class="chip chip--neutral">Real Estate</li><li class="chip chip--neutral">Consumer</li></ul></dd>
+      </div>
+    </dl>
+    <footer class="foot">
+      <span class="num">2021 Consulting Engagement · Deliverables Showcase</span>
+      <span>Client identity anonymised</span>
+    </footer>
+  </section>
+
+</div>
+</main>
+
+<script>
+/* Scroll-spy: purely additive. Without JS the TOC is a plain list of links. */
+(function () {
+  try {
+    var links = Array.prototype.slice.call(document.querySelectorAll('.toc__link'));
+    var bar = document.querySelector('.toc__list');
+    var targets = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+    var current = null;
+    function visible(a) { return a.offsetParent !== null; }
+    function update() {
+      var line = Math.max(120, window.innerHeight * 0.3);
+      var idx = 0;
+      for (var i = 0; i < targets.length; i++) {
+        if (!targets[i] || !visible(links[i])) continue;
+        if (targets[i].getBoundingClientRect().top - line <= 0) idx = i;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        for (var j = links.length - 1; j >= 0; j--) { if (visible(links[j])) { idx = j; break; } }
+      }
+      var a = links[idx];
+      if (a === current) return;
+      if (current) { current.classList.remove('is-active'); current.removeAttribute('aria-current'); }
+      a.classList.add('is-active'); a.setAttribute('aria-current', 'location');
+      current = a;
+      if (bar && bar.scrollWidth > bar.clientWidth) {
+        var left = a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2;
+        bar.scrollTo({ left: Math.max(0, left), behavior: 'auto' });
+      }
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; update(); }); }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    window.addEventListener('load', update);
+    update();
+  } catch (e) { /* navigation still works as plain links */ }
+})();
+</script>
+</body>
+</html>
