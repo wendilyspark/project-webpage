@@ -42,16 +42,16 @@ Replace real client names with generic descriptors. The goal is to make the proj
 
 Use a **client type descriptor** — a short English phrase that conveys the client's nature without revealing identity. The descriptor should reflect the client's ownership structure, industry position, or organizational type.
 
-**Established sanitization patterns from completed projects:**
+**Example sanitization patterns:**
 
-| Original Client | Sanitized Descriptor | Rationale |
+| Client in the source material | Sanitized Descriptor | Rationale |
 |----------------|---------------------|-----------|
-| 新开发银行 (NDB/金砖银行) | "BRICS Multilateral Development Bank" | Org type — multilateral bank |
-| 中海地产 | "Leading State-Owned Developer" | Ownership (state-owned) + sector (developer) |
-| 世茂服务 | "Listed Property Services Co." | Listed status + sector |
-| 中新丹阳练湖新区 | "Government × Industrial Park Developer" | Joint venture nature (govt + developer) |
-| 华贸中心 (with 华为) | "Premium CBD Mixed-Use Complex" | Asset type + positioning |
-| 瑞安房地产 | "Leading International Real Estate Group" | Ownership origin (HK-listed) + scale |
+| *A multilateral development bank* | "Multilateral Development Bank" | Org type — multilateral bank |
+| *A state-owned property developer* | "Leading State-Owned Developer" | Ownership (state-owned) + sector (developer) |
+| *A listed property-services company* | "Listed Property Services Co." | Listed status + sector |
+| *A government–developer joint-venture zone* | "Government × Industrial Park Developer" | Joint venture nature (govt + developer) |
+| *A named CBD mixed-use complex* | "Premium CBD Mixed-Use Complex" | Asset type + positioning |
+| *An overseas-listed international property group* | "Leading International Real Estate Group" | Ownership origin + scale |
 
 **General sanitization rules for other entities:**
 
@@ -72,16 +72,16 @@ The hero section `<h1>` must include the **client type descriptor** to give read
 <Project Theme> & <Secondary Theme>
 ```
 
-**Examples from completed projects:**
+**Examples:**
 
-| Project | Hero H1 |
+| Engagement type | Hero H1 |
 |---------|---------|
-| NDB Smart Building | **Multilateral Bank** / Smart Building & Process Digitalization |
-| 中海智慧家 | **State-Owned Developer** / Smart Home Innovation & Monetization Strategy |
-| 世茂三年战略 | **Listed Property Services Co.** / Three-Year Strategic Growth Blueprint |
-| 丹阳练湖新区 | **Government × Industrial Park Developer** / Industrial Planning & Investment Strategy |
-| 中海北京1号 | **State-Owned Developer** / Luxury Residential Product Strategy |
-| 华贸数字化 | **Premium CBD Mixed-Use Complex** / Digital Transformation Roadmap |
+| Building digitalization programme | **Multilateral Bank** / Smart Building & Process Digitalization |
+| Smart-home product strategy | **State-Owned Developer** / Smart Home Innovation & Monetization Strategy |
+| Multi-year growth plan | **Listed Property Services Co.** / Three-Year Strategic Growth Blueprint |
+| Industrial zone planning | **Government × Industrial Park Developer** / Industrial Planning & Investment Strategy |
+| Luxury residential product study | **State-Owned Developer** / Luxury Residential Product Strategy |
+| Digital transformation roadmap | **Premium CBD Mixed-Use Complex** / Digital Transformation Roadmap |
 
 The client type descriptor appears on its own line (using `<br>` or as a separate element) in a slightly different style from the project theme line, creating a two-line hero title.
 
@@ -94,13 +94,10 @@ HTML files use kebab-case English names that reflect the project's core theme:
 ```
 
 **Examples:**
-- `ndb-smart-building.html`
-- `coli-smart-home.html` (COLI = China Overseas Land & Investment)
-- `shimao-property-strategy.html`
-- `danyang-industrial-planning.html`
-- `coli-luxury-residential.html`
-- `huamao-digital-planning.html`
-- `westbund-financial-hub-phase1.html`
+- `acme-smart-building.html`
+- `acme-luxury-residential.html`
+- `northwind-property-strategy.html`
+- `contoso-digital-roadmap.html`
 
 Use commonly recognized English abbreviations for client names in filenames (these are not visible to readers). The actual HTML content uses the sanitized descriptor.
 
@@ -109,8 +106,8 @@ Use commonly recognized English abbreviations for client names in filenames (the
 - International landmark names used as benchmarks (Hudson Yards, Roppongi Hills, ICONSIAM) — these are public knowledge
 - Generic industry terms and methodologies
 - Financial figures and metrics (these don't identify the client)
-- City/district names when they are the project location (e.g., "Xuhui Waterfront") rather than the client identity
-- Public organization names when they are context rather than the client (e.g., "BRICS" as a framework)
+- City/district names when they are the project location (e.g., a named waterfront or CBD district) rather than the client identity
+- Public frameworks and standards when they are context rather than the client (e.g., "ESG" or "IFRS")
 
 ### Step 3: Generate HTML
 

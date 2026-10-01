@@ -17,7 +17,7 @@ Project Webpage reads your consulting project materials and generates a self-con
 - **A complete single-file HTML page** — no build step, no dependencies, opens in any browser
 - **Professional navy-and-gold design** — Playfair Display headings, clean section layouts, subtle scroll animations
 - **Full content fidelity** — every analysis section, deliverable, and metric from your source material, reorganized for visual impact
-- **Built-in client anonymization** — real client names are replaced with neutral descriptors ("Leading State-Owned Developer", "BRICS Multilateral Development Bank") — safe to publish publicly
+- **Built-in client anonymization** — real client names are replaced with neutral descriptors ("Leading State-Owned Developer", "Multilateral Development Bank") — safe to publish publicly
 - **Component-rich layouts** — card grids, layer stacks, stat callouts, benchmark tables, and tag clouds map your content to the right visual pattern automatically
 
 ## Input / Output
@@ -35,14 +35,14 @@ Minimum needed: project title, client context, 2–3 analysis areas or deliverab
 **Sample input (conversation):**
 
 ```
-Project: Post-Acquisition Integration Planning for a Canadian gold mine
-Client: Mining company transitioning to full ownership after PE acquisition
-Duration: 3 months
+Project: Customer loyalty programme redesign for a regional grocery chain
+Client: Mid-sized grocery retailer with ~120 stores
+Duration: 10 weeks
 Key deliverables:
-  - 100-day integration roadmap across Finance, Technology, and Legal
-  - IFRS compliance workplan (IFRS 15 revenue recognition, Big Four coordination)
-  - Activity-level program tracker with RACI and milestone flags
-Sector: Mining / Private Equity
+  - Customer segmentation from two years of basket data
+  - Programme economics model comparing three reward structures
+  - 12-month rollout plan with pilot-store selection
+Sector: Retail / Consumer
 ```
 
 ### Output
